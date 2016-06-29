@@ -1,6 +1,6 @@
 # Visualizing Data
 
-Cover grammar of graphics?
+Cover grammar of graphics?  Yes, we definitely should.
 
 ## Example one
 
