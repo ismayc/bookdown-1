@@ -3,6 +3,8 @@
 
 ## Preamble
 
+- Coggle Diagrams
+- Lean on visualizations as much as possible first to introduce summary measures
 
 ## Data/science pipeline
 
