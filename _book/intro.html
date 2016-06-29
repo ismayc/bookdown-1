@@ -27,6 +27,11 @@
 
 <meta name="date" content="2016-06-28">
 
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -113,9 +118,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="3" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>3</b> Tidy data</a></li>
 <li class="chapter" data-level="4" data-path="manipulating-data.html"><a href="manipulating-data.html"><i class="fa fa-check"></i><b>4</b> Manipulating Data</a></li>
-<li class="chapter" data-level="5" data-path="visualizing-data.html"><a href="visualizing-data.html"><i class="fa fa-check"></i><b>5</b> Visualizing Data</a></li>
+<li class="chapter" data-level="5" data-path="visualizing-data.html"><a href="visualizing-data.html"><i class="fa fa-check"></i><b>5</b> Visualizing Data</a><ul>
+<li class="chapter" data-level="5.1" data-path="visualizing-data.html"><a href="visualizing-data.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
+<li class="chapter" data-level="5.2" data-path="visualizing-data.html"><a href="visualizing-data.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="inference.html"><a href="inference.html"><i class="fa fa-check"></i><b>6</b> Inference</a></li>
-<li class="chapter" data-level="7" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>7</b> Placeholder</a></li>
+<li class="chapter" data-level="7" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -325,7 +333,7 @@ Figure 2.1: Here is a nice figure!
 
 </div>
 </div>
-<h3> Placeholder</h3>
+<h3> References</h3>
 <div id="refs" class="references">
 <div id="ref-R-bookdown">
 <p>Xie, Yihui. 2016. <em>Bookdown: Authoring Books with R Markdown</em>. <a href="https://github.com/rstudio/bookdown" class="uri">https://github.com/rstudio/bookdown</a>.</p>
@@ -378,6 +386,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

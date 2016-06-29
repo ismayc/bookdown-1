@@ -1,6 +1,6 @@
 # Visualizing Data
 
-Some _significant_ applications are demonstrated in this chapter.
+Cover grammar of graphics?
 
 ## Example one
 
