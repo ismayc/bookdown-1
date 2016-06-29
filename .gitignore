@@ -4,3 +4,4 @@
 _publish.R
 *.Rproj
 _book/*
+_bookdown_files/*

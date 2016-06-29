@@ -1,17 +1,32 @@
 # Introduction {#intro}
 
 
+## Preamble
+
+
 ## Data/science pipeline
+
+
 
 ## Reproducibility
 
-## Preamble
 
 ## Who is this book for? (Target)
 
-Assume no prequesites
 
 Students taking a traditional intro stats class in a small college environment using RStudio preferably RStudio Server. 
+
+We assume no prerequisites: no calculus and no prior programming experience.  
+
+
+
+## Algorithmic Thinking
+
+Despite what you may think, computers are stupid. You need to explicitly tell
+it everything it needs to do; if you make even a slight mistake, it will cry.
+
+
+
 
 *To think about further*
 
