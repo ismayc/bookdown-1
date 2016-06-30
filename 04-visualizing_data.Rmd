@@ -5,10 +5,23 @@ Cover grammar of graphics?  Yes, we definitely should.
 Theoretical discussion of the grammar of graphics
   - Menard example
   
-Five name graphs
+Five named graphs
   - Breakdown of their components with geoms
   - Jenny Bryan / [Naomi Robbins](https://www.amazon.com/Creating-Effective-Graphs-Naomi-Robbins/dp/0985911123?ie=UTF8&*Version*=1&*entries*=0)
+  - In particular histogram as a visual representation of distribution. i.e. it is an empirical distribution as an estimate of population distribution.
 
-## Example one
+
+## Five Named Graphs. FNG
+
+Restrict types of plots:
+  + histogram: as long as we avoid density plots
+  + boxplot: have to set x=1 aes. categorical variables
+  + barplot: issue with categorical variables
+  + scatterplot: jitter/alpha
+  + linegraph:
+  + mosaicplot (write mosaicplot in ggplot)
+  + Need a way to track all issues/FAQ's
+
+
 
 ## Example two
