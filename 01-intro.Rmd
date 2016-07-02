@@ -5,6 +5,7 @@
 
 - Coggle Diagrams
 - Lean on visualizations as much as possible first to introduce summary measures
+- We will focus on the triad: computational, data, and inferential thinking.
 
 ## Data/science pipeline
 
