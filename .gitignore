@@ -3,5 +3,3 @@
 .RData
 _publish.R
 *.Rproj
-_book/*
-_bookdown_files/*
