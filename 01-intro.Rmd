@@ -22,15 +22,12 @@ Students taking a traditional intro stats class in a small college environment u
 
 We assume no prerequisites: no calculus and no prior programming experience.  
 
-
+<!-- Bookdown examples from Yihui -->
 
 ## Algorithmic Thinking
 
 Despite what you may think, computers are stupid. You need to explicitly tell
 it everything it needs to do; if you make even a slight mistake, it will cry.
-
-
-
 
 *To think about further*
 
@@ -51,5 +48,3 @@ knitr::kable(
   booktabs = TRUE
 )
 ```
-
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015]. ddd aaa

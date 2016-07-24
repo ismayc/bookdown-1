@@ -1,35 +1,50 @@
 --- 
-title: "The Modern Language of Science"
-subtitle: "Reproducible Data Analysis Techniques" #"The Language of Statistical & Data Sciences"
+title: "The M.O.D.E.R.N. Language of Science"
+subtitle: "Modern Open Data-Analysis Encouraging Reproducibility and iNtuitive data visualization techniques" #"The Language of Statistical & Data Sciences"
 author: "Chester Ismay and Albert Y. Kim"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
-bibliography: [book.bib, packages.bib]
+bibliography: [book.bib, packages.bib, articles.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: #rstudio/bookdown-demo
 description: "Getting away from the traditional statistical curriculum more focused on reproducible research and modern data analysis techniques and tools"
 ---
 
+<!-- Bookdown stuff from Yihui -->
+
 # Prerequisites
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
+This book was written using the **bookdown** R package from Yihui Xie.  In order to follow along and run the code in this book on your own, you'll need to have access to R (and preferably RStudio).  You can find more information on both of these with a simple Google search for "R" and for "RStudio".
 
-For now, you have to install the development versions of **bookdown** from Github:
+We will keep a running list of R packages you will
+need to have installed to complete the analysis as well here in the `needed_pkgs` character vector.  You can check if you have all of the needed packages installed by running all of the lines below.  The last line will install them (i.e., download their needed files from the internet to your hard drive).
 
-```{r eval=FALSE}
-devtools::install_github("rstudio/bookdown")
+You can run the `library` function on them to load them into your current analysis.  Prior to each analysis where a package is needed you will see the corresponding `library` function.
+
+```{r pkg_setup, message=FALSE, warning=FALSE}
+needed_pkgs <- c("nycflights13", "dplyr", "ggplot2", "knitr")
+new.pkgs <- needed_pkgs[!(needed_pkgs %in% installed.packages())]
+
+if (length(new.pkgs)) {
+  install.packages(new.pkgs, repos = "http://cran.rstudio.com")
+}
 ```
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
+<!--
+The `printr` package is useful for outputting help files directly into our book and also looking at R output in a clean way.  We, thus, need to load the packages via the `library` function:
 
-To compile this example to PDF, you need to install XeLaTeX.
+```{r message=FALSE, warning=FALSE}
+#library(printr)
+```
+-->
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 
+  'nycflights13'#, 'printr'
 ), 'packages.bib')
 ```

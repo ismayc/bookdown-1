@@ -1,4 +1,4 @@
-# Visualizing Data
+# Visualizing Data {#viz}
 
 Cover grammar of graphics?  Yes, we definitely should.
 
@@ -19,7 +19,7 @@ Restrict types of plots:
   + barplot: issue with categorical variables
   + scatterplot: jitter/alpha
   + linegraph:
-  + mosaicplot (write mosaicplot in ggplot) [I actually prefer side-by-side bar graphs to stacked so this might be moot?]
+  + mosaicplot (write mosaicplot in ggplot) [I actually prefer side-by-side bar graphs/facetted to stacked so this might be moot?]
   + Need a way to track all issues/FAQ's
 
 
