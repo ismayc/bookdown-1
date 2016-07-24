@@ -7,21 +7,27 @@ Theoretical discussion of the grammar of graphics
   
 Five named graphs
   - Breakdown of their components with geoms
-  - Jenny Bryan / [Naomi Robbins](https://www.amazon.com/Creating-Effective-Graphs-Naomi-Robbins/dp/0985911123?ie=UTF8&*Version*=1&*entries*=0)
   - In particular histogram as a visual representation of distribution. i.e. it is an empirical distribution as an estimate of population distribution.
 
 
 ## Five Named Graphs. FNG
 
-Restrict types of plots:
+* Focussing on `dep_delay` here and how it relates with other variables
+
+* May need to introduce some data manipulation here
+
+* Restrict types of plots:
   + histogram: as long as we avoid density plots
   + boxplot: have to set x=1 aes. categorical variables
-  + barplot: issue with categorical variables
-  + scatterplot: jitter/alpha
-  + linegraph:
-  + mosaicplot (write mosaicplot in ggplot) [I actually prefer side-by-side bar graphs/facetted to stacked so this might be moot?]
-  + Need a way to track all issues/FAQ's
+      - Hadley suggests that a univariate boxplot shouldn't be used and prefers a histogram <https://groups.google.com/forum/#!topic/ggplot2/N4qRSmqMZxI>
+      - Boxplots do make sense when comparing distributions across levels of another variable though
+  + barplot: issue with categorical variables 
+      - May want to also discuss dot plots for many levels of categorical variable
+  + scatterplot: jitter/alpha/color
+  + linegraph: useful for time series / not useful if no ordering to x-values
+  + faceting: show why better than stacked bargraphs in via patterns across levels
+  + mosaicplot [I actually prefer side-by-side bar graphs/facetted bargraphs to stacked/mosaic so this might be moot?]
 
+### Review questions
 
-
-## Example two
+- Have a variety of bad plots with data for the readers and have readers create better plots with `ggplot2`

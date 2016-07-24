@@ -13,8 +13,6 @@ github-repo: #rstudio/bookdown-demo
 description: "Getting away from the traditional statistical curriculum more focused on reproducible research and modern data analysis techniques and tools"
 ---
 
-<!-- Bookdown stuff from Yihui -->
-
 # Prerequisites
 
 This book was written using the **bookdown** R package from Yihui Xie.  In order to follow along and run the code in this book on your own, you'll need to have access to R (and preferably RStudio).  You can find more information on both of these with a simple Google search for "R" and for "RStudio".
