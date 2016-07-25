@@ -13,20 +13,18 @@ Five named graphs
 ## Five Named Graphs. FNG
 
 * Focussing on `dep_delay` here and how it relates with other variables
-
-* May need to introduce some data manipulation here
-
+* May need to introduce some data manipulation here with `dplyr`
 * Restrict types of plots:
-  + histogram: as long as we avoid density plots
-  + boxplot: have to set x=1 aes. categorical variables
-      - Hadley suggests that a univariate boxplot shouldn't be used and prefers a histogram <https://groups.google.com/forum/#!topic/ggplot2/N4qRSmqMZxI>
-      - Boxplots do make sense when comparing distributions across levels of another variable though
-  + barplot: issue with categorical variables 
-      - May want to also discuss dot plots for many levels of categorical variable
-  + scatterplot: jitter/alpha/color
-  + linegraph: useful for time series / not useful if no ordering to x-values
-  + faceting: show why better than stacked bargraphs in via patterns across levels
-  + mosaicplot [I actually prefer side-by-side bar graphs/facetted bargraphs to stacked/mosaic so this might be moot?]
+    + histogram: as long as we avoid density plots
+    + boxplot: have to set x=1 aes. categorical variables when univariate
+        - Hadley suggests that a univariate boxplot shouldn't be used and prefers a histogram <https://groups.google.com/forum/#!topic/ggplot2/N4qRSmqMZxI>
+        - Boxplots do make sense when comparing distributions across levels of another variable though
+    + barplot: issue with categorical variables 
+        - May want to also discuss dot plots for many levels of categorical variable
+    + scatterplot: jitter/alpha/color
+    + linegraph: useful for time series / not useful if no ordering to x-values
+    + faceting: show why better than stacked bargraphs in via patterns across levels
+    + mosaicplot [I actually prefer side-by-side bar graphs/facetted bargraphs to stacked/mosaic so this might be moot?]
 
 ### Review questions
 

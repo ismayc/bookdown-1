@@ -161,11 +161,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="five-named-graphs.-fng" class="section level2">
 <h2><span class="header-section-number">4.1</span> Five Named Graphs. FNG</h2>
 <ul>
-<li><p>Focussing on <code>dep_delay</code> here and how it relates with other variables</p></li>
-<li><p>May need to introduce some data manipulation here</p></li>
-<li>Restrict types of plots:</li>
+<li>Focussing on <code>dep_delay</code> here and how it relates with other variables</li>
+<li>May need to introduce some data manipulation here with <code>dplyr</code></li>
+<li>Restrict types of plots:
+<ul>
 <li>histogram: as long as we avoid density plots</li>
-<li>boxplot: have to set x=1 aes. categorical variables
+<li>boxplot: have to set x=1 aes. categorical variables when univariate
 <ul>
 <li>Hadley suggests that a univariate boxplot shouldn’t be used and prefers a histogram <a href="https://groups.google.com/forum/#!topic/ggplot2/N4qRSmqMZxI" class="uri">https://groups.google.com/forum/#!topic/ggplot2/N4qRSmqMZxI</a></li>
 <li>Boxplots do make sense when comparing distributions across levels of another variable though</li>
@@ -177,7 +178,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>scatterplot: jitter/alpha/color</li>
 <li>linegraph: useful for time series / not useful if no ordering to x-values</li>
 <li>faceting: show why better than stacked bargraphs in via patterns across levels</li>
-<li><p>mosaicplot [I actually prefer side-by-side bar graphs/facetted bargraphs to stacked/mosaic so this might be moot?]</p></li>
+<li>mosaicplot [I actually prefer side-by-side bar graphs/facetted bargraphs to stacked/mosaic so this might be moot?]</li>
+</ul></li>
 </ul>
 <div id="review-questions-1" class="section level3">
 <h3><span class="header-section-number">4.1.1</span> Review questions</h3>
