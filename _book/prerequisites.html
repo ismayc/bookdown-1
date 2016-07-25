@@ -33,8 +33,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="tidy-data.html">
-<link rel="next" href="manipulating-data.html">
+
+<link rel="next" href="intro.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -153,50 +153,40 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="viz" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Visualizing Data</h1>
-<p>Cover grammar of graphics? Yes, we definitely should.</p>
-<p>Theoretical discussion of the grammar of graphics - Menard example</p>
-<p>Five named graphs - Breakdown of their components with geoms - In particular histogram as a visual representation of distribution. i.e. it is an empirical distribution as an estimate of population distribution.</p>
-<div id="five-named-graphs.-fng" class="section level2">
-<h2><span class="header-section-number">4.1</span> Five Named Graphs. FNG</h2>
-<ul>
-<li>Focussing on <code>dep_delay</code> here and how it relates with other variables</li>
-<li>May need to introduce some data manipulation here with <code>dplyr</code></li>
-<li>Restrict types of plots:
-<ul>
-<li>histogram: as long as we avoid density plots</li>
-<li>boxplot: have to set x=1 aes. categorical variables when univariate
-<ul>
-<li>Hadley suggests that a univariate boxplot shouldn’t be used and prefers a histogram <a href="https://groups.google.com/forum/#!topic/ggplot2/N4qRSmqMZxI" class="uri">https://groups.google.com/forum/#!topic/ggplot2/N4qRSmqMZxI</a></li>
-<li>Boxplots do make sense when comparing distributions across levels of another variable though</li>
-</ul></li>
-<li>barplot: issue with categorical variables
-<ul>
-<li>May want to also discuss dot plots for many levels of categorical variable</li>
-</ul></li>
-<li>scatterplot: jitter/alpha/color</li>
-<li>linegraph: useful for time series / not useful if no ordering to x-values</li>
-<li>faceting: show why better than stacked bargraphs in via patterns across levels</li>
-<li>mosaicplot [I actually prefer side-by-side bar graphs/facetted bargraphs to stacked/mosaic so this might be moot?]</li>
-</ul></li>
-</ul>
-<div id="review-questions-1" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Review questions</h3>
-<ul>
-<li>Have a variety of bad plots with data for the readers and have readers create better plots with <code>ggplot2</code></li>
-</ul>
+<div id="header">
+<h1 class="title">The M.O.D.E.R.N. Language of Science</h1>
+<h3 class="subtitle"><em>Modern Open Data-Analysis Encouraging Reproducibility and iNtuitive data visualization techniques</em></h3>
+<h4 class="author"><em>Chester Ismay and Albert Y. Kim</em></h4>
+<h4 class="date"><em>2016-07-24</em></h4>
+</div>
+<div id="prerequisites" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Prerequisites</h1>
+<p>This book was written using the <strong>bookdown</strong> R package from Yihui Xie. In order to follow along and run the code in this book on your own, you’ll need to have access to R (and preferably RStudio). You can find more information on both of these with a simple Google search for “R” and for “RStudio”.</p>
+<p>We will keep a running list of R packages you will need to have installed to complete the analysis as well here in the <code>needed_pkgs</code> character vector. You can check if you have all of the needed packages installed by running all of the lines below. The last line will install them (i.e., download their needed files from the internet to your hard drive).</p>
+<p>You can run the <code>library</code> function on them to load them into your current analysis. Prior to each analysis where a package is needed you will see the corresponding <code>library</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">needed_pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;nycflights13&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;knitr&quot;</span>)
+new.pkgs &lt;-<span class="st"> </span>needed_pkgs[!(needed_pkgs %in%<span class="st"> </span><span class="kw">installed.packages</span>())]
 
-</div>
-</div>
+if (<span class="kw">length</span>(new.pkgs)) {
+  <span class="kw">install.packages</span>(new.pkgs, <span class="dt">repos =</span> <span class="st">&quot;http://cran.rstudio.com&quot;</span>)
+}</code></pre></div>
+<!--
+The `printr` package is useful for outputting help files directly into our book and also looking at R output in a clean way.  We, thus, need to load the packages via the `library` function:
+
+
+```r
+#library(printr)
+```
+-->
+
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tidy-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="manipulating-data.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
@@ -223,7 +213,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-visualizing_data.Rmd",
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-prereqs.Rmd",
 "text": null
 },
 "download": ["ismay_kim.pdf", "ismay_kim.epub"],
