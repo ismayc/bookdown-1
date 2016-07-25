@@ -1,3 +1,8 @@
-# Manipulating Data
+# Manipulating Data {#manip}
 
-We describe our methods in this chapter.
+- Going through a lot of examples with `dplyr` here
+    + Definitely want to introduce them to the pipe
+    + Show why it is so much better than nesting/temporary variables
+- Make sure to refer back to plots in the viz chapter and how the
+  material here relates to answering those questions
+- We'll also need to address how this leads into inference

@@ -101,6 +101,8 @@ Another nice feature of R is the help system.  You can get help in R by simply e
 
 Another aspect of tidy data is a description of what each variable in the dataset represents.  This helps others to understand what your variable names mean and what they correspond to.  If we look at the output of `?flights`, we can see that a description of each variable by name is given.
 
+An important feature to **ALWAYS** include with your data is the appropriate units of measurement.  We'll see this further when we work with the `dep_delay` variable in Chapter \@ref(viz).  (It's in minutes, but you'd get some really strange interpretations if you thought it was in hours or seconds.  UNITS MATTER!)
+
 ## How is `flights` tidy?
 
 We see that `flights` has a rectangular shape with each row corresponding to a different flight and each column corresponding to a characteristic of that flight.  This matches exactly with how Hadley defined tidy data:
@@ -116,7 +118,7 @@ We identified earlier that the observational unit in the `flights` dataset is an
 
 By contrast, also included in the `nycflights13` package are datasets with different observational units [@R-nycflights13]:
 
-- `weather`: hourly meterological data for each airport
+- `weather`: hourly meteorological data for each airport
 - `planes`: construction information about each plane
 - `airports`: airport names and locations
 - `airlines`: translation between two letter carrier codes and names

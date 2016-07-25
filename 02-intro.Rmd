@@ -6,6 +6,8 @@
 - Coggle Diagrams
 - Lean on visualizations as much as possible first to introduce summary measures
 - We will focus on the triad: computational, data, and inferential thinking.
+- Discuss the role of data analysis in the sciences
+- Explain why programming and data science help scientific knowledge grow
 
 ## Data/science pipeline
 

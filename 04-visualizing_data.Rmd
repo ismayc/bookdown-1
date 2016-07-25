@@ -13,8 +13,11 @@ Five named graphs
 
 In Chapter \@ref(tidy), we discussed the importance of datasets being **tidy**.  You will see in examples here why having a tidy dataset helps us immensely with plotting our data.  We will focus on using Hadley's `ggplot2` package in doing so, which was developed to work specifically on datasets that are **tidy**.  It provides an easy way to customize your plots and is based on data visualization theory given in _The Grammar of Graphics_ [@wilkinson2005].
 
-## Five Named Graphs. FNG
+Graphics provide a nice way for us to get a sense for how quantitative variables compare in terms of their center and their spread.  It also helps us to identify patterns and outliers in our data.  We will see that a common extension of these ideas is to compare the distribution (i.e., what the spread of a variable looks like) as we go across the levels of a different categorical variable.
 
+## Five Named Graphs - The FNG
+
+<!--
 * Focussing on `dep_delay` here and how it relates with other variables
 * May need to introduce some data manipulation here with `dplyr`
 * Restrict types of plots:
@@ -28,7 +31,123 @@ In Chapter \@ref(tidy), we discussed the importance of datasets being **tidy**. 
     + linegraph: useful for time series / not useful if no ordering to x-values
     + faceting: show why better than stacked bargraphs in via patterns across levels
     + mosaicplot [I actually prefer side-by-side bar graphs/facetted bargraphs to stacked/mosaic so this might be moot?]
+-->
+
+For our purposes here, we will be working with five different types of graphs.  (Note that we will use a lot of different words here in regards to plotting -  "graphs", "plots", and "charts" are all ways to discuss a resulting graphic.  You can think of them as all being synonyms.)  These five plots are:
+
+- histograms
+- boxplots
+- barplots
+- scatter-plots
+- line-graphs
+
+With this toolbox of plots, you can visualize just about any type of variable thrown at you.  We will discuss some other variations of these but with the FNG in your repertoire you can do big things!  Something we will also stress here is that certain plots only work for categorical/logical variables and others only for quantitative variables.  You'll want to quiz yourself often on which plot makes sense with a given problem set-up.
+
+We return to the `flights` data frame introduced in Chapter \@ref(tidy).
+
+```{r}
+library(nycflights13)
+data(flights)
+```
+
+## Histograms
+
+Our focus now turns to the `dep_delay` variable in this `flights` dataset.  We would like to visualize what the  `r nrow(flights)` departure delays look like.  We could just produce points where each of the different values appears on something similar to a number line:
+
+```{r echo=FALSE, warning=FALSE, fig.cap="Strip Plot of Departure Delays from NYC in 2013"}
+library(ggplot2)
+ggplot(data = flights, mapping = aes(x = dep_delay, y = factor("A"))) +
+  geom_point() +
+  theme(axis.ticks.y = element_blank(), axis.title.y = element_blank(),
+    axis.text.y = element_blank())
+```
+
+This gives us a general idea of how the values of `dep_delay` differ.  We see that there are some values above 1000 minutes but the vast majority of points fall below 500 minutes.  Recall that 500 minutes is around `r round(500/60, 2)` hours.  That's quite awhile to have a delay.  You may suspect that even more points fall, say, within 60 minutes than anywhere else on this line.  It's difficult to see with the plot above just how many flights have delays, for example, between 0 and 60 minutes, greater than 60 and less than or equal to 120 minutes, etc.
+
+What is commonly produced instead of this strip plot is a plot known as a **histogram**.  The **histogram** show how many elements of the variable fall in specified **bins**.  These **bins** may correspond to the 0-60 minutes, 60-120 minutes, etc. layout we discussed in the last paragraph.  
+
+To produce a histogram, we introduce the Hadley's `ggplot2` package [@R-ggplot2].  We will use the `ggplot` function which expects at a bare minimal as arguments
+
+- the data frame where the variables exist and
+- the names of the variables to be plotted.
+
+The names of the variables will be entered into the `aes` function as arguments where `aes` stands for "aesthetics".
+
+```{r}
+ggplot(data = flights, mapping = aes(x = dep_delay))
+```
+
+The plot given above is not a histogram, but the output does show us a bit of what is going on with `ggplot(data = flights, mapping = aes(x = dep_delay))`.  It is producing a backdrop onto which we will "paint" elements.  
+
+We next proceed by adding a layer---hence, the use of the `+` symbol---to the plot to produce a histogram.  (Note also here that we don't have to specify the `data = ` and `mapping = ` text in our function calls.  This is covered in more detail in Appendix A - Chapter \@ref(appendix1).)
+
+```{r fig.cap="Histogram of Departure Delays from NYC in 2013"}
+ggplot(flights, aes(x = dep_delay)) +
+  geom_histogram()
+```
+
+We have the power to specify how many bins we would like to put the data into as an argument in the `geom_histogram` function.  By default, this is chosen to be 30 somewhat arbitrarily and we have received a warning above our plot that this was done.  We also notice here that another warning about 8225 missing values is given.  These are omitted from the plot. This warning is ignored for future customizations of the plot. (**Discuss missing values here?**)
+
+
+```{r fig.cap="Histogram of Departure Delays from NYC in 2013 - 50 Bins", warning=FALSE}
+ggplot(flights, aes(x = dep_delay)) +
+  geom_histogram(bins = 50)
+```
+
+We can tweak the plot a little more by specifying the width of the bins (instead of how many bins to divide the variable into) by using the `binwidth` argument in the `geom_histogram` function.  We can also add some color to the plot by invoking the `fill` and `color` arguments.  A listing of all of the built-in colors to R by name and color is available [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf).
+
+
+```{r fig.cap="Histogram of Departure Delays from NYC in 2013 - Binwidth = 60", warning=FALSE}
+ggplot(flights, aes(x = dep_delay)) +
+  geom_histogram(binwidth = 60, color = "white", fill = "forestgreen")
+```
+
+**Need to discuss what these plots tells us.  Is a log transformation useful here?  Not sure if this variable is a good way to investigate first since it is SO skewed and I'd rather not have to introduce a transformation here.  What do you think?**
+
+### Continuous data summaries
+
+The `dep_delay` variable is a **continuous** quantitative variable (frequently just called a **continuous variable**).  "A variable is **continuous** if you can arrange its values in order and an infinite number of unique values can exist between any two values of the variable"[@r4ds2016].  Some common examples of continuous variables are time and height.  Between any two times there are an infinitely many number of time units that fall between them.  
+
+It is often easier to think about quantitative variables that are not continuous to help us better understand continuity.  The best example is counts.  If we are looking to count the number of flights that depart on a given day from New York City, this variable would not be continuous.  It falls on a **discrete** scale.
+
+We can examine some summary information about this `dep_delay` variable.  To do so, we introduce the `summary` function.  (We will see in Chapter \@ref(manip) how to use the `summarize` function in the `dplyr` package to produce similar results.)
+
+The syntax here is a little different than what we have seen before.  (A further discussion about R syntax is available in Appendix A - Chapter \@ref(appendix1)). Here `summary` is the function and it is expecting an object to be summarized as its argument.  The object here is the `dep_delay` variable in the `flights` data frame.  To focus on just this one variable `dep_delay` in `flights`, we separate them by the dollar sign symbol `$`.
+
+```{r}
+summary(flights$dep_delay)
+```
+
+This tells us what is known as the **five-number summary** for our variable as well as the **mean** value of the variable.  More information on both of these concepts is given in Appendix A - Chapter \@ref(appendix1).
+
+**Need to finish the discussion here with a brief synopsis of what the `summary` function gives us.**
+
+### Learning check
+
+## Boxplots
+
+### Learning check
+
+## Barplots
+
+### Learning check
+
+## Scatter-plots
+
+### Learning check
+
+## Line-graphs 
+
+### Learning check
+
+## Summary of The Grammar of Graphics
+
+You have seen all of the major pieces behind "The Grammar of Graphics" which serves as the basis for the `ggplot2` package.  Here is a summary of each part:
+
+**May need some tweaking**:  <http://www.ling.upenn.edu/~joseff/avml2012/>
 
 ### Review questions
 
 - Have a variety of bad plots with data for the readers and have readers create better plots with `ggplot2`
+
+## What's to come?

@@ -1,0 +1,10 @@
+# Appendix A: R and RStudio Basics {#appendix1}
+
+- What is R? What is RStudio?
+- Screenshots of RStudio frames?
+- Give an introduction into using R
+- Mean, median, standard deviation, five-number summary
+- Some content to cover:
+    + data structures (vectors, lists, data frames, matrices)
+    + indexing/subsetting
+    + functions (default arguments)

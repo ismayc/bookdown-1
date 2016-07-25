@@ -1,5 +1,5 @@
 --- 
-title: "A M.O.D.E.R.N. D.I.V.E. into the Language of Science"
+title: "A _MODERN DIVE_ into the Language of Science"
 subtitle: "Modern Open-source Data-analysis Encouraging Reproducibility and iNtuitive Data-Inspired Visualization Efforts" #"The Language of Statistical & Data Sciences"
 author: "Chester Ismay and Albert Y. Kim"
 date: "`r Sys.Date()`"
