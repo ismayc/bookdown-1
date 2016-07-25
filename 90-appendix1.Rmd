@@ -8,3 +8,4 @@
     + data structures (vectors, lists, data frames, matrices)
     + indexing/subsetting
     + functions (default arguments)
+- RMarkdown chunk options
