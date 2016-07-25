@@ -1,5 +1,6 @@
 # Visualizing Data {#viz}
 
+<!--
 Cover grammar of graphics?  Yes, we definitely should.
 
 Theoretical discussion of the grammar of graphics
@@ -8,7 +9,9 @@ Theoretical discussion of the grammar of graphics
 Five named graphs
   - Breakdown of their components with geoms
   - In particular histogram as a visual representation of distribution. i.e. it is an empirical distribution as an estimate of population distribution.
+-->
 
+In Chapter \@ref(tidy), we discussed the importance of datasets being **tidy**.  You will see in examples here why having a tidy dataset helps us immensely with plotting our data.  We will focus on using Hadley's `ggplot2` package in doing so, which was developed to work specifically on datasets that are **tidy**.  It provides an easy way to customize your plots and is based on data visualization theory given in _The Grammar of Graphics_ [@wilkinson2005].
 
 ## Five Named Graphs. FNG
 

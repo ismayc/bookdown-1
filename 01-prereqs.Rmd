@@ -1,4 +1,4 @@
-# Prerequisites
+# Prerequisites {#prereqs}
 
 This book was written using the **bookdown** R package from Yihui Xie.  In order to follow along and run the code in this book on your own, you'll need to have access to R (and preferably RStudio).  You can find more information on both of these with a simple Google search for "R" and for "RStudio".
 
@@ -8,7 +8,7 @@ need to have installed to complete the analysis as well here in the `needed_pkgs
 You can run the `library` function on them to load them into your current analysis.  Prior to each analysis where a package is needed you will see the corresponding `library` function.
 
 ```{r pkg_setup, message=FALSE, warning=FALSE}
-needed_pkgs <- c("nycflights13", "dplyr", "ggplot2", "knitr")
+needed_pkgs <- c("nycflights13", "dplyr", "ggplot2", "knitr", "devtools")
 new.pkgs <- needed_pkgs[!(needed_pkgs %in% installed.packages())]
 
 if (length(new.pkgs)) {
@@ -28,6 +28,15 @@ The `printr` package is useful for outputting help files directly into our book 
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 
-  'nycflights13'#, 'printr'
+  'nycflights13', 'devtools'
 ), 'packages.bib')
 ```
+
+## Colophon
+
+The source of the book is available at <UPDATE THIS> and was built with versions of R packages given here:
+
+```{r colophon}
+devtools::session_info(needed_pkgs)
+```
+

@@ -1,4 +1,4 @@
-# Tidy data
+# Tidy data {#tidy}
 
 nycflights13 example 
 
