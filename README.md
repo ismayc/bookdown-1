@@ -1,3 +1,6 @@
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). Please see the page "Get Started" at https://bookdown.org/ for how to compile this example.
+**To-do**
 
-You can find the preview of this example at https://bookdown.org/yihui/bookdown-demo/
+- Change colors of Learning check/Review Question blocks
+- See if way to automate numbering of Learning check questions
+    + Currently an issue with https://github.com/rstudio/bookdown/issues/152
+    + Need to specify both CSS and LaTeX environment code for custom blocks
