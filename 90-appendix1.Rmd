@@ -8,4 +8,5 @@
     + data structures (vectors, lists, data frames, matrices)
     + indexing/subsetting
     + functions (default arguments)
+    + Case matters in R!
 - RMarkdown chunk options

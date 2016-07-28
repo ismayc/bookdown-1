@@ -1,9 +1,5 @@
 # Tidy data {#tidy}
 
-nycflights13 example 
-
-  - External link:  based on normal forms
-
 **Need to give big picture question here and set up how this chapter ties in to chapters to come**.
 
 You have surely heard the word "tidy" in your life:
@@ -35,17 +31,20 @@ variables and types. In **tidy data**:
 
 Reading over this definition, you can begin to think about data sets that won't follow this nice format.
 
-### Learning check
+```{block lc3-1, type='learncheck'}
+**_Learning check_**
 
-- Give an example dataset that doesn't follow this format.
-    + What features of this dataset might make it difficult to visualize?  
-    + How could the dataset be tweaked to make it **tidy**?
+**3.1** Give an example dataset that doesn't follow this format.
+
++ What features of this dataset might make it difficult to visualize?  
++ How could the dataset be tweaked to make it **tidy**?
+```   
     
-## The `nycflights13` dataset
+## The `nycflights13` datasets
 
 We likely have all flown on airplanes or know someone that has. Air travel has become an ever-present aspect of our daily lives.  If you live in or are visiting a relatively large city and you walk around that city's airport, you see gates showing flight information from many different airlines.  And you will frequently see that some flights are delayed because of a variety of conditions.  Are there ways that we can avoid having to deal with these flight delays?  
 
-We'd all like to arrive at our destinations on time whenever possible. (Unless you secretly love hanging out at airports.  If you are one of these people, pretend for the moment that you are very much anticipating being at your final destination.)  Hadley Wickham (herein just referred to as "Hadley") created a dataset containing information about departing flights from the New York City area in 2013 [@R-nycflights13].  We will begin by loading in this dataset and getting an idea of the structure of the dataset:
+We'd all like to arrive at our destinations on time whenever possible. (Unless you secretly love hanging out at airports.  If you are one of these people, pretend for the moment that you are very much anticipating being at your final destination.)  Hadley Wickham (herein just referred to as "Hadley") created multiple datasets containing information about departing flights from the New York City area in 2013 [@R-nycflights13].  We will begin by loading in one of these datasets, the `flights` dataset, and getting an idea of its structure:
 
 ```{r load_flights}
 library(nycflights13)
@@ -60,15 +59,20 @@ This dataset and most others presented in this book will be in the `data.frame` 
 head(flights)
 ```
 
-### Learning check
+```{block lc3-2, type='learncheck'}
+**_Learning check_**
 
-- What does the `head` function give us?  Why might it be a useful function to run on a dataset you have been presented with?
-- What do you think the `tail` function would give us for the `flights` dataset?
-- What does any *ONE* row in this dataset refer to?
-    A. Data on an airline 
-    B. Data on a flight
-    C. Data on an airport
-    D. Data on multiple flights
+**3.2** What does the `head` function give us?  Why might it be a useful function to run on a dataset you have been presented with?
+
+**3.3** What do you think the `tail` function would give us for the `flights` dataset?
+
+**3.4** What does any *ONE* row in this dataset refer to?
+
+- A. Data on an airline 
+- B. Data on a flight
+- C. Data on an airport
+- D. Data on multiple flights
+```
 
 We see that the `head` function gives us the first six rows (by default) for this dataset.  This can give us an idea of what to expect our dataset to look like.  For example, we see the different **variables** listed in the columns and we see that there are different types of variables.  Some of the variables like `distance`, `day`, and `arr_delay` are what we will call **quantitative** variables.  These variables vary in a numerical way.  Other variables here are **categorical**.
 
@@ -84,12 +88,17 @@ Note that if you look in the leftmost portion near the `##` of the R output, you
 str(flights)
 ```
 
-### Learning check
+```{block lc3-3, type='learncheck'}
+**_Learning check_**
 
-- What are some examples in this data set of **categorical** variables?  What makes them different than **quantitative** variables?
-- What does `int`, `num`, and `chr` mean in the output above?
-- How many different columns are in this dataset?
-- How many different rows are in this dataset?
+**3.5** What are some examples in this data set of **categorical** variables?  What makes them different than **quantitative** variables?
+
+**3.6** What does `int`, `num`, and `chr` mean in the output above?
+
+**3.7** How many different columns are in this dataset?
+
+**3.8** How many different rows are in this dataset?
+```
 
 Another way to view the properties of a dataset is to use the `str` function ("str" is short for "structure").  This will give you the first few entries of each variable in a row after the variable.  In addition, the type of the variable is given immediately after the `:` following each variable's name.  Here, `int` and `num` refer to quantitative variables.  In contrast, `chr` refers to categorical variables.  One more type of variable is given here with the `time_hour` variable: **POSIXct**.  As you may suspect, this variable corresponds to a specific date and time of day.
 
@@ -137,12 +146,15 @@ kable(airlines)
 
 Note that R by default will print out the object when only its name is given as we have done here with `airlines`.  If we'd prefer to print a data frame out in a clean format we can use the `kable` function in the `knitr` R package.
 
-### Review questions
+```{block tidy_review, type='review'}
+**_Review questions_**
+```
 
 1. What are common characteristics of "tidy" datasets?
 2. What makes them useful for organizing data?
-3. How many variables are presented in the table below?  What does each row correspond to? (**Hint:** You may not be able to answer both of these questions immediately but take your best guess.)
-4. What would the code `kable(head(flights))` produce?
+3. What would the code `kable(head(flights))` produce?
+4. How many variables are presented in the table below?  What does each row correspond to? (**Hint:** You may not be able to answer both of these questions immediately but take your best guess.)
+
 
 ```{r echo=FALSE, message=FALSE}
 library(dplyr)
@@ -151,9 +163,9 @@ faculty <- c(2, 3)
 kable(data_frame("students" = students, "faculty" = faculty))
 ```
 
-4. The confusion you may have encountered in Question 3 is a common one those that work with data are commonly presented with.  This dataset is not tidy.  Actually, the dataset in Question 3 has three variables not the two that were presented.  Make a guess as to what these variables are and present a tidy data set instead of this untidy one given in Question 3.
+5. The confusion you may have encountered in Question 4 is a common one those that work with data are commonly presented with.  This dataset is not tidy.  Actually, the dataset in Question 4 has three variables not the two that were presented.  Make a guess as to what these variables are and present a tidy data set instead of this untidy one given in Question 4.
 
-5. The actual data presented in Question 3 is given below in tidy data format:
+6. The actual data presented in Question 4 is given below in tidy data format:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -170,7 +182,7 @@ kable(data_frame("role" = role, `Sociology?` = sociology,
 
 ## What's to come?
 
-In Chapter \@ref(viz), we will further explore the distribution of the variable in this data frame that refers to departure delays for flights.  We'll be interested in understanding how this variable varies in relation to the values of other variables in the dataset.  We will see that visualization is often a powerful tool in helping us see what is going on in a dataset.  It will be a useful way to expand on the `str` function we have seen here for tidy data.
+In Chapter \@ref(viz), we will further explore the distribution of a variable in a related dataset to `flights`:  the `temp` variable in the `weather` dataset.  We'll be interested in understanding how this variable varies in relation to the values of other variables in the dataset.  We will see that visualization is often a powerful tool in helping us see what is going on in a dataset.  It will be a useful way to expand on the `str` function we have seen here for tidy data.
 
 **Last updated:**
 
