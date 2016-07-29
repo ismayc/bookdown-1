@@ -25,7 +25,7 @@
 
 <meta name="author" content="Chester Ismay and Albert Y. Kim">
 
-<meta name="date" content="2016-07-28">
+<meta name="date" content="2016-07-29">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -115,10 +115,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#algorithmic-thinking"><i class="fa fa-check"></i><b>2.5</b> Algorithmic Thinking</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>3</b> Tidy data</a><ul>
-<li class="chapter" data-level="3.1" data-path="tidy.html"><a href="tidy.html#definition"><i class="fa fa-check"></i><b>3.1</b> Definition</a></li>
+<li class="chapter" data-level="3.1" data-path="tidy.html"><a href="tidy.html#what-is-tidy-data"><i class="fa fa-check"></i><b>3.1</b> What is tidy data?</a></li>
 <li class="chapter" data-level="3.2" data-path="tidy.html"><a href="tidy.html#the-nycflights13-datasets"><i class="fa fa-check"></i><b>3.2</b> The <code>nycflights13</code> datasets</a></li>
 <li class="chapter" data-level="3.3" data-path="tidy.html"><a href="tidy.html#how-is-flights-tidy"><i class="fa fa-check"></i><b>3.3</b> How is <code>flights</code> tidy?</a></li>
-<li class="chapter" data-level="3.4" data-path="tidy.html"><a href="tidy.html#whats-to-come"><i class="fa fa-check"></i><b>3.4</b> What’s to come?</a></li>
+<li class="chapter" data-level="3.4" data-path="tidy.html"><a href="tidy.html#normal-forms-of-data"><i class="fa fa-check"></i><b>3.4</b> Normal forms of data</a></li>
+<li class="chapter" data-level="3.5" data-path="tidy.html"><a href="tidy.html#whats-to-come"><i class="fa fa-check"></i><b>3.5</b> What’s to come?</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="viz.html"><a href="viz.html"><i class="fa fa-check"></i><b>4</b> Visualizing Data</a><ul>
 <li class="chapter" data-level="4.1" data-path="viz.html"><a href="viz.html#five-named-graphs---the-fng"><i class="fa fa-check"></i><b>4.1</b> Five Named Graphs - The FNG</a></li>
@@ -209,15 +210,15 @@ Five named graphs
 <li>line-graphs</li>
 </ul>
 <p>With this toolbox of plots, you can visualize just about any type of variable thrown at you. We will discuss some other variations of these but with the FNG in your repertoire you can do big things! Something we will also stress here is that certain plots only work for categorical/logical variables and others only for quantitative variables. You’ll want to quiz yourself often on which plot makes sense with a given problem set-up.</p>
-<p>We now introduce another data frame in the <code>nycflights13</code> package introduced in Chapter <a href="tidy.html#tidy">3</a>.</p>
+<p>We now introduce another dataframe in the <code>nycflights13</code> package introduced in Chapter <a href="tidy.html#tidy">3</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nycflights13)
 <span class="kw">data</span>(weather)</code></pre></div>
 </div>
 <div id="histograms" class="section level2">
 <h2><span class="header-section-number">4.2</span> Histograms</h2>
-<p>Our focus now turns to the <code>temp</code> variable in this <code>weather</code> dataset. We would like to visualize what the 26130 temperatures look like. Looking over the <code>weather</code> dataset<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> and running <code>?weather</code>, we can see that the <code>temp</code> variable corresponds to hourly temperature (in Fahreheit) recordings at weather stations near airports in New York City. We could just produce points where each of the different values appears on something similar to a number line:</p>
-<div class="figure"><span id="fig:unnamed-chunk-11"></span>
-<img src="ismay_kim_files/figure-html/unnamed-chunk-11-1.png" alt="Strip Plot of Hourly Temperature Recordings from NYC in 2013" width="672" />
+<p>Our focus now turns to the <code>temp</code> variable in this <code>weather</code> dataset. We would like to visualize what the 26130 temperatures look like. Looking over the <code>weather</code> dataset<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> and running <code>?weather</code>, we can see that the <code>temp</code> variable corresponds to hourly temperature (in Fahrenheit) recordings at weather stations near airports in New York City. We could just produce points where each of the different values appears on something similar to a number line:</p>
+<div class="figure"><span id="fig:unnamed-chunk-12"></span>
+<img src="ismay_kim_files/figure-html/unnamed-chunk-12-1.png" alt="Strip Plot of Hourly Temperature Recordings from NYC in 2013" width="672" />
 <p class="caption">
 Figure 4.1: Strip Plot of Hourly Temperature Recordings from NYC in 2013
 </p>
@@ -226,20 +227,20 @@ Figure 4.1: Strip Plot of Hourly Temperature Recordings from NYC in 2013
 <p>What is commonly produced instead of this strip plot is a plot known as a <strong>histogram</strong>. The <strong>histogram</strong> show how many elements of the variable fall in specified <strong>bins</strong>. These <strong>bins</strong> may correspond to between 0-10°F, 10-20°F, etc.</p>
 <p>To produce a histogram, we introduce the Hadley’s <code>ggplot2</code> package <span class="citation">(Wickham and Chang <a href="#ref-R-ggplot2">2016</a>)</span>. We will use the <code>ggplot</code> function which expects at a bare minimal as arguments</p>
 <ul>
-<li>the data frame where the variables exist and</li>
+<li>the dataframe where the variables exist and</li>
 <li>the names of the variables to be plotted.</li>
 </ul>
 <p>The names of the variables will be entered into the <code>aes</code> function as arguments where <code>aes</code> stands for “aesthetics”.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp))</code></pre></div>
-<p><img src="ismay_kim_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="ismay_kim_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>The plot given above is not a histogram, but the output does show us a bit of what is going on with <code>ggplot(data = weather, mapping = aes(x = temp))</code>. It is producing a backdrop onto which we will “paint” elements.</p>
 <p>We next proceed by adding a layer—hence, the use of the <code>+</code> symbol—to the plot to produce a histogram. (Note also here that we don’t have to specify the <code>data =</code> and <code>mapping =</code> text in our function calls. This is covered in more detail in Appendix A - Chapter <a href="appendix1.html#appendix1">7</a>.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) +
 <span class="st">  </span><span class="kw">geom_histogram</span>()</code></pre></div>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (stat_bin).</code></pre>
-<div class="figure"><span id="fig:unnamed-chunk-13"></span>
-<img src="ismay_kim_files/figure-html/unnamed-chunk-13-1.png" alt="Histogram of Hourly Temperature Recordings from NYC in 2013" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<img src="ismay_kim_files/figure-html/unnamed-chunk-14-1.png" alt="Histogram of Hourly Temperature Recordings from NYC in 2013" width="672" />
 <p class="caption">
 Figure 4.2: Histogram of Hourly Temperature Recordings from NYC in 2013
 </p>
@@ -247,8 +248,8 @@ Figure 4.2: Histogram of Hourly Temperature Recordings from NYC in 2013
 <p>We have the power to specify how many bins we would like to put the data into as an argument in the <code>geom_histogram</code> function. By default, this is chosen to be 30 somewhat arbitrarily and we have received a warning above our plot that this was done. We also notice here that another warning about 1 missing value is given. This value is omitted from the plot. This warning is ignored for future customizations of the plot. (<strong>Discuss missing values here?</strong>)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) +
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">60</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-14"></span>
-<img src="ismay_kim_files/figure-html/unnamed-chunk-14-1.png" alt="Histogram of Hourly Temperature Recordings from NYC in 2013 - 60 Bins" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
+<img src="ismay_kim_files/figure-html/unnamed-chunk-15-1.png" alt="Histogram of Hourly Temperature Recordings from NYC in 2013 - 60 Bins" width="672" />
 <p class="caption">
 Figure 4.3: Histogram of Hourly Temperature Recordings from NYC in 2013 - 60 Bins
 </p>
@@ -256,8 +257,8 @@ Figure 4.3: Histogram of Hourly Temperature Recordings from NYC in 2013 - 60 Bin
 <p>We can tweak the plot a little more by specifying the width of the bins (instead of how many bins to divide the variable into) by using the <code>binwidth</code> argument in the <code>geom_histogram</code> function. We can also add some color to the plot by invoking the <code>fill</code> and <code>color</code> arguments. A listing of all of the built-in colors to R by name and color is available <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">here</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) +
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;forestgreen&quot;</span>)</code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-15"></span>
-<img src="ismay_kim_files/figure-html/unnamed-chunk-15-1.png" alt="Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwidth = 10" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-16"></span>
+<img src="ismay_kim_files/figure-html/unnamed-chunk-16-1.png" alt="Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwidth = 10" width="672" />
 <p class="caption">
 Figure 4.4: Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwidth = 10
 </p>
@@ -284,12 +285,12 @@ Figure 4.4: Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwid
 <p>The <code>temp</code> variable is a <strong>continuous</strong> quantitative variable (frequently just called a <strong>continuous variable</strong>). “A variable is <strong>continuous</strong> if you can arrange its values in order and an infinite number of unique values can exist between any two values of the variable”<span class="citation">(Wickham and Grolemund <a href="#ref-r4ds2016">2016</a>)</span>. Some common examples of continuous variables are time and height. Between any two times there are an infinitely many number of time units that fall between them.</p>
 <p>It is often easier to think about quantitative variables that are not continuous to help us better understand continuity. The best example is counts. If we are looking to count the number of flights that depart on a given day from New York City, this variable would not be continuous. It falls on a <strong>discrete</strong> scale.</p>
 <p>We can examine some summary information about this <code>temp</code> variable. To do so, we introduce the <code>summary</code> function. (We will see in Chapter <a href="manip.html#manip">5</a> how to use the <code>summarize</code> function in the <code>dplyr</code> package to produce similar results.)</p>
-<p>The syntax here is a little different than what we have seen before. (A further discussion about R syntax is available in Appendix A - Chapter <a href="appendix1.html#appendix1">7</a>). Here <code>summary</code> is the function and it is expecting an object to be summarized as its argument. The object here is the <code>temp</code> variable in the <code>weather</code> data frame. To focus on just this one variable <code>temp</code> in <code>weather</code>, we separate them by the dollar sign symbol <code>$</code>. Order matters here: the data frame comes before the <code>$</code> and the variable/column name comes after.</p>
+<p>The syntax here is a little different than what we have seen before. (A further discussion about R syntax is available in Appendix A - Chapter <a href="appendix1.html#appendix1">7</a>). Here <code>summary</code> is the function and it is expecting an object to be summarized as its argument. The object here is the <code>temp</code> variable in the <code>weather</code> dataframe. To focus on just this one variable <code>temp</code> in <code>weather</code>, we separate them by the dollar sign symbol <code>$</code>. Order matters here: the dataframe comes before the <code>$</code> and the variable/column name comes after.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(weather$temp)</code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##   10.94   39.92   55.04   55.20   69.98  100.00       1</code></pre>
 <p>This tells us what is known as the <strong>five-number summary</strong> for our variable as well as the <strong>mean</strong> value of the variable. More information on both of these concepts is given in Appendix A - Chapter <a href="appendix1.html#appendix1">7</a>.</p>
-<p>This <code>summary</code> gives us some numerical summaries of our temperature variable. The minimum recorded temperature is 10.94 degrees Fahrenheit and the maximum is 100.04 degrees Fahrenheit. We have one missing value denoted as an <code>NA</code> in the observations of this variable. The median Fahrehneit temperature of 55.04 and mean of 55.2035149 are quite close. This is a property of symmetric distributions.</p>
+<p>This <code>summary</code> gives us some numerical summaries of our temperature variable. The minimum recorded temperature is 10.94 degrees Fahrenheit and the maximum is 100.04 degrees Fahrenheit. We have one missing value denoted as an <code>NA</code> in the observations of this variable. The median Fahrenheit temperature of 55.04 and mean of 55.2035149 are quite close. This is a property of symmetric distributions.</p>
 <p>The last two entries given by <code>summary</code> correspond to the 25<sup>th</sup> percentile and the 75<sup>th</sup> percentile. If we sorted all of the temperatures in increasing order, we would see that 25% of them would fall below 39.92 and that 75% of them would fall below 69.98. This implies that the middle 50% of data values lie between 39.92 and 69.98 degrees Fahrenheit.</p>
 <p><strong>Introduce standard deviation here?</strong></p>
 </div>
@@ -309,39 +310,39 @@ Figure 4.4: Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwid
 <p>Histograms can also be produced to compare the distribution of a variable over another variable. Suppose we were interested in looking at how the temperature recordings we saw in the last section varied by month. This is what is meant by “the distribution of a variable over another variable”.</p>
 <div id="facetting" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Facetting</h3>
-<p>In order to look at histograms of <code>temp</code> for each month, we introduce a new concept called <strong>facetting</strong>. Facetting is used when we’d like to create small multiples of the same plot over a different categorical variable. By default, all of the small multiples will have the same vertical axis. An example will help here. We will discuss the concept of facetting in further detail in Section @ref{barplots}.</p>
+<p>In order to look at histograms of <code>temp</code> for each month, we introduce a new concept called <strong>facetting</strong>. Faceting is used when we’d like to create small multiples of the same plot over a different categorical variable. By default, all of the small multiples will have the same vertical axis. An example will help here. We will discuss the concept of faceting in further detail in Section @ref{barplots}.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> temp)) +
 <span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">5</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;firebrick&quot;</span>) +
 <span class="st">  </span><span class="kw">facet_wrap</span>(~month)</code></pre></div>
-<p><img src="ismay_kim_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="ismay_kim_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>As we might expect, the temperature tends to increase as summer approaches and then decrease as winter approaches.</p>
 <div class="learncheck">
 <p>
 <strong><em>Learning check</em></strong>
 </p>
 <p>
-<strong>4.5</strong> What other things do you notice about the facetted plot above? How does a facetted plot help us see how relationships between two variables?
+<strong>4.5</strong> What other things do you notice about the faceted plot above? How does a faceted plot help us see how relationships between two variables?
 </p>
 <p>
 <strong>4.6</strong> What do the numbers 1-12 correspond to in the plot above? What about 25, 50, 75, 100?
 </p>
 <p>
-<strong>4.7</strong> What could be done to make the facetted plot above more readable? (Focus on tweaking the histograms and not on making a different type of plot here.)
+<strong>4.7</strong> What could be done to make the faceted plot above more readable? (Focus on tweaking the histograms and not on making a different type of plot here.)
 </p>
 <p>
-<strong>4.8</strong> For which types of datasets would these types of facetted plots not work well in comparing relationships between variables? Draw or give an example.
+<strong>4.8</strong> For which types of datasets would these types of faceted plots not work well in comparing relationships between variables? Draw or give an example.
 </p>
 </div>
-<p>Histograms can provide a way to compare distributions across groups as we see above when we looked at temperature over months. Frequently, a plot called a <strong>boxplot</strong> (also called a <strong>side-by-side boxplot</strong>) is done instead. The <strong>boxplot</strong> uses the information provided in the <strong>five-number summary</strong> referred to in the previous section when we used the <code>summary</code> function. It gives a way to compare this summary information across the different levels of a group. Let’s create a boxplot to compare the monthly temperatures as we did above with the facetted histograms.</p>
+<p>Histograms can provide a way to compare distributions across groups as we see above when we looked at temperature over months. Frequently, a plot called a <strong>boxplot</strong> (also called a <strong>side-by-side boxplot</strong>) is done instead. The <strong>boxplot</strong> uses the information provided in the <strong>five-number summary</strong> referred to in the previous section when we used the <code>summary</code> function. It gives a way to compare this summary information across the different levels of a group. Let’s create a boxplot to compare the monthly temperatures as we did above with the faceted histograms.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> month, <span class="dt">y =</span> temp)) +
 <span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
 <pre><code>## Warning: Continuous x aesthetic -- did you forget aes(group=...)?</code></pre>
 <pre><code>## Warning: Removed 1 rows containing non-finite values (stat_boxplot).</code></pre>
-<p><img src="ismay_kim_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>Note the first warning that is given here. (The second one corresponds to missing values in the data frame and it is turned off on subsequent plots.) This plot does not look like what we were expecting. We were expecting to see the distribution of temperatures for each month (so 12 different boxplots). This gives us the overall boxplot without any other groupings. We can get around this by introducing a new function for our <code>x</code> variable.</p>
+<p><img src="ismay_kim_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Note the first warning that is given here. (The second one corresponds to missing values in the dataframe and it is turned off on subsequent plots.) This plot does not look like what we were expecting. We were expecting to see the distribution of temperatures for each month (so 12 different boxplots). This gives us the overall boxplot without any other groupings. We can get around this by introducing a new function for our <code>x</code> variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> weather, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(month), <span class="dt">y =</span> temp)) +
 <span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre></div>
-<p><img src="ismay_kim_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="ismay_kim_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>We have introduced a new function called <code>factor()</code> here. One of the things this function does is to convert a numeric value like <code>month</code> (1, 2, …, 12) into a categorical variable. The “box” part of this plot represents the 25<sup>th</sup> percentile, the median (50<sup>th</sup> percentile), and the 75<sup>th</sup> percentile. The dots correspond to <strong>outliers</strong>. (The specific formulation for these outliers is discussed in Appendix A - Chapter <a href="appendix1.html#appendix1">7</a>.) The lines show how the data varies that is not in the center 50% defined by the first and third quantiles. Longer lines correspond to more variability and shorter lines correspond to less variability.</p>
 <div class="learncheck">
 <p>
@@ -357,7 +358,7 @@ Figure 4.4: Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwid
 <strong>4.11</strong> We looked at the distribution of a continuous variable over a categorical variable here with this boxplot. Why can’t we look at the distribution of one continuous variable over the distribution of another continuous variable? Say temperature across pressure, for example?
 </p>
 <p>
-<strong>4.12</strong> Boxplots provide a simple way to identify outliers. Why may outliers be easier to identify when looking at a boxplot instead of a facetted histogram?
+<strong>4.12</strong> Boxplots provide a simple way to identify outliers. Why may outliers be easier to identify when looking at a boxplot instead of a faceted histogram?
 </p>
 </div>
 </div>
@@ -424,6 +425,8 @@ Figure 4.4: Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwid
 </div>
 <div id="whats-to-come-1" class="section level2">
 <h2><span class="header-section-number">4.8</span> What’s to come?</h2>
+<p><strong>Last updated:</strong></p>
+<pre><code>## [1] &quot;Friday, July 29, 2016 14:39:25 CDT&quot;</code></pre>
 
 </div>
 </div>

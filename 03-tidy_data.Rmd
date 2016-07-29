@@ -11,7 +11,7 @@ You have surely heard the word "tidy" in your life:
 
 So what does it mean for your data to be **tidy**?  Put simply:  it means that your data is organized.  But it's more than just that.  It means that your data follows the same standard format making it easy for others to find elements of your data, to manipulate and transform your data, and for our purposes continuing with the common theme:  it makes it easier to visualize your data and the relationships between different variables in your data.
 
-## Definition
+## What is tidy data?
 
 We will follow Hadley Wickham's definition of **tidy data** here [@tidy]:
 
@@ -29,7 +29,7 @@ variables and types. In **tidy data**:
 > 2. Each observation forms a row.
 > 3. Each type of observational unit forms a table.
 
-Reading over this definition, you can begin to think about data sets that won't follow this nice format.
+Reading over this definition, you can begin to think about datasets that won't follow this nice format.
 
 ```{block lc3-1, type='learncheck'}
 **_Learning check_**
@@ -53,7 +53,7 @@ data(flights)
 
 The `library` function here loads the R package `nycflights13` into the current R environment in which you are working.  (Note that you'll get an error if you try to load this package in and it hasn't been installed.  Check Chapter \@ref(intro) to make sure the package has been downloaded to your computer.)  The next line of code `data(flights)` loads in the `flights` dataset that is stored in the `nycflights13` package.  
 
-This dataset and most others presented in this book will be in the `data.frame` format in R.  Data frames are ways to look at collections of variables that are tightly coupled together.  We next begin with a couple useful R functions to get a sense for what the `flights` dataset looks like:
+This dataset and most others presented in this book will be in the `data.frame` format in R.  dataframes are ways to look at collections of variables that are tightly coupled together.  We next begin with a couple useful R functions to get a sense for what the `flights` dataset looks like:
 
 ```{r}
 head(flights)
@@ -91,7 +91,7 @@ str(flights)
 ```{block lc3-3, type='learncheck'}
 **_Learning check_**
 
-**3.5** What are some examples in this data set of **categorical** variables?  What makes them different than **quantitative** variables?
+**3.5** What are some examples in this dataset of **categorical** variables?  What makes them different than **quantitative** variables?
 
 **3.6** What does `int`, `num`, and `chr` mean in the output above?
 
@@ -144,14 +144,31 @@ library(knitr)
 kable(airlines)
 ```
 
-Note that R by default will print out the object when only its name is given as we have done here with `airlines`.  If we'd prefer to print a data frame out in a clean format we can use the `kable` function in the `knitr` R package.
+Note that R by default will print out the object when only its name is given as we have done here with `airlines`.  If we'd prefer to print a dataframe out in a clean format we can use the `kable` function in the `knitr` R package.
+
+## Normal forms of data
+
+The datasets included in the `nycflights13` package are in a form that minimizes redundancy of data.  We will see that there are ways to _merge_ (or _join_) the different tables together easily.  We are capable of doing so because each of the tables have _keys_ in common to relate one to another.  This is an important property of **normal forms** of data.  The process of decomposing dataframes into less redundant tables without losing information is called **normalization**[^<https://en.wikipedia.org/wiki/Database_normalization>].
+
+We saw an example of this above with the `airlines` dataset.  While the `flights` dataframe could also include a column with the names of the airlines instead of the carrier code, this would be repetitive since there is a unique mapping of the carrier code to the name of the airline/carrier. 
+
+Below an example is given showing how to **join** the `airlines` dataframe together with the `flights` dataframe by linking together the two datasets via a common **key** of `"carrier"`.  Note that this "joined" dataframe is assigned to a new dataframe called `joined_flights`.  The structure of `joined_flights` is also given so that you can see a few elements of the new column added.
+
+```{r message=FALSE}
+library(dplyr)
+joined_flights <- inner_join(x = flights, y = airlines, by = "carrier")
+str(joined_flights)
+```
+
+More discussion about joining dataframes together will be given in Chapter \@ref(manip).  We will see there that the names of the columns to be linked need not match as they did here with `"carrier"`.
+
 
 ```{block tidy_review, type='review'}
 **_Review questions_**
 ```
 
 1. What are common characteristics of "tidy" datasets?
-2. What makes them useful for organizing data?
+2. What makes "tidy" datasets useful for organizing data?
 3. What would the code `kable(head(flights))` produce?
 4. How many variables are presented in the table below?  What does each row correspond to? (**Hint:** You may not be able to answer both of these questions immediately but take your best guess.)
 
@@ -163,7 +180,7 @@ faculty <- c(2, 3)
 kable(data_frame("students" = students, "faculty" = faculty))
 ```
 
-5. The confusion you may have encountered in Question 4 is a common one those that work with data are commonly presented with.  This dataset is not tidy.  Actually, the dataset in Question 4 has three variables not the two that were presented.  Make a guess as to what these variables are and present a tidy data set instead of this untidy one given in Question 4.
+5. The confusion you may have encountered in Question 4 is a common one those that work with data are commonly presented with.  This dataset is not tidy.  Actually, the dataset in Question 4 has three variables not the two that were presented.  Make a guess as to what these variables are and present a tidy dataset instead of this untidy one given in Question 4.
 
 6. The actual data presented in Question 4 is given below in tidy data format:
 
@@ -177,8 +194,10 @@ kable(data_frame("role" = role, `Sociology?` = sociology,
 ```
 
 - What does each row correspond to?  
-- What are the different variables in this data frame?  
+- What are the different variables in this dataframe?  
 - The `Sociology?` variable is known as a logical variable.  What types of values does a logical variable take on?
+
+7. What are some advantages of data in normal forms?  What are some disadvantages?
 
 ## What's to come?
 

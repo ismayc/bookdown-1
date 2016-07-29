@@ -25,7 +25,7 @@
 
 <meta name="author" content="Chester Ismay and Albert Y. Kim">
 
-<meta name="date" content="2016-07-28">
+<meta name="date" content="2016-07-29">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -115,10 +115,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#algorithmic-thinking"><i class="fa fa-check"></i><b>2.5</b> Algorithmic Thinking</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="tidy.html"><a href="tidy.html"><i class="fa fa-check"></i><b>3</b> Tidy data</a><ul>
-<li class="chapter" data-level="3.1" data-path="tidy.html"><a href="tidy.html#definition"><i class="fa fa-check"></i><b>3.1</b> Definition</a></li>
+<li class="chapter" data-level="3.1" data-path="tidy.html"><a href="tidy.html#what-is-tidy-data"><i class="fa fa-check"></i><b>3.1</b> What is tidy data?</a></li>
 <li class="chapter" data-level="3.2" data-path="tidy.html"><a href="tidy.html#the-nycflights13-datasets"><i class="fa fa-check"></i><b>3.2</b> The <code>nycflights13</code> datasets</a></li>
 <li class="chapter" data-level="3.3" data-path="tidy.html"><a href="tidy.html#how-is-flights-tidy"><i class="fa fa-check"></i><b>3.3</b> How is <code>flights</code> tidy?</a></li>
-<li class="chapter" data-level="3.4" data-path="tidy.html"><a href="tidy.html#whats-to-come"><i class="fa fa-check"></i><b>3.4</b> What’s to come?</a></li>
+<li class="chapter" data-level="3.4" data-path="tidy.html"><a href="tidy.html#normal-forms-of-data"><i class="fa fa-check"></i><b>3.4</b> Normal forms of data</a></li>
+<li class="chapter" data-level="3.5" data-path="tidy.html"><a href="tidy.html#whats-to-come"><i class="fa fa-check"></i><b>3.5</b> What’s to come?</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="viz.html"><a href="viz.html"><i class="fa fa-check"></i><b>4</b> Visualizing Data</a><ul>
 <li class="chapter" data-level="4.1" data-path="viz.html"><a href="viz.html#five-named-graphs---the-fng"><i class="fa fa-check"></i><b>4.1</b> Five Named Graphs - The FNG</a></li>
@@ -180,8 +181,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>“I am not by any stretch of the imagination a tidy person, and the piles of unread books on the coffee table and by my bed have a plaintive, pleading quality to me - ‘Read me, please!’” - Linda Grant</li>
 </ul>
 <p>So what does it mean for your data to be <strong>tidy</strong>? Put simply: it means that your data is organized. But it’s more than just that. It means that your data follows the same standard format making it easy for others to find elements of your data, to manipulate and transform your data, and for our purposes continuing with the common theme: it makes it easier to visualize your data and the relationships between different variables in your data.</p>
-<div id="definition" class="section level2">
-<h2><span class="header-section-number">3.1</span> Definition</h2>
+<div id="what-is-tidy-data" class="section level2">
+<h2><span class="header-section-number">3.1</span> What is tidy data?</h2>
 <p>We will follow Hadley Wickham’s definition of <strong>tidy data</strong> here <span class="citation">(Wickham <a href="#ref-tidy">2014</a>)</span>:</p>
 <blockquote>
 <p>A dataset is a collection of values, usually either numbers (if quantitative) or strings (if qualitative). Values are organised in two ways. Every value belongs to a variable and an observation. A variable contains all values that measure the same underlying attribute (like height, temperature, duration) across units. An observation contains all values measured on the same unit (like a person, or a day, or a race) across attributes.</p>
@@ -196,7 +197,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Each type of observational unit forms a table.</li>
 </ol>
 </blockquote>
-<p>Reading over this definition, you can begin to think about data sets that won’t follow this nice format.</p>
+<p>Reading over this definition, you can begin to think about datasets that won’t follow this nice format.</p>
 <div class="learncheck">
 <p>
 <strong><em>Learning check</em></strong>
@@ -221,7 +222,7 @@ How could the dataset be tweaked to make it <strong>tidy</strong>?
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nycflights13)
 <span class="kw">data</span>(flights)</code></pre></div>
 <p>The <code>library</code> function here loads the R package <code>nycflights13</code> into the current R environment in which you are working. (Note that you’ll get an error if you try to load this package in and it hasn’t been installed. Check Chapter <a href="intro.html#intro">2</a> to make sure the package has been downloaded to your computer.) The next line of code <code>data(flights)</code> loads in the <code>flights</code> dataset that is stored in the <code>nycflights13</code> package.</p>
-<p>This dataset and most others presented in this book will be in the <code>data.frame</code> format in R. Data frames are ways to look at collections of variables that are tightly coupled together. We next begin with a couple useful R functions to get a sense for what the <code>flights</code> dataset looks like:</p>
+<p>This dataset and most others presented in this book will be in the <code>data.frame</code> format in R. dataframes are ways to look at collections of variables that are tightly coupled together. We next begin with a couple useful R functions to get a sense for what the <code>flights</code> dataset looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(flights)</code></pre></div>
 <pre><code>##   year month day dep_time sched_dep_time dep_delay arr_time sched_arr_time
 ## 1 2013     1   1      517            515         2      830            819
@@ -306,7 +307,7 @@ D. Data on multiple flights
 <strong><em>Learning check</em></strong>
 </p>
 <p>
-<strong>3.5</strong> What are some examples in this data set of <strong>categorical</strong> variables? What makes them different than <strong>quantitative</strong> variables?
+<strong>3.5</strong> What are some examples in this dataset of <strong>categorical</strong> variables? What makes them different than <strong>quantitative</strong> variables?
 </p>
 <p>
 <strong>3.6</strong> What does <code>int</code>, <code>num</code>, and <code>chr</code> mean in the output above?
@@ -441,7 +442,38 @@ airlines</code></pre></div>
 </tr>
 </tbody>
 </table>
-<p>Note that R by default will print out the object when only its name is given as we have done here with <code>airlines</code>. If we’d prefer to print a data frame out in a clean format we can use the <code>kable</code> function in the <code>knitr</code> R package.</p>
+<p>Note that R by default will print out the object when only its name is given as we have done here with <code>airlines</code>. If we’d prefer to print a dataframe out in a clean format we can use the <code>kable</code> function in the <code>knitr</code> R package.</p>
+</div>
+<div id="normal-forms-of-data" class="section level2">
+<h2><span class="header-section-number">3.4</span> Normal forms of data</h2>
+<p>The datasets included in the <code>nycflights13</code> package are in a form that minimizes redundancy of data. We will see that there are ways to <em>merge</em> (or <em>join</em>) the different tables together easily. We are capable of doing so because each of the tables have <em>keys</em> in common to relate one to another. This is an important property of <strong>normal forms</strong> of data. The process of decomposing dataframes into less redundant tables without losing information is called <strong>normalization</strong>[^&lt;https://en.wikipedia.org/wiki/Database_normalization&gt;].</p>
+<p>We saw an example of this above with the <code>airlines</code> dataset. While the <code>flights</code> dataframe could also include a column with the names of the airlines instead of the carrier code, this would be repetitive since there is a unique mapping of the carrier code to the name of the airline/carrier.</p>
+<p>Below an example is given showing how to <strong>join</strong> the <code>airlines</code> dataframe together with the <code>flights</code> dataframe by linking together the two datasets via a common <strong>key</strong> of <code>&quot;carrier&quot;</code>. Note that this “joined” dataframe is assigned to a new dataframe called <code>joined_flights</code>. The structure of <code>joined_flights</code> is also given so that you can see a few elements of the new column added.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+joined_flights &lt;-<span class="st"> </span><span class="kw">inner_join</span>(<span class="dt">x =</span> flights, <span class="dt">y =</span> airlines, <span class="dt">by =</span> <span class="st">&quot;carrier&quot;</span>)
+<span class="kw">str</span>(joined_flights)</code></pre></div>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    336776 obs. of  20 variables:
+##  $ year          : int  2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 ...
+##  $ month         : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ day           : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ dep_time      : int  517 533 542 544 554 554 555 557 557 558 ...
+##  $ sched_dep_time: int  515 529 540 545 600 558 600 600 600 600 ...
+##  $ dep_delay     : num  2 4 2 -1 -6 -4 -5 -3 -3 -2 ...
+##  $ arr_time      : int  830 850 923 1004 812 740 913 709 838 753 ...
+##  $ sched_arr_time: int  819 830 850 1022 837 728 854 723 846 745 ...
+##  $ arr_delay     : num  11 20 33 -18 -25 12 19 -14 -8 8 ...
+##  $ carrier       : chr  &quot;UA&quot; &quot;UA&quot; &quot;AA&quot; &quot;B6&quot; ...
+##  $ flight        : int  1545 1714 1141 725 461 1696 507 5708 79 301 ...
+##  $ tailnum       : chr  &quot;N14228&quot; &quot;N24211&quot; &quot;N619AA&quot; &quot;N804JB&quot; ...
+##  $ origin        : chr  &quot;EWR&quot; &quot;LGA&quot; &quot;JFK&quot; &quot;JFK&quot; ...
+##  $ dest          : chr  &quot;IAH&quot; &quot;IAH&quot; &quot;MIA&quot; &quot;BQN&quot; ...
+##  $ air_time      : num  227 227 160 183 116 150 158 53 140 138 ...
+##  $ distance      : num  1400 1416 1089 1576 762 ...
+##  $ hour          : num  5 5 5 5 6 5 6 6 6 6 ...
+##  $ minute        : num  15 29 40 45 0 58 0 0 0 0 ...
+##  $ time_hour     : POSIXct, format: &quot;2013-01-01 05:00:00&quot; &quot;2013-01-01 05:00:00&quot; ...
+##  $ name          : chr  &quot;United Air Lines Inc.&quot; &quot;United Air Lines Inc.&quot; &quot;American Airlines Inc.&quot; &quot;JetBlue Airways&quot; ...</code></pre>
+<p>More discussion about joining dataframes together will be given in Chapter <a href="manip.html#manip">5</a>. We will see there that the names of the columns to be linked need not match as they did here with <code>&quot;carrier&quot;</code>.</p>
 <div class="review">
 <p>
 <strong><em>Review questions</em></strong>
@@ -449,7 +481,7 @@ airlines</code></pre></div>
 </div>
 <ol style="list-style-type: decimal">
 <li>What are common characteristics of “tidy” datasets?</li>
-<li>What makes them useful for organizing data?</li>
+<li>What makes “tidy” datasets useful for organizing data?</li>
 <li>What would the code <code>kable(head(flights))</code> produce?</li>
 <li>How many variables are presented in the table below? What does each row correspond to? (<strong>Hint:</strong> You may not be able to answer both of these questions immediately but take your best guess.)</li>
 </ol>
@@ -472,7 +504,7 @@ airlines</code></pre></div>
 </tbody>
 </table>
 <ol start="5" style="list-style-type: decimal">
-<li><p>The confusion you may have encountered in Question 4 is a common one those that work with data are commonly presented with. This dataset is not tidy. Actually, the dataset in Question 4 has three variables not the two that were presented. Make a guess as to what these variables are and present a tidy data set instead of this untidy one given in Question 4.</p></li>
+<li><p>The confusion you may have encountered in Question 4 is a common one those that work with data are commonly presented with. This dataset is not tidy. Actually, the dataset in Question 4 has three variables not the two that were presented. Make a guess as to what these variables are and present a tidy dataset instead of this untidy one given in Question 4.</p></li>
 <li><p>The actual data presented in Question 4 is given below in tidy data format:</p></li>
 </ol>
 <table>
@@ -564,16 +596,19 @@ airlines</code></pre></div>
 <ul>
 <li>What does each row correspond to?<br />
 </li>
-<li>What are the different variables in this data frame?<br />
+<li>What are the different variables in this dataframe?<br />
 </li>
 <li>The <code>Sociology?</code> variable is known as a logical variable. What types of values does a logical variable take on?</li>
 </ul>
+<ol start="7" style="list-style-type: decimal">
+<li>What are some advantages of data in normal forms? What are some disadvantages?</li>
+</ol>
 </div>
 <div id="whats-to-come" class="section level2">
-<h2><span class="header-section-number">3.4</span> What’s to come?</h2>
+<h2><span class="header-section-number">3.5</span> What’s to come?</h2>
 <p>In Chapter <a href="viz.html#viz">4</a>, we will further explore the distribution of a variable in a related dataset to <code>flights</code>: the <code>temp</code> variable in the <code>weather</code> dataset. We’ll be interested in understanding how this variable varies in relation to the values of other variables in the dataset. We will see that visualization is often a powerful tool in helping us see what is going on in a dataset. It will be a useful way to expand on the <code>str</code> function we have seen here for tidy data.</p>
 <p><strong>Last updated:</strong></p>
-<pre><code>## [1] &quot;Thursday, July 28, 2016 16:50:42 CDT&quot;</code></pre>
+<pre><code>## [1] &quot;Friday, July 29, 2016 14:39:19 CDT&quot;</code></pre>
 
 </div>
 </div>

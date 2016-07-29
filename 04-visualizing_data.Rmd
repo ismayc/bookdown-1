@@ -43,7 +43,7 @@ For our purposes here, we will be working with five different types of graphs.  
 
 With this toolbox of plots, you can visualize just about any type of variable thrown at you.  We will discuss some other variations of these but with the FNG in your repertoire you can do big things!  Something we will also stress here is that certain plots only work for categorical/logical variables and others only for quantitative variables.  You'll want to quiz yourself often on which plot makes sense with a given problem set-up.
 
-We now introduce another data frame in the `nycflights13` package introduced in Chapter \@ref(tidy).
+We now introduce another dataframe in the `nycflights13` package introduced in Chapter \@ref(tidy).
 
 ```{r}
 library(nycflights13)
@@ -52,7 +52,7 @@ data(weather)
 
 ## Histograms
 
-Our focus now turns to the `temp` variable in this `weather` dataset.  We would like to visualize what the  `r nrow(weather)` temperatures look like.  Looking over the `weather` dataset^[To view a dataset in spreadsheet format in RStudio, you can run the `View()` function with the dataframe as its argument.] and running `?weather`, we can see that the `temp` variable corresponds to hourly temperature (in Fahreheit) recordings at weather stations near airports in New York City. We could just produce points where each of the different values appears on something similar to a number line:
+Our focus now turns to the `temp` variable in this `weather` dataset.  We would like to visualize what the  `r nrow(weather)` temperatures look like.  Looking over the `weather` dataset^[To view a dataset in spreadsheet format in RStudio, you can run the `View()` function with the dataframe as its argument.] and running `?weather`, we can see that the `temp` variable corresponds to hourly temperature (in Fahrenheit) recordings at weather stations near airports in New York City. We could just produce points where each of the different values appears on something similar to a number line:
 
 ```{r echo=FALSE, warning=FALSE, fig.cap="Strip Plot of Hourly Temperature Recordings from NYC in 2013"}
 hist_title <- "Histogram of Hourly Temperature Recordings from NYC in 2013"
@@ -69,7 +69,7 @@ What is commonly produced instead of this strip plot is a plot known as a **hist
 
 To produce a histogram, we introduce the Hadley's `ggplot2` package [@R-ggplot2].  We will use the `ggplot` function which expects at a bare minimal as arguments
 
-- the data frame where the variables exist and
+- the dataframe where the variables exist and
 - the names of the variables to be plotted.
 
 The names of the variables will be entered into the `aes` function as arguments where `aes` stands for "aesthetics".
@@ -125,7 +125,7 @@ It is often easier to think about quantitative variables that are not continuous
 
 We can examine some summary information about this `temp` variable.  To do so, we introduce the `summary` function.  (We will see in Chapter \@ref(manip) how to use the `summarize` function in the `dplyr` package to produce similar results.)
 
-The syntax here is a little different than what we have seen before.  (A further discussion about R syntax is available in Appendix A - Chapter \@ref(appendix1)). Here `summary` is the function and it is expecting an object to be summarized as its argument.  The object here is the `temp` variable in the `weather` data frame.  To focus on just this one variable `temp` in `weather`, we separate them by the dollar sign symbol `$`.  Order matters here:  the data frame comes before the `$` and the variable/column name comes after.
+The syntax here is a little different than what we have seen before.  (A further discussion about R syntax is available in Appendix A - Chapter \@ref(appendix1)). Here `summary` is the function and it is expecting an object to be summarized as its argument.  The object here is the `temp` variable in the `weather` dataframe.  To focus on just this one variable `temp` in `weather`, we separate them by the dollar sign symbol `$`.  Order matters here:  the dataframe comes before the `$` and the variable/column name comes after.
 
 ```{r}
 summary(weather$temp)
@@ -133,7 +133,7 @@ summary(weather$temp)
 
 This tells us what is known as the **five-number summary** for our variable as well as the **mean** value of the variable.  More information on both of these concepts is given in Appendix A - Chapter \@ref(appendix1).
 
-This `summary` gives us some numerical summaries of our temperature variable.  The minimum recorded temperature is `r min(weather$temp, na.rm=TRUE)` degrees Fahrenheit and the maximum is `r max(weather$temp, na.rm=TRUE)` degrees Fahrenheit.  We have one missing value denoted as an `NA` in the observations of this variable.  The median Fahrehneit temperature of `r median(weather$temp, na.rm = TRUE)` and mean of `r mean(weather$temp, na.rm = TRUE)` are quite close.  This is a property of symmetric distributions.  
+This `summary` gives us some numerical summaries of our temperature variable.  The minimum recorded temperature is `r min(weather$temp, na.rm=TRUE)` degrees Fahrenheit and the maximum is `r max(weather$temp, na.rm=TRUE)` degrees Fahrenheit.  We have one missing value denoted as an `NA` in the observations of this variable.  The median Fahrenheit temperature of `r median(weather$temp, na.rm = TRUE)` and mean of `r mean(weather$temp, na.rm = TRUE)` are quite close.  This is a property of symmetric distributions.  
 
 The last two entries given by `summary` correspond to the 25^th^ percentile and the 75^th^ percentile.  If we sorted all of the temperatures in increasing order, we would see that 25% of them would fall below `r (q1 <- quantile(weather$temp, 0.25, na.rm = TRUE))` and that 75% of them would fall below `r (q3 <- quantile(weather$temp, 0.75, na.rm = TRUE))`.  This implies that the middle 50% of data values lie between `r q1` and `r q3` degrees Fahrenheit.
 
@@ -157,7 +157,7 @@ interested in looking at how the temperature recordings we saw in the last secti
 
 ### Facetting
 
-In order to look at histograms of `temp` for each month, we introduce a new concept called **facetting**.  Facetting is used when we'd like to create small multiples of the same plot over a different categorical variable.  By default, all of the small multiples will have the same vertical axis.  An example will help here.  We will discuss the concept of facetting in further detail in Section \@ref{barplots}.
+In order to look at histograms of `temp` for each month, we introduce a new concept called **facetting**.  Faceting is used when we'd like to create small multiples of the same plot over a different categorical variable.  By default, all of the small multiples will have the same vertical axis.  An example will help here.  We will discuss the concept of faceting in further detail in Section \@ref{barplots}.
 
 ```{r warning=FALSE}
 ggplot(data = weather, mapping = aes(x = temp)) +
@@ -170,27 +170,27 @@ As we might expect, the temperature tends to increase as summer approaches and t
 ```{block lc4-2, type='learncheck'}
 **_Learning check_**
 
-**4.5** What other things do you notice about the facetted plot above?  How does a facetted plot help us see how relationships
+**4.5** What other things do you notice about the faceted plot above?  How does a faceted plot help us see how relationships
 between two variables?
 
 **4.6** What do the numbers 1-12 correspond to in the plot above?  What about 25, 50, 75, 100?
 
-**4.7** What could be done to make the facetted plot above more readable?  (Focus on tweaking the histograms and not on making a 
+**4.7** What could be done to make the faceted plot above more readable?  (Focus on tweaking the histograms and not on making a 
 different type of plot here.)
 
-**4.8** For which types of datasets would these types of facetted plots not work well in comparing relationships between variables?
+**4.8** For which types of datasets would these types of faceted plots not work well in comparing relationships between variables?
 Draw or give an example.
 ```
 
 Histograms can provide a way to compare distributions across groups as we see above when we looked at temperature over months.  Frequently,
-a plot called a **boxplot** (also called a **side-by-side boxplot**) is done instead.  The **boxplot** uses the information provided in the **five-number summary** referred to in the previous section when we used the `summary` function.  It gives a way to compare this summary information across the different levels of a group.  Let's create a boxplot to compare the monthly temperatures as we did above with the facetted histograms.
+a plot called a **boxplot** (also called a **side-by-side boxplot**) is done instead.  The **boxplot** uses the information provided in the **five-number summary** referred to in the previous section when we used the `summary` function.  It gives a way to compare this summary information across the different levels of a group.  Let's create a boxplot to compare the monthly temperatures as we did above with the faceted histograms.
 
 ```{r}
 ggplot(data = weather, mapping = aes(x = month, y = temp)) +
   geom_boxplot()
 ```
 
-Note the first warning that is given here.  (The second one corresponds to missing values in the data frame and it is turned off on subsequent plots.) This plot does not look like what we were expecting.  We were expecting to see the distribution of
+Note the first warning that is given here.  (The second one corresponds to missing values in the dataframe and it is turned off on subsequent plots.) This plot does not look like what we were expecting.  We were expecting to see the distribution of
 temperatures for each month (so 12 different boxplots).  This gives us the overall boxplot without any other groupings.  We can get around this by introducing a new function for our `x` variable.
 
 ```{r warning=FALSE}
@@ -210,7 +210,7 @@ We have introduced a new function called `factor()` here.  One of the things thi
 
 **4.11** We looked at the distribution of a continuous variable over a categorical variable here with this boxplot.  Why can't we look at the distribution of one continuous variable over the distribution of another continuous variable?  Say temperature across pressure, for example?
 
-**4.12** Boxplots provide a simple way to identify outliers.  Why may outliers be easier to identify when looking at a boxplot instead of a facetted histogram?
+**4.12** Boxplots provide a simple way to identify outliers.  Why may outliers be easier to identify when looking at a boxplot instead of a faceted histogram?
 ```
 
 ### Summary
@@ -260,3 +260,9 @@ You have seen all of the major pieces behind "The Grammar of Graphics" which ser
 - Have a variety of bad plots with data for the readers and have readers create better plots with `ggplot2`
 
 ## What's to come?
+
+**Last updated:**
+
+```{r time_viz, echo=FALSE}
+format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```
