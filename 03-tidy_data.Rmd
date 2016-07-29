@@ -148,11 +148,11 @@ Note that R by default will print out the object when only its name is given as 
 
 ## Normal forms of data
 
-The datasets included in the `nycflights13` package are in a form that minimizes redundancy of data.  We will see that there are ways to _merge_ (or _join_) the different tables together easily.  We are capable of doing so because each of the tables have _keys_ in common to relate one to another.  This is an important property of **normal forms** of data.  The process of decomposing dataframes into less redundant tables without losing information is called **normalization**[^<https://en.wikipedia.org/wiki/Database_normalization>].
+The datasets included in the `nycflights13` package are in a form that minimizes redundancy of data.  We will see that there are ways to _merge_ (or _join_) the different tables together easily.  We are capable of doing so because each of the tables have _keys_ in common to relate one to another.  This is an important property of **normal forms** of data.  The process of decomposing dataframes into less redundant tables without losing information is called **normalization**[^https://en.wikipedia.org/wiki/Database_normalization].
 
 We saw an example of this above with the `airlines` dataset.  While the `flights` dataframe could also include a column with the names of the airlines instead of the carrier code, this would be repetitive since there is a unique mapping of the carrier code to the name of the airline/carrier. 
 
-Below an example is given showing how to **join** the `airlines` dataframe together with the `flights` dataframe by linking together the two datasets via a common **key** of `"carrier"`.  Note that this "joined" dataframe is assigned to a new dataframe called `joined_flights`.  The structure of `joined_flights` is also given so that you can see a few elements of the new column added.
+Below an example is given showing how to **join** the `airlines` dataframe together with the `flights` dataframe by linking together the two datasets via a common **key** of `"carrier"`.  Note that this "joined" dataframe is assigned to a new dataframe called `joined_flights`.  The structure of `joined_flights` is also given so that you can see a few elements of the new column `name` that has been added.  (We will see in Chapter \@ref(manip) ways to change `name` to a more descriptive variable name.)
 
 ```{r message=FALSE}
 library(dplyr)

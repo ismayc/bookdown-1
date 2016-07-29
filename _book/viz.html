@@ -132,8 +132,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3.2" data-path="viz.html"><a href="viz.html#summary-1"><i class="fa fa-check"></i><b>4.3.2</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="viz.html"><a href="viz.html#barplots"><i class="fa fa-check"></i><b>4.4</b> Barplots</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="viz.html"><a href="viz.html#categorical-data-summaries"><i class="fa fa-check"></i><b>4.4.1</b> Categorical data summaries</a></li>
-<li class="chapter" data-level="4.4.2" data-path="viz.html"><a href="viz.html#summary-2"><i class="fa fa-check"></i><b>4.4.2</b> Summary</a></li>
+<li class="chapter" data-level="4.4.1" data-path="viz.html"><a href="viz.html#must-avoid-pie-charts"><i class="fa fa-check"></i><b>4.4.1</b> Must avoid pie charts!</a></li>
+<li class="chapter" data-level="4.4.2" data-path="viz.html"><a href="viz.html#categorical-data-summaries"><i class="fa fa-check"></i><b>4.4.2</b> Categorical data summaries</a></li>
+<li class="chapter" data-level="4.4.3" data-path="viz.html"><a href="viz.html#summary-2"><i class="fa fa-check"></i><b>4.4.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="viz.html"><a href="viz.html#scatter-plots"><i class="fa fa-check"></i><b>4.5</b> Scatter-plots</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="viz.html"><a href="viz.html#summary-3"><i class="fa fa-check"></i><b>4.5.1</b> Summary</a></li>
@@ -369,19 +370,150 @@ Figure 4.4: Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwid
 </div>
 <div id="barplots" class="section level2">
 <h2><span class="header-section-number">4.4</span> Barplots</h2>
+<p>Both histograms and boxplots represent ways to visualize the variability of continuous variables. Another common task is to present the distribution of a categorical variable. This is a simpler task since we will be interested in how many elements from our data fall into the different categories of the categorical variable. We need not bin the data or identify the different quantiles for categorical variables.</p>
+<p>Frequently, the best way to visualize these different counts (also known as <strong>frequencies</strong>) is via a barplot. Consider the distribution of airlines that flew out of New York City in 2013. This can be plotted by invoking the <code>geom_bar</code> function in <code>ggplot2</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier)) +
+<span class="st">  </span><span class="kw">geom_bar</span>()</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-21"></span>
+<img src="ismay_kim_files/figure-html/unnamed-chunk-21-1.png" alt="Number of flights departing NYC in 2013 by airline" width="672" />
+<p class="caption">
+Figure 4.5: Number of flights departing NYC in 2013 by airline
+</p>
+</div>
+<p>Recall the <code>airlines</code> dataset discussed in Chapter <a href="tidy.html#tidy">3</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
+<span class="kw">data</span>(airlines)
+<span class="kw">kable</span>(airlines)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">carrier</th>
+<th align="left">name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">9E</td>
+<td align="left">Endeavor Air Inc.</td>
+</tr>
+<tr class="even">
+<td align="left">AA</td>
+<td align="left">American Airlines Inc.</td>
+</tr>
+<tr class="odd">
+<td align="left">AS</td>
+<td align="left">Alaska Airlines Inc.</td>
+</tr>
+<tr class="even">
+<td align="left">B6</td>
+<td align="left">JetBlue Airways</td>
+</tr>
+<tr class="odd">
+<td align="left">DL</td>
+<td align="left">Delta Air Lines Inc.</td>
+</tr>
+<tr class="even">
+<td align="left">EV</td>
+<td align="left">ExpressJet Airlines Inc.</td>
+</tr>
+<tr class="odd">
+<td align="left">F9</td>
+<td align="left">Frontier Airlines Inc.</td>
+</tr>
+<tr class="even">
+<td align="left">FL</td>
+<td align="left">AirTran Airways Corporation</td>
+</tr>
+<tr class="odd">
+<td align="left">HA</td>
+<td align="left">Hawaiian Airlines Inc.</td>
+</tr>
+<tr class="even">
+<td align="left">MQ</td>
+<td align="left">Envoy Air</td>
+</tr>
+<tr class="odd">
+<td align="left">OO</td>
+<td align="left">SkyWest Airlines Inc.</td>
+</tr>
+<tr class="even">
+<td align="left">UA</td>
+<td align="left">United Air Lines Inc.</td>
+</tr>
+<tr class="odd">
+<td align="left">US</td>
+<td align="left">US Airways Inc.</td>
+</tr>
+<tr class="even">
+<td align="left">VX</td>
+<td align="left">Virgin America</td>
+</tr>
+<tr class="odd">
+<td align="left">WN</td>
+<td align="left">Southwest Airlines Co.</td>
+</tr>
+<tr class="even">
+<td align="left">YV</td>
+<td align="left">Mesa Airlines Inc.</td>
+</tr>
+</tbody>
+</table>
+<p>We see that United Air Lines, JetBlue Airways, and ExpressJet Airlines had the most flights depart New York City in 2013. To get the actual number of flights by each airline we can use the <code>table</code> function on the <code>carrier</code> variable in <code>flights</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights_table &lt;-<span class="st"> </span><span class="kw">table</span>(flights$carrier)
+flights_table</code></pre></div>
+<pre><code>## 
+##    9E    AA    AS    B6    DL    EV    F9    FL    HA    MQ    OO    UA 
+## 18460 32729   714 54635 48110 54173   685  3260   342 26397    32 58665 
+##    US    VX    WN    YV 
+## 20536  5162 12275   601</code></pre>
+<p>More information on the use of this <code>$</code> syntax is available in Chapter <a href="tidy.html#tidy">3</a> and in Appendix A - Chapter <a href="appendix1.html#appendix1">7</a>.</p>
+<p>We can sort this table from highest to lowest counts by using the <code>sort</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sorted_flights &lt;-<span class="st"> </span><span class="kw">sort</span>(flights_table, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
+<span class="kw">names</span>(sorted_flights)</code></pre></div>
+<pre><code>##  [1] &quot;UA&quot; &quot;B6&quot; &quot;EV&quot; &quot;DL&quot; &quot;AA&quot; &quot;MQ&quot; &quot;US&quot; &quot;9E&quot; &quot;WN&quot; &quot;VX&quot; &quot;FL&quot; &quot;AS&quot; &quot;F9&quot; &quot;YV&quot;
+## [15] &quot;HA&quot; &quot;OO&quot;</code></pre>
+<p>It is often preferred for barplots to be ordered corresponding to the heights of the bars. This allows the reader to more easily compare the ordering of different airlines in terms of departed flights <span class="citation">(Robbins <a href="#ref-robbins2013">2013</a>)</span>. We can also much more easily answer questions like “How many airlines have more departing flights than Southwest Airlines?”.</p>
+<p>We can use the sorted table giving the number of flights defined as <code>sorted_flights</code> to <strong>reorder</strong> the <code>carrier</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier)) +
+<span class="st">  </span><span class="kw">geom_bar</span>() +
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits =</span> <span class="kw">names</span>(sorted_flights))</code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<img src="ismay_kim_files/figure-html/unnamed-chunk-25-1.png" alt="Number of flights departing NYC in 2013 by airline - Descending numbers" width="672" />
+<p class="caption">
+Figure 4.6: Number of flights departing NYC in 2013 by airline - Descending numbers
+</p>
+</div>
+<p>The last addition here specifies the values of the horizontal <code>x</code> axis on a discrete scale to correspond to those given by the entries of <code>sorted_flights</code>.</p>
 <div class="learncheck">
 <p>
 <strong><em>Learning check</em></strong>
 </p>
 <p>
-<strong>4.</strong>
+<strong>4.13</strong> Why are histograms inappropriate for visualizing categorical variables?
+</p>
+<p>
+<strong>4.14</strong> Why are three specific questions that can be more easily answered by looking at Figure 4.6 instead of Figure 4.5?
 </p>
 </div>
+<div id="must-avoid-pie-charts" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Must avoid pie charts!</h3>
+<p>Unfortunately, one of the most common plots seen today for categorical data is the pie chart. While they may see harmless enough, they actually present a problem in that humans are unable to judge angles well. As Naomi Robbins describes in her book “Creating More Effective Graphs”, we overestimate angles greater than 90 degrees and we underestimate angles less than 90 degrees. In other words, it is difficult for us to determine relative size of one piece of the pie compared to another.</p>
+<p>Let’s examine our previous barplot example on the number of flights departing NYC by airline. This time we will use a pie chart. As you review this chart, try to identify</p>
+<ul>
+<li>how much larger the portion of the pie is for ExpressJet Airlines (<code>EV</code>) compared to US Airways (<code>US</code>),</li>
+<li>what the third largest carrier is in terms of departing flights, and</li>
+<li>how many carriers have fewer flights than United Airlines (<code>UA</code>)?</li>
+</ul>
+<p><img src="ismay_kim_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>While it is quite easy to look back at the barplot to get the answer to these questions, it’s quite difficult to get the answers correct when looking at the pie graph. Barplots can always present the information in a way that is easier for the eye to determine relative position.</p>
+<p>There may be one exception from Nathan Yau at FlowingData.com[^https://flowingdata.com/2008/09/19/pie-i-have-eaten-and-pie-i-have-not-eaten/] but we will leave this for the reader to decide:</p>
+<p><img src="images/Pie-I-have-Eaten.jpg" width="250" style="display: block; margin: auto;" /></p>
+</div>
 <div id="categorical-data-summaries" class="section level3">
-<h3><span class="header-section-number">4.4.1</span> Categorical data summaries</h3>
+<h3><span class="header-section-number">4.4.2</span> Categorical data summaries</h3>
 </div>
 <div id="summary-2" class="section level3">
-<h3><span class="header-section-number">4.4.2</span> Summary</h3>
+<h3><span class="header-section-number">4.4.3</span> Summary</h3>
 </div>
 </div>
 <div id="scatter-plots" class="section level2">
@@ -426,7 +558,7 @@ Figure 4.4: Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwid
 <div id="whats-to-come-1" class="section level2">
 <h2><span class="header-section-number">4.8</span> What’s to come?</h2>
 <p><strong>Last updated:</strong></p>
-<pre><code>## [1] &quot;Friday, July 29, 2016 14:39:25 CDT&quot;</code></pre>
+<pre><code>## [1] &quot;Friday, July 29, 2016 16:10:22 CDT&quot;</code></pre>
 
 </div>
 </div>
@@ -440,6 +572,9 @@ Figure 4.4: Histogram of Hourly Temperature Recordings from NYC in 2013 - Binwid
 </div>
 <div id="ref-r4ds2016">
 <p>Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science</em>. O’Reilly. <a href="http://http://r4ds.had.co.nz/" class="uri">http://http://r4ds.had.co.nz/</a>.</p>
+</div>
+<div id="ref-robbins2013">
+<p>Robbins, Naomi. 2013. <em>Creating More Effective Graphs</em>. Chart House.</p>
 </div>
 </div>
 <div class="footnotes">

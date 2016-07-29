@@ -132,8 +132,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.3.2" data-path="viz.html"><a href="viz.html#summary-1"><i class="fa fa-check"></i><b>4.3.2</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="viz.html"><a href="viz.html#barplots"><i class="fa fa-check"></i><b>4.4</b> Barplots</a><ul>
-<li class="chapter" data-level="4.4.1" data-path="viz.html"><a href="viz.html#categorical-data-summaries"><i class="fa fa-check"></i><b>4.4.1</b> Categorical data summaries</a></li>
-<li class="chapter" data-level="4.4.2" data-path="viz.html"><a href="viz.html#summary-2"><i class="fa fa-check"></i><b>4.4.2</b> Summary</a></li>
+<li class="chapter" data-level="4.4.1" data-path="viz.html"><a href="viz.html#must-avoid-pie-charts"><i class="fa fa-check"></i><b>4.4.1</b> Must avoid pie charts!</a></li>
+<li class="chapter" data-level="4.4.2" data-path="viz.html"><a href="viz.html#categorical-data-summaries"><i class="fa fa-check"></i><b>4.4.2</b> Categorical data summaries</a></li>
+<li class="chapter" data-level="4.4.3" data-path="viz.html"><a href="viz.html#summary-2"><i class="fa fa-check"></i><b>4.4.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.5" data-path="viz.html"><a href="viz.html#scatter-plots"><i class="fa fa-check"></i><b>4.5</b> Scatter-plots</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="viz.html"><a href="viz.html#summary-3"><i class="fa fa-check"></i><b>4.5.1</b> Summary</a></li>
@@ -446,9 +447,9 @@ airlines</code></pre></div>
 </div>
 <div id="normal-forms-of-data" class="section level2">
 <h2><span class="header-section-number">3.4</span> Normal forms of data</h2>
-<p>The datasets included in the <code>nycflights13</code> package are in a form that minimizes redundancy of data. We will see that there are ways to <em>merge</em> (or <em>join</em>) the different tables together easily. We are capable of doing so because each of the tables have <em>keys</em> in common to relate one to another. This is an important property of <strong>normal forms</strong> of data. The process of decomposing dataframes into less redundant tables without losing information is called <strong>normalization</strong>[^&lt;https://en.wikipedia.org/wiki/Database_normalization&gt;].</p>
+<p>The datasets included in the <code>nycflights13</code> package are in a form that minimizes redundancy of data. We will see that there are ways to <em>merge</em> (or <em>join</em>) the different tables together easily. We are capable of doing so because each of the tables have <em>keys</em> in common to relate one to another. This is an important property of <strong>normal forms</strong> of data. The process of decomposing dataframes into less redundant tables without losing information is called <strong>normalization</strong>[^https://en.wikipedia.org/wiki/Database_normalization].</p>
 <p>We saw an example of this above with the <code>airlines</code> dataset. While the <code>flights</code> dataframe could also include a column with the names of the airlines instead of the carrier code, this would be repetitive since there is a unique mapping of the carrier code to the name of the airline/carrier.</p>
-<p>Below an example is given showing how to <strong>join</strong> the <code>airlines</code> dataframe together with the <code>flights</code> dataframe by linking together the two datasets via a common <strong>key</strong> of <code>&quot;carrier&quot;</code>. Note that this “joined” dataframe is assigned to a new dataframe called <code>joined_flights</code>. The structure of <code>joined_flights</code> is also given so that you can see a few elements of the new column added.</p>
+<p>Below an example is given showing how to <strong>join</strong> the <code>airlines</code> dataframe together with the <code>flights</code> dataframe by linking together the two datasets via a common <strong>key</strong> of <code>&quot;carrier&quot;</code>. Note that this “joined” dataframe is assigned to a new dataframe called <code>joined_flights</code>. The structure of <code>joined_flights</code> is also given so that you can see a few elements of the new column <code>name</code> that has been added. (We will see in Chapter <a href="manip.html#manip">5</a> ways to change <code>name</code> to a more descriptive variable name.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 joined_flights &lt;-<span class="st"> </span><span class="kw">inner_join</span>(<span class="dt">x =</span> flights, <span class="dt">y =</span> airlines, <span class="dt">by =</span> <span class="st">&quot;carrier&quot;</span>)
 <span class="kw">str</span>(joined_flights)</code></pre></div>
@@ -608,7 +609,7 @@ joined_flights &lt;-<span class="st"> </span><span class="kw">inner_join</span>(
 <h2><span class="header-section-number">3.5</span> What’s to come?</h2>
 <p>In Chapter <a href="viz.html#viz">4</a>, we will further explore the distribution of a variable in a related dataset to <code>flights</code>: the <code>temp</code> variable in the <code>weather</code> dataset. We’ll be interested in understanding how this variable varies in relation to the values of other variables in the dataset. We will see that visualization is often a powerful tool in helping us see what is going on in a dataset. It will be a useful way to expand on the <code>str</code> function we have seen here for tidy data.</p>
 <p><strong>Last updated:</strong></p>
-<pre><code>## [1] &quot;Friday, July 29, 2016 14:39:19 CDT&quot;</code></pre>
+<pre><code>## [1] &quot;Friday, July 29, 2016 16:10:13 CDT&quot;</code></pre>
 
 </div>
 </div>
