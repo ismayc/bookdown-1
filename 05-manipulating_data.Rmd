@@ -8,6 +8,7 @@
     + Show how to rename variables such as the `name` column from `airlines`
     + Get number of elements in specific columns similar to `table()` function
       with `dplyr`
+    + [Nick Horton's slides from JSM](https://github.com/Amherst-Statistics)
 - Database normalization
    + https://en.wikipedia.org/wiki/Database_normalization
    + Add importance of joining tables

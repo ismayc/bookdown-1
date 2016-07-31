@@ -2,6 +2,8 @@
 
 **Need to give big picture question here and set up how this chapter ties in to chapters to come**.
 
+**Force dataframes into tibbles using `as_tibble`?  That way `head` isn't needed since printing will be nice by default.**
+
 ```{r setup_tidy, include=FALSE}
 chap <- 3
 lc <- 0
@@ -13,7 +15,7 @@ rq <- 0
 You have surely heard the word "tidy" in your life:
 
 - "Tidy up your room!"
-- "Please write your homework in a tidy way so that it is easier to grade and provide feedback."
+- "Please write your homework in a tidy way so that it is easier to grade and to provide feedback."
 - Marie Kondo's best-selling book [_The Life-Changing Magic of Tidying Up: The Japanese Art of Decluttering and Organizing_](https://www.amazon.com/Life-Changing-Magic-Tidying-Decluttering-Organizing/dp/1607747308/ref=sr_1_1?ie=UTF8&qid=1469400636&sr=8-1&keywords=tidying+up)
 - "I am not by any stretch of the imagination a tidy person, and the piles of unread books on the coffee table and by my bed have a plaintive, pleading quality to me - 'Read me, please!'" - Linda Grant
 

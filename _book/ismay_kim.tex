@@ -308,6 +308,15 @@ packages given here:
 \item
   We will focus on the triad: computational, data, and inferential
   thinking.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Literate programming / literate data science
+  \item
+    ``Programs must be written for people to read, and only incidentally
+    for machines to execute.'' - Hal Abelson
+  \end{itemize}
 \item
   Discuss the role of data analysis in the sciences
 \item
@@ -414,6 +423,9 @@ Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
 \textbf{Need to give big picture question here and set up how this
 chapter ties in to chapters to come}.
 
+\textbf{Force dataframes into tibbles using \texttt{as\_tibble}? That
+way \texttt{head} isn't needed since printing will be nice by default.}
+
 You have surely heard the word ``tidy'' in your life:
 
 \begin{itemize}
@@ -422,7 +434,7 @@ You have surely heard the word ``tidy'' in your life:
   ``Tidy up your room!''
 \item
   ``Please write your homework in a tidy way so that it is easier to
-  grade and provide feedback.''
+  grade and to provide feedback.''
 \item
   Marie Kondo's best-selling book
   \href{https://www.amazon.com/Life-Changing-Magic-Tidying-Decluttering-Organizing/dp/1607747308/ref=sr_1_1?ie=UTF8\&qid=1469400636\&sr=8-1\&keywords=tidying+up}{\emph{The
@@ -1017,7 +1029,7 @@ for tidy data.
 \textbf{Last updated:}
 
 \begin{verbatim}
-## [1] "Sunday, July 31, 2016 16:12:58 CDT"
+## [1] "Sunday, July 31, 2016 17:15:30 CDT"
 \end{verbatim}
 
 \chapter{Visualizing Data}\label{viz}
@@ -2202,7 +2214,7 @@ summary of each part:
 \textbf{Last updated:}
 
 \begin{verbatim}
-## [1] "Sunday, July 31, 2016 16:13:41 CDT"
+## [1] "Sunday, July 31, 2016 17:16:13 CDT"
 \end{verbatim}
 
 \chapter{Manipulating Data}\label{manip}
@@ -2227,6 +2239,9 @@ summary of each part:
   \item
     Get number of elements in specific columns similar to
     \texttt{table()} function with \texttt{dplyr}
+  \item
+    \href{https://github.com/Amherst-Statistics}{Nick Horton's slides
+    from JSM}
   \end{itemize}
 \item
   Database normalization
@@ -2362,6 +2377,8 @@ by looking at Figure 4.6 instead of Figure 4.5?
   Changing the labels of a plot (x-axis, y-axis)
 \item
   Changing the theme
+\item
+  Adding \texttt{code\_folding} and \texttt{code\_download} to YAML
 \end{itemize}
 
 \bibliography{bib/packages.bib,bib/books.bib,bib/articles.bib}
