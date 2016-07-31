@@ -1,0 +1,41 @@
+# Appendix B: Intermediate R {#appendix2}
+
+## Sorted barplots
+
+Building upon the example in Section \@ref(barplots):
+
+```{r}
+library(nycflights13)
+flights_table <- table(flights$carrier)
+flights_table
+```
+
+More information on the use of this `$` syntax is available in Chapter \@ref(tidy) and in Appendix A - Chapter \@ref(appendix1).
+
+
+We can sort this table from highest to lowest counts by using the `sort` function:
+
+```{r}
+sorted_flights <- sort(flights_table, decreasing = TRUE)
+names(sorted_flights)
+```
+
+It is often preferred for barplots to be ordered corresponding to the heights of the bars.  This allows the reader to more easily compare the ordering of different airlines in terms of departed flights [@robbins2013].  We can also much more easily answer questions like "How many airlines have more departing flights than Southwest Airlines?".
+
+We can use the sorted table giving the number of flights defined as `sorted_flights` to **reorder** the `carrier`.
+
+```{r, fig.cap="Number of flights departing NYC in 2013 by airline - Descending numbers"}
+ggplot(data = flights, mapping = aes(x = carrier)) +
+  geom_bar() +
+  scale_x_discrete(limits = names(sorted_flights))
+```
+
+The last addition here specifies the values of the horizontal `x` axis on a discrete scale to correspond to those given by the entries of `sorted_flights`.  
+
+
+** ** What are three specific questions that can be more easily answered by looking at Figure 4.6 instead of Figure 4.5?
+
+***
+
+- Changing the labels of a plot (x-axis, y-axis)
+- Changing the theme

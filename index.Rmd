@@ -1,14 +1,19 @@
 --- 
-title: "A _MODERN DIVE_ into the Language of Science"
+title: "A MODERN DIVE into the Language of Science"
 subtitle: "Modern Open-source Data-analysis Encouraging Reproducibility and iNtuitive Data-Inspired Visualization Efforts" #"The Language of Statistical & Data Sciences"
 author: "Chester Ismay and Albert Y. Kim"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [books.bib, packages.bib, articles.bib]
+bibliography: [bib/books.bib, bib/packages.bib, bib/articles.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: #rstudio/bookdown-demo
 description: "Getting away from the traditional introductory statistical curriculum more focused on reproducible research and modern data analysis techniques and tools"
 ---
+
+```{r set-options, include=FALSE}
+options(width = 72)
+knitr::opts_chunk$set(tidy = FALSE)
+```
 

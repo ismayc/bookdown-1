@@ -17,6 +17,7 @@
   }%
 \fi
 
+%% Need to clean up
 \newenvironment{rmdblock}[1]
   {\begin{shaded*}
   \begin{itemize}
@@ -31,6 +32,7 @@
   \end{itemize}
   \end{shaded*}
   }
+%% Probably can be omitted
 \newenvironment{rmdnote}
   {\begin{rmdblock}{note}}
   {\end{rmdblock}}
@@ -52,3 +54,11 @@
 \newenvironment{review}
   {\begin{rmdblock}{warning}}
   {\end{rmdblock}}
+
+% To tweak tufte layout
+\geometry{
+  left=0.8in, % left margin
+  textwidth=35pc, % main text block
+  marginparsep=1pc, % gutter between main text block and margin notes
+  marginparwidth=8pc % width of margin notes
+}

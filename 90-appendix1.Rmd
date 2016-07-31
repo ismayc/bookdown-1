@@ -9,4 +9,5 @@
     + indexing/subsetting
     + functions (default arguments)
     + Case matters in R!
+    + Why do some arguments require quotations and others don't?
 - RMarkdown chunk options

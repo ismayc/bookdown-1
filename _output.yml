@@ -9,8 +9,14 @@ bookdown::gitbook:
     edit:
       link: https://github.com/rstudio/bookdown-demo/edit/master/%s
 bookdown::pdf_book:
+  base_format: tufte::tufte_book
   includes:
     in_header: preamble.tex
   latex_engine: xelatex
   citation_package: natbib
+  keep_tex: true
+  fig_width: 7
+  fig_height: 4
+  highlight: tango
 bookdown::epub_book: default
+#bookdown::word_document2: default
