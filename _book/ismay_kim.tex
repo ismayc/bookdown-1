@@ -106,7 +106,7 @@
 % title / author / date
 \title{A MODERN DIVE into the Language of Science}
 \author{Chester Ismay and Albert Y. Kim}
-\date{2016-07-30}
+\date{2016-07-31}
 
 \usepackage{booktabs}
 \usepackage{longtable}
@@ -206,12 +206,15 @@ will see the corresponding \texttt{library} function in the text.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{needed_pkgs <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"nycflights13"}\NormalTok{, }\StringTok{"dplyr"}\NormalTok{, }\StringTok{"ggplot2"}\NormalTok{, }\StringTok{"knitr"}\NormalTok{, }
-  \StringTok{"devtools"}\NormalTok{, }\StringTok{"ggplot2"}\NormalTok{)}
+  \StringTok{"devtools"}\NormalTok{, }\StringTok{"ggplot2"}\NormalTok{, }\StringTok{"webshot"}\NormalTok{)}
 \NormalTok{new.pkgs <-}\StringTok{ }\NormalTok{needed_pkgs[!(needed_pkgs %in%}\StringTok{ }\KeywordTok{installed.packages}\NormalTok{())]}
 
 \NormalTok{if (}\KeywordTok{length}\NormalTok{(new.pkgs)) \{}
   \KeywordTok{install.packages}\NormalTok{(new.pkgs, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
 \NormalTok{\}}
+\CommentTok{# Check that phantomjs is installed on the Mac.  Will need to run on the PC}
+\NormalTok{if(}\KeywordTok{Sys.which}\NormalTok{(}\StringTok{"phantomjs"}\NormalTok{) !=}\StringTok{ ""}\NormalTok{)}
+  \NormalTok{webshot::}\KeywordTok{install_phantomjs}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -238,7 +241,7 @@ packages given here:
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
 ##  tz       America/Detroit             
-##  date     2016-07-30
+##  date     2016-07-31
 \end{verbatim}
 
 \begin{verbatim}
@@ -285,6 +288,7 @@ packages given here:
 ##  stringi        1.1.1    2016-05-27 CRAN (R 3.3.0)
 ##  stringr        1.0.0    2015-04-30 CRAN (R 3.3.0)
 ##  tibble         1.1      2016-07-04 CRAN (R 3.3.0)
+##  webshot        0.3.2    2016-06-23 CRAN (R 3.3.0)
 ##  whisker        0.3-2    2013-04-28 CRAN (R 3.3.0)
 ##  withr          1.0.2    2016-06-20 CRAN (R 3.3.0)
 ##  yaml           2.1.13   2014-06-12 CRAN (R 3.3.0)
@@ -1013,7 +1017,7 @@ for tidy data.
 \textbf{Last updated:}
 
 \begin{verbatim}
-## [1] "Saturday, July 30, 2016 20:04:09 EDT"
+## [1] "Sunday, July 31, 2016 00:34:09 EDT"
 \end{verbatim}
 
 \chapter{Visualizing Data}\label{viz}
@@ -1234,7 +1238,7 @@ the \texttt{dplyr} package to produce similar results.)
 
 The syntax here is a little different than what we have seen before. (A
 further discussion about R syntax is available in Appendix A - Chapter
-\ref{appendix1}). Here \texttt{summary} is the function and it is
+\ref{appendix1}). Here, \texttt{summary} is the function and it is
 expecting an object to be summarized as its argument. The object here is
 the \texttt{temp} variable in the \texttt{weather} dataframe. To focus
 on just this one variable \texttt{temp} in \texttt{weather}, we separate
@@ -1960,11 +1964,166 @@ relationships come about as you make subtle changes to your plots.
 
 \section{Line-graphs}\label{line-graphs}
 
-\begin{itemize}
-\tightlist
-\item
-  Median flight arrival delay by day
-\end{itemize}
+The last of the FNG is a line-graph. They are most frequently used when
+the horizontal axis is time. Time represents a variable that is
+connected together by each day following the previous day. In other
+words, time has a natural ordering. Line-graphs should be avoided when
+there is not a clear ordering to the explanatory (``x'' variable).
+
+We are interested in exploring the arrival delays by day throughout the
+year of 2013 from outgoing flights from New York City. If we plotted all
+of these values, we obtain the following scatter-plot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(flights, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{time_hour, }\DataTypeTok{y =} \NormalTok{arr_delay)) +}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ismay_kim_files/figure-latex/unnamed-chunk-32-1}
+
+We see that this plot is difficult to understand based on the sheer
+number of points plotted. We see some outlier points with more than 500
+minutes of arrival delay, but even some jittering and transparency is
+not going to help us here.
+
+Instead of plotting all of the values for each hour for all flights, it
+might make sense to plot the average value for each day in terms of
+arrival delays. Of course, we also need to address which average we
+should use: mean or median. With there being some outliers here, we have
+chosen to use the median arrival delay (since the mean is heavily
+influence by outliers).
+
+You may think that this is a difficult task but the \texttt{group\_by}
+and \texttt{summarize} functions make this a breeze. You'll see more
+examples using these two functions in Chapter \ref{manip}. Here we will
+create a new variable, which corresponds to the month and day combined,
+from the \texttt{time\_hour} column using the \texttt{mutate} function
+and create a new dataframe called \texttt{flights\_day}. We also give
+the \texttt{str} of this new dataset so you can see the new variable
+added \texttt{date}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights_day <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(flights, }\DataTypeTok{date =} \KeywordTok{as.Date}\NormalTok{(time_hour))}
+\KeywordTok{str}\NormalTok{(flights_day)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes 'tbl_df', 'tbl' and 'data.frame':    336776 obs. of  20 variables:
+##  $ year          : int  2013 2013 2013 2013 2013 2013 2013 2013 2013 2013 ...
+##  $ month         : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ day           : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ dep_time      : int  517 533 542 544 554 554 555 557 557 558 ...
+##  $ sched_dep_time: int  515 529 540 545 600 558 600 600 600 600 ...
+##  $ dep_delay     : num  2 4 2 -1 -6 -4 -5 -3 -3 -2 ...
+##  $ arr_time      : int  830 850 923 1004 812 740 913 709 838 753 ...
+##  $ sched_arr_time: int  819 830 850 1022 837 728 854 723 846 745 ...
+##  $ arr_delay     : num  11 20 33 -18 -25 12 19 -14 -8 8 ...
+##  $ carrier       : chr  "UA" "UA" "AA" "B6" ...
+##  $ flight        : int  1545 1714 1141 725 461 1696 507 5708 79 301 ...
+##  $ tailnum       : chr  "N14228" "N24211" "N619AA" "N804JB" ...
+##  $ origin        : chr  "EWR" "LGA" "JFK" "JFK" ...
+##  $ dest          : chr  "IAH" "IAH" "MIA" "BQN" ...
+##  $ air_time      : num  227 227 160 183 116 150 158 53 140 138 ...
+##  $ distance      : num  1400 1416 1089 1576 762 ...
+##  $ hour          : num  5 5 5 5 6 5 6 6 6 6 ...
+##  $ minute        : num  15 29 40 45 0 58 0 0 0 0 ...
+##  $ time_hour     : POSIXct, format: "2013-01-01 05:00:00" ...
+##  $ date          : Date, format: "2013-01-01" ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{flights_summarized <-}\StringTok{ }\NormalTok{flights_day %>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(date) %>%}
+\StringTok{  }\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{median_arr_delay =} \KeywordTok{median}\NormalTok{(arr_delay, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\KeywordTok{head}\NormalTok{(flights_summarized)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 2
+##         date median_arr_delay
+##       <date>            <dbl>
+## 1 2013-01-01                3
+## 2 2013-01-02                4
+## 3 2013-01-03                1
+## 4 2013-01-04               -8
+## 5 2013-01-05               -7
+## 6 2013-01-06               -1
+\end{verbatim}
+
+You will see the ``pipe'' operator \texttt{\%\textgreater{}\%} explained
+in more detail in Chapter \ref{manip}, but you can read it as ``and
+then''. Here, we take the \texttt{flights\_day} dataframe that we just
+created and then group it together by \texttt{date}. This goes through
+the dataframe and puts together all rows that have \texttt{2013-01-01}
+together, all rows that have \texttt{2013-01-02} together, \ldots{}, and
+all rows that have \texttt{2013-12-31} together. And then it looks at
+the median value of \texttt{arr\_delay} over each one of the days. You
+can get a glimpse of the first few rows of this new dataset above since
+we invoked the \texttt{head} function on it.
+
+Note also that there are missing values in this data set so we need to
+exclude them from the analysis. This is why the \texttt{na.rm\ =\ TRUE}
+argument is invoked. Many functions require this extra specification so
+it's always a good idea to run a \texttt{?median} or \texttt{?mean}
+before you try to run the function. Or you can always run it afterwards
+as well when you get strange results.
+
+Now getting back to our line-graph. We want to plot the median arrival
+delay over all airlines on all days in 2013 from departing flights in
+NYC. This syntax should look similar to what we have seen before with
+plots involving \texttt{ggplot}. Notice that we are using the
+\texttt{flights\_summarized} dataset here and not the
+\texttt{flights\_day} or \texttt{flights} dataframes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{ggplot}\NormalTok{(}\DataTypeTok{data =} \NormalTok{flights_summarized, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =} \NormalTok{date, }\DataTypeTok{y =} \NormalTok{median_arr_delay)) +}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics{ismay_kim_files/figure-latex/lineflights-1} \caption[Line-graph of median arrival delay for flights leaving NYC in 2013 versus day of the year]{Line-graph of median arrival delay for flights leaving NYC in 2013 versus day of the year}\label{fig:lineflights}
+\end{figure}
+
+\subsection{Interactive line-graphs}\label{interactive-line-graphs}
+
+Another useful tool for viewing line-graphs such as this is the
+\texttt{dygraph} function in the \texttt{dygraphs} package in
+combination with the \texttt{dyRangeSelector} function. This allows us
+to zoom in on a selected range and get an interactive plot for us to
+work with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dygraphs)}
+\KeywordTok{rownames}\NormalTok{(flights_summarized) <-}\StringTok{ }\NormalTok{flights_summarized$date}
+\NormalTok{flights_summarized <-}\StringTok{ }\KeywordTok{select}\NormalTok{(flights_summarized, -date)}
+\KeywordTok{dyRangeSelector}\NormalTok{(}\KeywordTok{dygraph}\NormalTok{(flights_summarized))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{ismay_kim_files/figure-latex/unnamed-chunk-35-1}
+
+The syntax here is a little different than what we have covered so far.
+The \texttt{dygraph} function is expecting for the dates to be given as
+the \texttt{rownames} of the object. We then remove the \texttt{date}
+variable from the \texttt{flights\_summarized} dataframe since it is
+accounted for in the \texttt{rownames}. Lastly, we run the
+\texttt{dygraph} function on the new dataframe that only contains the
+median arrival delay as a column and then provide the ability to have a
+selector to zoom in on the interactive plot via
+\texttt{dyRangeSelector}. (Note that this plot will only be interactive
+in the HTML version of this book.)
+
+\textbf{Include this interactive dygraphs stuff here or in Appendix B?}
+
+\textbf{Include bad example of when a line-graph would be invalid?}
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
@@ -1972,11 +2131,33 @@ relationships come about as you make subtle changes to your plots.
 \textbf{\emph{Learning check}}
 \end{learncheck}
 
-\textbf{(LC4.31)}
+\textbf{(LC4.31)} Why should line-graphs be avoided when there is not a
+clear ordering of the horizontal axis?
+
+\textbf{(LC4.32)} Why are line-graphs frequently used when time is the
+explanatory variable?
+
+\textbf{(LC4.33)} Why did we use the \texttt{flights\_summarized}
+dataframe to produce the line-graph in Figure \ref{fig:lineflights}
+instead of \texttt{flights} or \texttt{flights\_day}?
+
+\textbf{(LC4.34)} Are the largest median arrival delays where you
+expected them to occur on the line-graph above in Figure
+\ref{lineflights}?
+
+\textbf{(LC4.35)} Use the interactive line-graph to determine the
+highest median arrival delay for flights from NYC in 2013. What date was
+it and what do you think contributed to it?
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
 \subsection{Summary}\label{summary-4}
+
+Line-graphs provide a useful tool for viewing a continuous variable that
+is plotted versus time. We need to be careful to not be too entrenched
+in using line-graphs whenever we wish though. They only make sense when
+the explanatory variable (the one on the explanatory variable) has a
+natural ordering. We can mislead our audience if that isn't the case.
 
 \section{Brief Review of The Grammar of
 Graphics}\label{brief-review-of-the-grammar-of-graphics}
@@ -2021,7 +2202,7 @@ summary of each part:
 \textbf{Last updated:}
 
 \begin{verbatim}
-## [1] "Saturday, July 30, 2016 20:04:25 EDT"
+## [1] "Sunday, July 31, 2016 00:34:56 EDT"
 \end{verbatim}
 
 \chapter{Manipulating Data}\label{manip}
@@ -2161,7 +2342,7 @@ We can use the sorted table giving the number of flights defined as
 \end{Shaded}
 
 \begin{figure}
-\includegraphics{ismay_kim_files/figure-latex/unnamed-chunk-34-1} \caption[Number of flights departing NYC in 2013 by airline - Descending numbers]{Number of flights departing NYC in 2013 by airline - Descending numbers}\label{fig:unnamed-chunk-34}
+\includegraphics{ismay_kim_files/figure-latex/unnamed-chunk-38-1} \caption[Number of flights departing NYC in 2013 by airline - Descending numbers]{Number of flights departing NYC in 2013 by airline - Descending numbers}\label{fig:unnamed-chunk-38}
 \end{figure}
 
 The last addition here specifies the values of the horizontal \texttt{x}

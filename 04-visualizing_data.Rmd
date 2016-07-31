@@ -63,7 +63,7 @@ data(weather)
 
 Our focus now turns to the `temp` variable in this `weather` dataset.  We would like to visualize what the  `r nrow(weather)` temperatures look like.  Looking over the `weather` dataset^[To view a dataset in spreadsheet format in RStudio, you can run the `View()` function with the dataframe as its argument.] and running `?weather`, we can see that the `temp` variable corresponds to hourly temperature (in Fahrenheit) recordings at weather stations near airports in New York City. We could just produce points where each of the different values appears on something similar to a number line:
 
-```{r echo=FALSE, warning=FALSE, fig.cap="Strip Plot of Hourly Temperature Recordings from NYC in 2013"}
+```{r echo=FALSE, warning=FALSE, fig.height = 2, fig.cap="Strip Plot of Hourly Temperature Recordings from NYC in 2013"}
 hist_title <- "Histogram of Hourly Temperature Recordings from NYC in 2013"
 library(ggplot2)
 ggplot(data = weather, mapping = aes(x = temp, y = factor("A"))) +
@@ -137,7 +137,7 @@ It is often easier to think about quantitative variables that are not continuous
 
 We can examine some summary information about this `temp` variable.  To do so, we introduce the `summary` function.  (We will see in Chapter \@ref(manip) how to use the `summarize` function in the `dplyr` package to produce similar results.)
 
-The syntax here is a little different than what we have seen before.  (A further discussion about R syntax is available in Appendix A - Chapter \@ref(appendix1)). Here `summary` is the function and it is expecting an object to be summarized as its argument.  The object here is the `temp` variable in the `weather` dataframe.  To focus on just this one variable `temp` in `weather`, we separate them by the dollar sign symbol `$`.  Order matters here:  the dataframe comes before the `$` and the variable/column name comes after.
+The syntax here is a little different than what we have seen before.  (A further discussion about R syntax is available in Appendix A - Chapter \@ref(appendix1)). Here, `summary` is the function and it is expecting an object to be summarized as its argument.  The object here is the `temp` variable in the `weather` dataframe.  To focus on just this one variable `temp` in `weather`, we separate them by the dollar sign symbol `$`.  Order matters here:  the dataframe comes before the `$` and the variable/column name comes after.
 
 ```{r}
 summary(weather$temp)
@@ -331,7 +331,7 @@ Barplots are the go-to way to visualize the frequency of different categories of
 
 We begin by getting the names of the airports in NYC that were included in the `flights` dataset.  Remember from Chapter \@ref(tidy) that this can be done by using the `inner_join` function in the `dplyr` package.
 
-```{r}
+```{r message=FALSE}
 library(dplyr)
 flights_namedports <- inner_join(flights, airports, by = c("origin" = "faa"))
 str(flights_namedports)
@@ -493,7 +493,60 @@ With medium to large datasets, you may need to tweak arguments in both `geom_jit
 
 ## Line-graphs 
 
-- Median flight arrival delay by day
+The last of the FNG is a line-graph.  They are most frequently used when the horizontal axis is time.  Time represents a variable that is connected together by each day following the previous day.  In other words, time has a natural ordering.  Line-graphs should be avoided when there is not a clear ordering to the explanatory ("x" variable).
+
+We are interested in exploring the arrival delays by day throughout the year of 2013 from outgoing flights from New York City.  If we plotted all of these values, we obtain the following scatter-plot:
+
+```{r warning=FALSE}
+ggplot(flights, aes(x = time_hour, y = arr_delay)) + 
+  geom_point()
+```
+
+We see that this plot is difficult to understand based on the sheer number of points plotted.  We see some outlier points with more than 500 minutes of arrival delay, but even some jittering and transparency is not going to help us here.
+
+Instead of plotting all of the values for each hour for all flights, it might make sense to plot the average value for each day in terms of arrival delays.  Of course, we also need to address which average we should use:  mean or median.  With there being some outliers here, we have chosen to use the median arrival delay (since the mean is heavily influence by outliers).
+
+You may think that this is a difficult task but the `group_by` and `summarize` functions make this a breeze.  You'll see more examples using these two functions in Chapter \@ref(manip).  Here we will create a new variable, which corresponds to the month and day combined, from the `time_hour` column using the `mutate` function and create a new dataframe called `flights_day`.  We also give the `str` of this new dataset so you can see the new variable added `date`:
+
+```{r}
+flights_day <- mutate(flights, date = as.Date(time_hour))
+str(flights_day)
+```
+
+```{r}
+flights_summarized <- flights_day %>% group_by(date) %>%
+  summarize(median_arr_delay = median(arr_delay, na.rm = TRUE))
+head(flights_summarized)
+```
+
+You will see the "pipe" operator `%>%` explained in more detail in Chapter \@ref(manip), but you can read it as "and then".  Here, we take the `flights_day` dataframe that we just created and then group it together by `date`.  This goes through the dataframe and puts together all rows that have `2013-01-01` together, all rows that have `2013-01-02` together, ..., and all rows that have `2013-12-31` together.  And then it looks at the median value of `arr_delay` over each one of the days.  You can get a glimpse of the first few rows of this new dataset above since we invoked the `head` function on it.
+
+Note also that there are missing values in this data set so we need to exclude them from the analysis.  This is why the `na.rm = TRUE` argument is invoked.  Many functions require this extra specification so it's always a good idea to run a `?median` or `?mean` before you try to run the function.  Or you can always run it afterwards as well when you get strange results.
+
+Now getting back to our line-graph.  We want to plot the median arrival delay over all airlines on all days in 2013 from departing flights in NYC.  This syntax should look similar to what we have seen before with plots involving `ggplot`.  Notice that we are using the `flights_summarized` dataset here and not the `flights_day` or `flights` dataframes.
+
+```{r lineflights, fig.cap="Line-graph of median arrival delay for flights leaving NYC in 2013 versus day of the year"}
+ggplot(data = flights_summarized, aes(x = date, y = median_arr_delay)) +
+  geom_line()
+```
+
+### Interactive line-graphs
+
+Another useful tool for viewing line-graphs such as this is the `dygraph` function in the `dygraphs` package in combination with the `dyRangeSelector` function.  This allows us to zoom in on a selected range and get an interactive plot for us to work with:
+
+```{r warning=FALSE}
+library(dygraphs)
+rownames(flights_summarized) <- flights_summarized$date
+flights_summarized <- select(flights_summarized, -date)
+dyRangeSelector(dygraph(flights_summarized))
+```
+
+
+The syntax here is a little different than what we have covered so far.  The `dygraph` function is expecting for the dates to be given as the `rownames` of the object.  We then remove the `date` variable from the `flights_summarized` dataframe since it is accounted for in the `rownames`.  Lastly, we run the `dygraph` function on the new dataframe that only contains the median arrival delay as a column and then provide the ability to have a selector to zoom in on the interactive plot via `dyRangeSelector`.  (Note that this plot will only be interactive in the HTML version of this book.)
+
+**Include this interactive dygraphs stuff here or in Appendix B?**
+
+**Include bad example of when a line-graph would be invalid?**
 
 ***
 
@@ -501,11 +554,22 @@ With medium to large datasets, you may need to tweak arguments in both `geom_jit
 **_Learning check_**
 ```
 
-**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**  Why should line-graphs be avoided when there is not a clear ordering of the horizontal axis?
+
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Why are line-graphs frequently used when time is the explanatory variable?
+
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Why did we use the `flights_summarized` dataframe to produce the line-graph in Figure \@ref(fig:lineflights) instead of `flights` or `flights_day`?
+
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Are the largest median arrival delays where you expected them to occur on the line-graph above in Figure \@ref(lineflights)?
+
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Use the interactive line-graph to determine the highest median arrival delay for flights from NYC in 2013.  What date was it and what do you think contributed to it?
+
 
 ***
 
 ### Summary
+
+Line-graphs provide a useful tool for viewing a continuous variable that is plotted versus time.  We need to be careful to not be too entrenched in using line-graphs whenever we wish though.  They only make sense when the explanatory variable (the one on the explanatory variable) has a natural ordering.  We can mislead our audience if that isn't the case.
 
 ## Brief Review of The Grammar of Graphics
 

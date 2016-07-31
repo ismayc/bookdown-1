@@ -25,7 +25,7 @@
 
 <meta name="author" content="Chester Ismay and Albert Y. Kim">
 
-<meta name="date" content="2016-07-30">
+<meta name="date" content="2016-07-31">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,6 +49,12 @@
 
 
 
+<script src="libs/htmlwidgets-0.6/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/dygraphs-binding-0.9/dygraphs.js"></script>
 
 
 <style type="text/css">
@@ -142,7 +148,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5.3" data-path="viz.html"><a href="viz.html#summary-3"><i class="fa fa-check"></i><b>4.5.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="viz.html"><a href="viz.html#line-graphs"><i class="fa fa-check"></i><b>4.6</b> Line-graphs</a><ul>
-<li class="chapter" data-level="4.6.1" data-path="viz.html"><a href="viz.html#summary-4"><i class="fa fa-check"></i><b>4.6.1</b> Summary</a></li>
+<li class="chapter" data-level="4.6.1" data-path="viz.html"><a href="viz.html#interactive-line-graphs"><i class="fa fa-check"></i><b>4.6.1</b> Interactive line-graphs</a></li>
+<li class="chapter" data-level="4.6.2" data-path="viz.html"><a href="viz.html#summary-4"><i class="fa fa-check"></i><b>4.6.2</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="viz.html"><a href="viz.html#brief-review-of-the-grammar-of-graphics"><i class="fa fa-check"></i><b>4.7</b> Brief Review of The Grammar of Graphics</a></li>
 <li class="chapter" data-level="4.8" data-path="viz.html"><a href="viz.html#whats-to-come-1"><i class="fa fa-check"></i><b>4.8</b> What’s to come?</a></li>
@@ -178,7 +185,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1 class="title">A MODERN DIVE into the Language of Science</h1>
 <h3 class="subtitle"><em>Modern Open-source Data-analysis Encouraging Reproducibility and iNtuitive Data-Inspired Visualization Efforts</em></h3>
 <h4 class="author"><em>Chester Ismay and Albert Y. Kim</em></h4>
-<h4 class="date"><em>2016-07-30</em></h4>
+<h4 class="date"><em>2016-07-31</em></h4>
 </div>
 <div id="prereqs" class="section level1">
 <h1><span class="header-section-number">1</span> Prerequisites</h1>
@@ -186,12 +193,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>We will keep a running list of R packages you will need to have installed to complete the analysis as well here in the <code>needed_pkgs</code> character vector. You can check if you have all of the needed packages installed by running all of the lines below. The last lines including the <code>if</code> will install them as needed (i.e., download their needed files from the internet to your hard drive).</p>
 <p>You can run the <code>library</code> function on them to load them into your current analysis. Prior to each analysis where a package is needed, you will see the corresponding <code>library</code> function in the text.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">needed_pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;nycflights13&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;knitr&quot;</span>, 
-  <span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>)
+  <span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;webshot&quot;</span>)
 new.pkgs &lt;-<span class="st"> </span>needed_pkgs[!(needed_pkgs %in%<span class="st"> </span><span class="kw">installed.packages</span>())]
 
 if (<span class="kw">length</span>(new.pkgs)) {
   <span class="kw">install.packages</span>(new.pkgs, <span class="dt">repos =</span> <span class="st">&quot;http://cran.rstudio.com&quot;</span>)
-}</code></pre></div>
+}
+<span class="co"># Check that phantomjs is installed on the Mac.  Will need to run on the PC</span>
+if(<span class="kw">Sys.which</span>(<span class="st">&quot;phantomjs&quot;</span>) !=<span class="st"> &quot;&quot;</span>)
+  webshot::<span class="kw">install_phantomjs</span>()</code></pre></div>
 <!--
 The `printr` package is useful for outputting help files directly into our book and also looking at R output in a clean way.  We, thus, need to load the packages via the `library` function:
 
@@ -212,7 +222,7 @@ The `printr` package is useful for outputting help files directly into our book 
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
 ##  tz       America/Detroit             
-##  date     2016-07-30</code></pre>
+##  date     2016-07-31</code></pre>
 <pre><code>## Packages ---------------------------------------------------------------</code></pre>
 <pre><code>##  package      * version  date       source        
 ##  assertthat     0.1      2013-12-06 CRAN (R 3.3.0)
@@ -253,6 +263,7 @@ The `printr` package is useful for outputting help files directly into our book 
 ##  stringi        1.1.1    2016-05-27 CRAN (R 3.3.0)
 ##  stringr        1.0.0    2015-04-30 CRAN (R 3.3.0)
 ##  tibble         1.1      2016-07-04 CRAN (R 3.3.0)
+##  webshot        0.3.2    2016-06-23 CRAN (R 3.3.0)
 ##  whisker        0.3-2    2013-04-28 CRAN (R 3.3.0)
 ##  withr          1.0.2    2016-06-20 CRAN (R 3.3.0)
 ##  yaml           2.1.13   2014-06-12 CRAN (R 3.3.0)</code></pre>

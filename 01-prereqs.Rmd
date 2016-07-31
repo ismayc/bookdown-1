@@ -8,12 +8,15 @@ You can run the `library` function on them to load them into your current analys
 
 ```{r pkg_setup, message=FALSE, warning=FALSE}
 needed_pkgs <- c("nycflights13", "dplyr", "ggplot2", "knitr", 
-  "devtools", "ggplot2")
+  "devtools", "ggplot2", "webshot")
 new.pkgs <- needed_pkgs[!(needed_pkgs %in% installed.packages())]
 
 if (length(new.pkgs)) {
   install.packages(new.pkgs, repos = "http://cran.rstudio.com")
 }
+# Check that phantomjs is installed on the Mac.  Will need to run on the PC
+if(Sys.which("phantomjs") != "")
+  webshot::install_phantomjs()
 ```
 
 <!--
@@ -28,7 +31,7 @@ The `printr` package is useful for outputting help files directly into our book 
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 
-  'nycflights13', 'devtools', 'ggplot2'
+  'nycflights13', 'devtools', 'ggplot2', "webshot"
 ), 'packages.bib')
 ```
 
