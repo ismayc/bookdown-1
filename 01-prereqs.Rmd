@@ -15,7 +15,7 @@ if (length(new.pkgs)) {
   install.packages(new.pkgs, repos = "http://cran.rstudio.com")
 }
 # Check that phantomjs is installed
-if(webshot:::find_phantom() == "")
+if(is.null(webshot:::find_phantom()))
   webshot::install_phantomjs()
 ```
 

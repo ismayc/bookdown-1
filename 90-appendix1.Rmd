@@ -2,8 +2,9 @@
 
 - What is R? What is RStudio?
 - Screenshots of RStudio frames?
+- Installing R and RStudio directions with screenshots
 - Give an introduction into using R
-- Mean, median, standard deviation, five-number summary
+- Mean, median, standard deviation, five-number summary, distribution
 - Some content to cover:
     + data structures (vectors, lists, data frames, matrices)
     + indexing/subsetting

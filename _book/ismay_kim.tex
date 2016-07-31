@@ -213,7 +213,7 @@ will see the corresponding \texttt{library} function in the text.
   \KeywordTok{install.packages}\NormalTok{(new.pkgs, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
 \NormalTok{\}}
 \CommentTok{# Check that phantomjs is installed}
-\NormalTok{if(webshot:::}\KeywordTok{find_phantom}\NormalTok{() ==}\StringTok{ ""}\NormalTok{)}
+\NormalTok{if(}\KeywordTok{is.null}\NormalTok{(webshot:::}\KeywordTok{find_phantom}\NormalTok{()))}
   \NormalTok{webshot::}\KeywordTok{install_phantomjs}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -240,7 +240,7 @@ packages given here:
 ##  ui       X11                         
 ##  language (EN)                        
 ##  collate  en_US.UTF-8                 
-##  tz       America/Detroit             
+##  tz       America/Chicago             
 ##  date     2016-07-31
 \end{verbatim}
 
@@ -1017,7 +1017,7 @@ for tidy data.
 \textbf{Last updated:}
 
 \begin{verbatim}
-## [1] "Sunday, July 31, 2016 01:00:40 EDT"
+## [1] "Sunday, July 31, 2016 16:12:58 CDT"
 \end{verbatim}
 
 \chapter{Visualizing Data}\label{viz}
@@ -2202,7 +2202,7 @@ summary of each part:
 \textbf{Last updated:}
 
 \begin{verbatim}
-## [1] "Sunday, July 31, 2016 01:01:28 EDT"
+## [1] "Sunday, July 31, 2016 16:13:41 CDT"
 \end{verbatim}
 
 \chapter{Manipulating Data}\label{manip}
@@ -2260,9 +2260,11 @@ Topics
 \item
   Screenshots of RStudio frames?
 \item
+  Installing R and RStudio directions with screenshots
+\item
   Give an introduction into using R
 \item
-  Mean, median, standard deviation, five-number summary
+  Mean, median, standard deviation, five-number summary, distribution
 \item
   Some content to cover:
 
