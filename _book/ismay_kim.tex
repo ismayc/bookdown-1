@@ -212,8 +212,8 @@ will see the corresponding \texttt{library} function in the text.
 \NormalTok{if (}\KeywordTok{length}\NormalTok{(new.pkgs)) \{}
   \KeywordTok{install.packages}\NormalTok{(new.pkgs, }\DataTypeTok{repos =} \StringTok{"http://cran.rstudio.com"}\NormalTok{)}
 \NormalTok{\}}
-\CommentTok{# Check that phantomjs is installed on the Mac.  Will need to run on the PC}
-\NormalTok{if(}\KeywordTok{Sys.which}\NormalTok{(}\StringTok{"phantomjs"}\NormalTok{) !=}\StringTok{ ""}\NormalTok{)}
+\CommentTok{# Check that phantomjs is installed}
+\NormalTok{if(webshot:::}\KeywordTok{find_phantom}\NormalTok{() ==}\StringTok{ ""}\NormalTok{)}
   \NormalTok{webshot::}\KeywordTok{install_phantomjs}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1017,7 +1017,7 @@ for tidy data.
 \textbf{Last updated:}
 
 \begin{verbatim}
-## [1] "Sunday, July 31, 2016 00:34:09 EDT"
+## [1] "Sunday, July 31, 2016 01:00:40 EDT"
 \end{verbatim}
 
 \chapter{Visualizing Data}\label{viz}
@@ -2202,7 +2202,7 @@ summary of each part:
 \textbf{Last updated:}
 
 \begin{verbatim}
-## [1] "Sunday, July 31, 2016 00:34:56 EDT"
+## [1] "Sunday, July 31, 2016 01:01:28 EDT"
 \end{verbatim}
 
 \chapter{Manipulating Data}\label{manip}

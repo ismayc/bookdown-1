@@ -199,8 +199,8 @@ new.pkgs &lt;-<span class="st"> </span>needed_pkgs[!(needed_pkgs %in%<span class
 if (<span class="kw">length</span>(new.pkgs)) {
   <span class="kw">install.packages</span>(new.pkgs, <span class="dt">repos =</span> <span class="st">&quot;http://cran.rstudio.com&quot;</span>)
 }
-<span class="co"># Check that phantomjs is installed on the Mac.  Will need to run on the PC</span>
-if(<span class="kw">Sys.which</span>(<span class="st">&quot;phantomjs&quot;</span>) !=<span class="st"> &quot;&quot;</span>)
+<span class="co"># Check that phantomjs is installed</span>
+if(webshot:::<span class="kw">find_phantom</span>() ==<span class="st"> &quot;&quot;</span>)
   webshot::<span class="kw">install_phantomjs</span>()</code></pre></div>
 <!--
 The `printr` package is useful for outputting help files directly into our book and also looking at R output in a clean way.  We, thus, need to load the packages via the `library` function:
