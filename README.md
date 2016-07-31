@@ -9,6 +9,7 @@
   gitbook
 - Remove hard-coding whenever possible
 - Add captions and labels to all plots
+- Look into appropriate license (LICENSE file)
 
 ## Notes
 
