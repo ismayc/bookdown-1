@@ -67,9 +67,9 @@ data(weather)
 
 ## Histograms
 
-Our focus now turns to the `temp` variable in this `weather` dataset.  We would like to visualize what the  `r nrow(weather)` temperatures look like.  Looking over the `weather` dataset^[To view a dataset in spreadsheet format in RStudio, you can run the `View()` function with the dataframe as its argument.] and running `?weather`, we can see that the `temp` variable corresponds to hourly temperature (in Fahrenheit) recordings at weather stations near airports in New York City. We could just produce points where each of the different values appears on something similar to a number line:
+Our focus now turns to the `temp` variable in this `weather` dataset.  We would like to visualize what the  `r nrow(weather)` temperatures look like.  Looking over the `weather` dataset^[Recall that to view a dataset in spreadsheet format in RStudio, you can run the `View()` function with the dataframe as its argument.] and running `?weather`, we can see that the `temp` variable corresponds to hourly temperature (in Fahrenheit) recordings at weather stations near airports in New York City. We could just produce points where each of the different values appears on something similar to a number line:
 
-```{r echo=FALSE, warning=FALSE, fig.height = 2, fig.cap="Strip Plot of Hourly Temperature Recordings from NYC in 2013"}
+```{r echo=FALSE, warning=FALSE, fig.height = 1, fig.cap="Strip Plot of Hourly Temperature Recordings from NYC in 2013"}
 hist_title <- "Histogram of Hourly Temperature Recordings from NYC in 2013"
 library(ggplot2)
 ggplot(data = weather, mapping = aes(x = temp, y = factor("A"))) +
@@ -315,7 +315,7 @@ While it is quite easy to look back at the barplot to get the answer to these qu
 [fd]: https://flowingdata.com/2008/09/19/pie-i-have-eaten-and-pie-i-have-not-eaten/  "Pie I Have Eaten and Pie I Have Not Eaten"
 
 ```{r echo=FALSE, fig.align='center'}
-include_graphics("images/Pie-I-have-Eaten.jpg")
+knitr::include_graphics("images/Pie-I-have-Eaten.jpg")
 ```
 
 ***
@@ -339,10 +339,9 @@ We begin by getting the names of the airports in NYC that were included in the `
 ```{r message=FALSE}
 library(dplyr)
 flights_namedports <- inner_join(flights, airports, by = c("origin" = "faa"))
-str(flights_namedports)
 ```
 
-We see that `name` now corresponds to the name of the airport as referenced by the `origin` variable.  We will now plot `carrier` as the horizontal variable.  When we specify `geom_bar`, it will specify `count` as being the vertical variable.  A new addition here is `fill = name`.  Look over what was produced from the plot to get an idea of what this argument gives.
+After running `View(flights_namedports)`, we see that `name` now corresponds to the name of the airport as referenced by the `origin` variable.  We will now plot `carrier` as the horizontal variable.  When we specify `geom_bar`, it will specify `count` as being the vertical variable.  A new addition here is `fill = name`.  Look over what was produced from the plot to get an idea of what this argument gives.
 
 ```{r, fig.cap="Stacked barplot comparing the number of flights by carrier and airport"}
 ggplot(data = flights_namedports, mapping = aes(x = carrier, fill = name)) +
@@ -511,17 +510,16 @@ We see that this plot is difficult to understand based on the sheer number of po
 
 Instead of plotting all of the values for each hour for all flights, it might make sense to plot the average value for each day in terms of arrival delays.  Of course, we also need to address which average we should use:  mean or median.  With there being some outliers here, we have chosen to use the median arrival delay (since the mean is heavily influence by outliers).
 
-You may think that this is a difficult task but the `group_by` and `summarize` functions make this a breeze.  You'll see more examples using these two functions in Chapter \@ref(manip).  Here we will create a new variable, which corresponds to the month and day combined, from the `time_hour` column using the `mutate` function and create a new dataframe called `flights_day`.  We also give the `str` of this new dataset so you can see the new variable added `date`:
+You may think that this is a difficult task but the `group_by` and `summarize` functions make this a breeze.  You'll see more examples using these two functions in Chapter \@ref(manip).  Here we will create a new variable, which corresponds to the month and day combined, from the `time_hour` column using the `mutate` function and create a new dataframe called `flights_day`.  Notice from running `View(flights_day)` that the new variable added called `date` appears on the far right of the dataset.
 
 ```{r}
 flights_day <- mutate(flights, date = as.Date(time_hour))
-str(flights_day)
 ```
 
 ```{r}
 flights_summarized <- flights_day %>% group_by(date) %>%
   summarize(median_arr_delay = median(arr_delay, na.rm = TRUE))
-head(flights_summarized)
+flights_summarized
 ```
 
 You will see the "pipe" operator `%>%` explained in more detail in Chapter \@ref(manip), but you can read it as "and then".  Here, we take the `flights_day` dataframe that we just created and then group it together by `date`.  This goes through the dataframe and puts together all rows that have `2013-01-01` together, all rows that have `2013-01-02` together, ..., and all rows that have `2013-12-31` together.  And then it looks at the median value of `arr_delay` over each one of the days.  You can get a glimpse of the first few rows of this new dataset above since we invoked the `head` function on it.
