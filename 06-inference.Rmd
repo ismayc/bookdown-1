@@ -1,6 +1,32 @@
 # Inference {#infer}
 
-Topics
++ Standard errors and sampling distribution via randomization
+    + Developing traditional inference from randomization
+    + two-sample permutation test -> null distribution  
+    + Showing what happens when assumptions/conditions aren’t met
+    + Then show normal/t-test and show how it fits on top of sampling distribution
++ Hypothesis testing
+    + The theory of hypothesis. Criminal justice. Question: what do you do with a problem like alpha?
++ Confidence intervals
++ Simple linear regression
++ Multiple regression
+    + Regression/correlation/multiple regression/confounding
+    + Categorical predictor and baseline 
+    + Implement `tidy`, `broom::augment`, and `glance` in `broom` package to get results
+    + Model selection is a can of worms 
+    + Cross-validation
+        + Take half of dataset for fit, use to predict other half.
+            + Show random sampling of half matters
+            + Is only once enough?
 
-+ (random) Sampling: representativeness/generalizability/bias
-+ 
+
+## Topics to be Dropped
+
+* Design of experiments
+* statistical power
+* Independence/Probability
+* Chi-Square Tests
+* Not do extensive ANOVA, but allude to it after doing multiple regression with categorical
+* Logistic Regression
+* CLT/Mathematical computation engine (but we need to ascertain the unintended consequences of dropping it)
+    + Tell them the minimum they need to know

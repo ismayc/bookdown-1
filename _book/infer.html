@@ -8,7 +8,7 @@
   <title>A MODERN DIVE into the Language of Science</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
   <meta name="description" content="Getting away from the traditional introductory statistical curriculum more focused on reproducible research and modern data analysis techniques and tools">
-  <meta name="generator" content="bookdown 0.1.2 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.0.73 and GitBook 2.6.7">
 
   <meta property="og:title" content="A MODERN DIVE into the Language of Science" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 
 <meta name="author" content="Chester Ismay and Albert Y. Kim">
 
-<meta name="date" content="2016-08-01">
+<meta name="date" content="2016-08-02">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,7 +33,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="manip.html">
+<link rel="prev" href="collect.html">
 <link rel="next" href="appendix1.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -54,7 +54,7 @@
 <script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
 <script src="libs/moment-2.8.4/moment.js"></script>
 <script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
-<script src="libs/dygraphs-binding-0.9/dygraphs.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.0/dygraphs.js"></script>
 
 
 <style type="text/css">
@@ -155,12 +155,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.8" data-path="viz.html"><a href="viz.html#whats-to-come-1"><i class="fa fa-check"></i><b>4.8</b> What’s to come?</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="manip.html"><a href="manip.html"><i class="fa fa-check"></i><b>5</b> Manipulating Data</a></li>
-<li class="chapter" data-level="6" data-path="infer.html"><a href="infer.html"><i class="fa fa-check"></i><b>6</b> Inference</a></li>
-<li class="chapter" data-level="7" data-path="appendix1.html"><a href="appendix1.html"><i class="fa fa-check"></i><b>7</b> Appendix A: R and RStudio Basics</a></li>
-<li class="chapter" data-level="8" data-path="appendix2.html"><a href="appendix2.html"><i class="fa fa-check"></i><b>8</b> Appendix B: Intermediate R</a><ul>
-<li class="chapter" data-level="8.1" data-path="appendix2.html"><a href="appendix2.html#sorted-barplots"><i class="fa fa-check"></i><b>8.1</b> Sorted barplots</a></li>
+<li class="chapter" data-level="6" data-path="collect.html"><a href="collect.html"><i class="fa fa-check"></i><b>6</b> Collecting Data</a></li>
+<li class="chapter" data-level="7" data-path="infer.html"><a href="infer.html"><i class="fa fa-check"></i><b>7</b> Inference</a><ul>
+<li class="chapter" data-level="7.1" data-path="infer.html"><a href="infer.html#topics-to-be-dropped"><i class="fa fa-check"></i><b>7.1</b> Topics to be Dropped</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="chapter" data-level="8" data-path="appendix1.html"><a href="appendix1.html"><i class="fa fa-check"></i><b>8</b> Appendix A: R and RStudio Basics</a></li>
+<li class="chapter" data-level="9" data-path="appendix2.html"><a href="appendix2.html"><i class="fa fa-check"></i><b>9</b> Appendix B: Intermediate R</a><ul>
+<li class="chapter" data-level="9.1" data-path="appendix2.html"><a href="appendix2.html#sorted-barplots"><i class="fa fa-check"></i><b>9.1</b> Sorted barplots</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>10</b> References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -182,20 +185,61 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="infer" class="section level1">
-<h1><span class="header-section-number">6</span> Inference</h1>
-<p>Topics</p>
+<h1><span class="header-section-number">7</span> Inference</h1>
 <ul>
-<li>(random) Sampling: representativeness/generalizability/bias</li>
-<li></li>
+<li>Standard errors and sampling distribution via randomization
+<ul>
+<li>Developing traditional inference from randomization</li>
+<li>two-sample permutation test -&gt; null distribution<br />
+</li>
+<li>Showing what happens when assumptions/conditions aren’t met</li>
+<li>Then show normal/t-test and show how it fits on top of sampling distribution</li>
+</ul></li>
+<li>Hypothesis testing
+<ul>
+<li>The theory of hypothesis. Criminal justice. Question: what do you do with a problem like alpha?</li>
+</ul></li>
+<li>Confidence intervals</li>
+<li>Simple linear regression</li>
+<li>Multiple regression
+<ul>
+<li>Regression/correlation/multiple regression/confounding</li>
+<li>Categorical predictor and baseline</li>
+<li>Implement <code>tidy</code>, <code>broom::augment</code>, and <code>glance</code> in <code>broom</code> package to get results</li>
+<li>Model selection is a can of worms</li>
+<li>Cross-validation
+<ul>
+<li>Take half of dataset for fit, use to predict other half.
+<ul>
+<li>Show random sampling of half matters</li>
+<li>Is only once enough?</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="topics-to-be-dropped" class="section level2">
+<h2><span class="header-section-number">7.1</span> Topics to be Dropped</h2>
+<ul>
+<li>Design of experiments</li>
+<li>statistical power</li>
+<li>Independence/Probability</li>
+<li>Chi-Square Tests</li>
+<li>Not do extensive ANOVA, but allude to it after doing multiple regression with categorical</li>
+<li>Logistic Regression</li>
+<li>CLT/Mathematical computation engine (but we need to ascertain the unintended consequences of dropping it)
+<ul>
+<li>Tell them the minimum they need to know</li>
+</ul></li>
 </ul>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="manip.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="collect.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="appendix1.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
 
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
