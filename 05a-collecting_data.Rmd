@@ -1,0 +1,7 @@
+# Collecting Data {#collect}
+
+More traditional in feel
+
++ (random) Sampling: representativeness/generalizability/bias
++ Observational study vs randomized experiment (fit with correlation)
++ Confounding variables
