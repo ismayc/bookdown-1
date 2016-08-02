@@ -6,18 +6,22 @@ Building upon the example in Section \@ref(barplots):
 
 ```{r}
 library(nycflights13)
+library(ggplot2)
 flights_table <- table(flights$carrier)
 flights_table
+#library(dplyr)
+#carrier_counts <- flights %>% count(carrier)
+#carrier_counts
 ```
-
-More information on the use of this `$` syntax is available in Chapter \@ref(tidy) and in Appendix A - Chapter \@ref(appendix1).
-
 
 We can sort this table from highest to lowest counts by using the `sort` function:
 
 ```{r}
 sorted_flights <- sort(flights_table, decreasing = TRUE)
 names(sorted_flights)
+
+#carrier_counts <- carrier_counts %>%
+#  arrange(desc(n))
 ```
 
 It is often preferred for barplots to be ordered corresponding to the heights of the bars.  This allows the reader to more easily compare the ordering of different airlines in terms of departed flights [@robbins2013].  We can also much more easily answer questions like "How many airlines have more departing flights than Southwest Airlines?".
@@ -28,6 +32,10 @@ We can use the sorted table giving the number of flights defined as `sorted_flig
 ggplot(data = flights, mapping = aes(x = carrier)) +
   geom_bar() +
   scale_x_discrete(limits = names(sorted_flights))
+
+#ggplot(data = carrier_counts, mapping = aes(x = carrier, y = n)) +
+#  geom_bar(stat = "identity") + 
+#  scale_x_discrete(limits = carrier)
 ```
 
 The last addition here specifies the values of the horizontal `x` axis on a discrete scale to correspond to those given by the entries of `sorted_flights`.  
@@ -38,5 +46,5 @@ The last addition here specifies the values of the horizontal `x` axis on a disc
 ***
 
 - Changing the labels of a plot (x-axis, y-axis)
-- Changing the theme
+- Changing the theme for ggplots (`ggthemes` package too)
 - Adding `code_folding` and `code_download` to YAML

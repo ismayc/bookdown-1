@@ -4,3 +4,5 @@
 _publish.R
 *.Rproj
 placeholder.html
+_book/*
+_bookdown_files/*

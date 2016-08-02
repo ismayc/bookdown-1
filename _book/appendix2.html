@@ -25,7 +25,7 @@
 
 <meta name="author" content="Chester Ismay and Albert Y. Kim">
 
-<meta name="date" content="2016-07-31">
+<meta name="date" content="2016-08-01">
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -187,6 +187,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">8.1</span> Sorted barplots</h2>
 <p>Building upon the example in Section <a href="viz.html#barplots">4.4</a>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(nycflights13)
+<span class="kw">library</span>(ggplot2)
 flights_table &lt;-<span class="st"> </span><span class="kw">table</span>(flights$carrier)
 flights_table</code></pre></div>
 <pre><code>## 
@@ -194,12 +195,16 @@ flights_table</code></pre></div>
 ## 18460 32729   714 54635 48110 54173   685  3260   342 26397    32 58665 
 ##    US    VX    WN    YV 
 ## 20536  5162 12275   601</code></pre>
-<p>More information on the use of this <code>$</code> syntax is available in Chapter <a href="tidy.html#tidy">3</a> and in Appendix A - Chapter <a href="appendix1.html#appendix1">7</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(dplyr)</span>
+<span class="co">#carrier_counts &lt;- flights %&gt;% count(carrier)</span>
+<span class="co">#carrier_counts</span></code></pre></div>
 <p>We can sort this table from highest to lowest counts by using the <code>sort</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sorted_flights &lt;-<span class="st"> </span><span class="kw">sort</span>(flights_table, <span class="dt">decreasing =</span> <span class="ot">TRUE</span>)
 <span class="kw">names</span>(sorted_flights)</code></pre></div>
 <pre><code>##  [1] &quot;UA&quot; &quot;B6&quot; &quot;EV&quot; &quot;DL&quot; &quot;AA&quot; &quot;MQ&quot; &quot;US&quot; &quot;9E&quot; &quot;WN&quot; &quot;VX&quot; &quot;FL&quot; &quot;AS&quot; &quot;F9&quot;
 ## [14] &quot;YV&quot; &quot;HA&quot; &quot;OO&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#carrier_counts &lt;- carrier_counts %&gt;%</span>
+<span class="co">#  arrange(desc(n))</span></code></pre></div>
 <p>It is often preferred for barplots to be ordered corresponding to the heights of the bars. This allows the reader to more easily compare the ordering of different airlines in terms of departed flights <span class="citation">(Robbins <a href="#ref-robbins2013">2013</a>)</span>. We can also much more easily answer questions like “How many airlines have more departing flights than Southwest Airlines?”.</p>
 <p>We can use the sorted table giving the number of flights defined as <code>sorted_flights</code> to <strong>reorder</strong> the <code>carrier</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> flights, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> carrier)) +
@@ -211,6 +216,9 @@ flights_table</code></pre></div>
 Figure 8.1: Number of flights departing NYC in 2013 by airline - Descending numbers
 </p>
 </div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#ggplot(data = carrier_counts, mapping = aes(x = carrier, y = n)) +</span>
+<span class="co">#  geom_bar(stat = &quot;identity&quot;) + </span>
+<span class="co">#  scale_x_discrete(limits = carrier)</span></code></pre></div>
 <p>The last addition here specifies the values of the horizontal <code>x</code> axis on a discrete scale to correspond to those given by the entries of <code>sorted_flights</code>.</p>
 <p>** ** What are three specific questions that can be more easily answered by looking at Figure 4.6 instead of Figure 4.5?</p>
 <hr />
@@ -264,7 +272,7 @@ gitbook.start({
 "link": "https://github.com/rstudio/bookdown-demo/edit/master/91-appendix2.Rmd",
 "text": null
 },
-"download": null,
+"download": ["ismay_kim.pdf", "ismay_kim.epub"],
 "toc": {
 "collapse": "subsection"
 }

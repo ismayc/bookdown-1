@@ -11,6 +11,8 @@ Five named graphs
   - In particular histogram as a visual representation of distribution. i.e. it is an empirical distribution as an estimate of population distribution.
 -->
 
+**Compare shapes of plots instead of summary statistics? (Berkeley)**
+
 ```{r setup_viz, include=FALSE}
 chap <- 4
 lc <- 0
@@ -590,6 +592,8 @@ You have seen all of the major pieces behind "The Grammar of Graphics" which ser
 
 - Have sample datasets to work with from problem statements
     + Identify the appropriate plot to address the questions of interest
+
+- Why is it important for barplots to start at zero?
 
 ***
 ***
