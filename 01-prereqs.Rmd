@@ -31,13 +31,14 @@ The `printr` package is useful for outputting help files directly into our book 
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 
-  'nycflights13', 'devtools', 'ggplot2', "webshot"
+  'nycflights13', 'devtools', 'ggplot2', 'webshot', 
+  'dygraphs', 'tufte'
 ), 'bib/packages.bib')
 ```
 
 ## Colophon
 
-The source of the book is available at <UPDATE THIS> and was built with versions of R packages given here:
+The source of the book is available at <UPDATE THIS> and was built with versions of R packages given here.  This may not be of importance for initial readers of this book, but you can reproduce a duplicate of this book by installing these versions of the packages.
 
 ```{r colophon}
 devtools::session_info(needed_pkgs)

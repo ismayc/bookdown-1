@@ -69,12 +69,12 @@ library(nycflights13)
 data(flights)
 ```
 
-The `library` function here loads the R package `nycflights13` into the current R environment in which you are working.  (Note that you'll get an error if you try to load this package in and it hasn't been installed.  Check Chapter \@ref(intro) to make sure the package has been downloaded to your computer.)  The next line of code `data(flights)` loads in the `flights` dataset that is stored in the `nycflights13` package.  
+The `library` function here loads the R package `nycflights13` into the current R environment in which you are working.  (Note that you'll get an error if you try to load this package in and it hasn't been installed.  Check Chapter \@ref(intro) to make sure the package has been downloaded.)  The next line of code `data(flights)` loads in the `flights` dataset that is stored in the `nycflights13` package.  
 
-This dataset and most others presented in this book will be in the `data.frame` format in R.  dataframes are ways to look at collections of variables that are tightly coupled together.  We next begin with a couple useful R functions to get a sense for what the `flights` dataset looks like:
+This dataset and most others presented in this book will be in the `data.frame` format in R.  Dataframes are ways to look at collections of variables that are tightly coupled together.  Frequently, the best way to get a feel for a dataframe is to use the `View` function in RStudio.  This command will be given throughout the book as a reminder, but the actual output will be hidden.
 
-```{r}
-head(flights)
+```{r eval=FALSE}
+View(flights)
 ```
 
 ***
@@ -83,9 +83,11 @@ head(flights)
 **_Learning check_**
 ```
 
+<!--
 **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** What does the `head` function give us?  Why might it be a useful function to run on a dataset you have been presented with?
 
 **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** What do you think the `tail` function would give us for the `flights` dataset?
+-->
 
 **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** What does any *ONE* row in this dataset refer to?
 
@@ -96,9 +98,9 @@ head(flights)
 
 ***
 
-We see that the `head` function gives us the first six rows (by default) for this dataset.  This can give us an idea of what to expect our dataset to look like.  For example, we see the different **variables** listed in the columns and we see that there are different types of variables.  Some of the variables like `distance`, `day`, and `arr_delay` are what we will call **quantitative** variables.  These variables vary in a numerical way.  Other variables here are **categorical**.
+By running `View(flights)`, we see the different **variables** listed in the columns and we see that there are different types of variables.  Some of the variables like `distance`, `day`, and `arr_delay` are what we will call **quantitative** variables.  These variables vary in a numerical way.  Other variables here are **categorical**.
 
-Note that if you look in the leftmost portion near the `##` of the R output, you will see a column of numbers.  These are the row numbers of the dataset.  If you glance across a row with the same number, say row 5, you can get an idea of what each row correspond to.  In other words, this will allow you to identify what object is being referred to in a given row.  This is often called the **observational unit**.  The **observational unit** in this example is an individual flight departing New York City in 2013.
+Note that if you look in the leftmost column of the `View(flights)` output, you will see a column of numbers.  These are the row numbers of the dataset.  If you glance across a row with the same number, say row 5, you can get an idea of what each row correspond to.  In other words, this will allow you to identify what object is being referred to in a given row.  This is often called the **observational unit**.  The **observational unit** in this example is an individual flight departing New York City in 2013.
 
 **Note**:  Frequently the first thing you should do when given a dataset is to 
 
@@ -165,12 +167,7 @@ data(airlines)
 airlines
 ```
 
-```{r}
-library(knitr)
-kable(airlines)
-```
-
-Note that R by default will print out the object when only its name is given as we have done here with `airlines`.  If we'd prefer to print a dataframe out in a clean format we can use the `kable` function in the `knitr` R package.
+As can be seen here when you just enter the name of an object in R, by default it will print the contents of that object to the screen.  Be careful!  It's usually better to use the `View()` function in RStudio since larger objects may take awhile to print to the screen and it likely won't be helpful to you to have hundreds of lines outputted.
 
 ## Normal forms of data
 
@@ -178,13 +175,18 @@ The datasets included in the `nycflights13` package are in a form that minimizes
 
 We saw an example of this above with the `airlines` dataset.  While the `flights` dataframe could also include a column with the names of the airlines instead of the carrier code, this would be repetitive since there is a unique mapping of the carrier code to the name of the airline/carrier. 
 
-Below an example is given showing how to **join** the `airlines` dataframe together with the `flights` dataframe by linking together the two datasets via a common **key** of `"carrier"`.  Note that this "joined" dataframe is assigned to a new dataframe called `joined_flights`.  The structure of `joined_flights` is also given so that you can see a few elements of the new column `name` that has been added.  (We will see in Chapter \@ref(manip) ways to change `name` to a more descriptive variable name.)
+Below an example is given showing how to **join** the `airlines` dataframe together with the `flights` dataframe by linking together the two datasets via a common **key** of `"carrier"`.  Note that this "joined" dataframe is assigned to a new dataframe called `joined_flights`. 
 
 ```{r message=FALSE}
 library(dplyr)
 joined_flights <- inner_join(x = flights, y = airlines, by = "carrier")
-str(joined_flights)
 ```
+
+```{r eval=FALSE}
+View(joined_flights)
+```
+
+If we `View` this dataset, we see a new variable has been created called (We will see in Chapter \@ref(manip) ways to change `name` to a more descriptive variable name.)
 
 More discussion about joining dataframes together will be given in Chapter \@ref(manip).  We will see there that the names of the columns to be linked need not match as they did here with `"carrier"`.
 
@@ -199,13 +201,16 @@ More discussion about joining dataframes together will be given in Chapter \@ref
 
 **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`** What makes "tidy" datasets useful for organizing data?
 
+<!--
 **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`** What would the code `kable(head(flights))` produce?
+-->
 
 **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`** How many variables are presented in the table below?  What does each row correspond to? (**Hint:** You may not be able to answer both of these questions immediately but take your best guess.)
 
 
 ```{r echo=FALSE, message=FALSE}
 library(dplyr)
+library(knitr)
 students <- c(4, 6)
 faculty <- c(2, 3)
 kable(data_frame("students" = students, "faculty" = faculty))

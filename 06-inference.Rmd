@@ -1,3 +1,5 @@
+# (PART) Inference {-} 
+
 # Inference {#infer}
 
 + Standard errors and sampling distribution via randomization

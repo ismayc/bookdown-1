@@ -13,6 +13,10 @@ Five named graphs
 
 **Compare shapes of plots instead of summary statistics? (Berkeley)**
 
+**Most important thing with graphics is making it obvious for your audience to see the findings you want to get across**
+
+**To create insights into the data**
+
 ```{r setup_viz, include=FALSE}
 chap <- 4
 lc <- 0
@@ -253,9 +257,8 @@ ggplot(data = flights, mapping = aes(x = carrier)) +
 Recall the `airlines` dataset discussed in Chapter \@ref(tidy).
 
 ```{r}
-library(knitr)
 data(airlines)
-kable(airlines)
+airlines
 ```
 
 We see that United Air Lines, JetBlue Airways, and ExpressJet Airlines had the most flights depart New York City in 2013.  To get the actual number of flights by each airline we can use the `table` function on the `carrier` variable in `flights`:
