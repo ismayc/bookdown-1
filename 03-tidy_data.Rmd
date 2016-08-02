@@ -6,6 +6,8 @@
 
 **Add RStudio graphics**
 
+**http://chance.amstat.org/2015/04/setting-the-stage/**
+
 ```{r setup_tidy, include=FALSE}
 chap <- 3
 lc <- 0
