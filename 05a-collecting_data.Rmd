@@ -3,5 +3,11 @@
 More traditional in feel
 
 + (random) Sampling: representativeness/generalizability/bias
+    + Image of sampling: population, soup idea
+    + Representativeness/bias: OkCupid to make statements. Population
 + Observational study vs randomized experiment (fit with correlation)
-+ Confounding variables
+    + OkCupid is an observational
++ Correlation is not causation
+    + Confounding variables
+    + Shoes on vs waking up with headache
+    + Think up data example to include in earlier chapters

@@ -2,14 +2,30 @@
 
 # Inference {#infer}
 
++ Idea of histogram of sample being a visual approximation to population distribution.
+    + Shiny
+    + Take normal distribution using mean/SD of okcupid heights and plot count (not density) 
+    curve on top of histogram.
++ Sampling distribution:
+    + Permutation test:
+        * Flight delays for American vs United
+        * Do women smoke more than men in OkCupid? 
+        * Think up more dichotomies than male vs female.
+        * 
+
+
+
 + Standard errors and sampling distribution via randomization
     + Developing traditional inference from randomization
     + two-sample permutation test -> null distribution  
     + Showing what happens when assumptions/conditions aren’t met
     + Then show normal/t-test and show how it fits on top of sampling distribution
+    + Shiny Google Forms
 + Hypothesis testing
     + The theory of hypothesis. Criminal justice. Question: what do you do with a problem like alpha?
+    + Example of non-rejection of H0: heights of men and women, flights from NYC to Boston vs flights from NYC to SF.
 + Confidence intervals
+    + 
 + Simple linear regression
 + Multiple regression
     + Regression/correlation/multiple regression/confounding
@@ -22,6 +38,11 @@
             + Is only once enough?
 
 
+
+
+
+
+
 ## Topics to be Dropped
 
 * Design of experiments
@@ -32,6 +53,7 @@
 * Logistic Regression
 * CLT/Mathematical computation engine (but we need to ascertain the unintended consequences of dropping it)
     + Tell them the minimum they need to know
+* Simpson's paradox
     
 ## What's to come?
 
