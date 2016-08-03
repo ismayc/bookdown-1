@@ -3,6 +3,7 @@
 - What is R? What is RStudio?
 - Screenshots of RStudio frames?
 - Installing R and RStudio directions with screenshots
+- "File organization and naming are powerful weapons against chaos." - Jenny Bryan
 - Give an introduction into using R
 - Mean, median, standard deviation, five-number summary, distribution
 - Some content to cover:

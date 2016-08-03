@@ -50,6 +50,7 @@ The last addition here specifies the values of the horizontal `x` axis on a disc
 - Adding `code_folding` and `code_download` to YAML
 - `kable` function from `knitr`
 - Reading in data from files in different formats
+- Reshaping the data with `tidyr`
 
 **Last updated:**
 

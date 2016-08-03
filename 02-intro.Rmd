@@ -17,7 +17,11 @@
 
 ## Reproducibility
 
+* "The most important tool is the _mindset_,
+when starting, that the end product
+will be reproducible." – Keith Baggerly
 
+* "We are talking about _computational_ reproducibility." - Yihui Xie
 
 ## Who is this book for? (Target)
 
