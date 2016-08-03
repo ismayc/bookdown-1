@@ -17,6 +17,6 @@
 
 **Last updated:**
 
-```{r time_tidy, echo=FALSE}
+```{r time_app1, echo=FALSE}
 format(Sys.time(), "%A, %B %d, %Y %X %Z")
 ```

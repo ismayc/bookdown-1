@@ -20,6 +20,6 @@
 
 **Last updated:**
 
-```{r time_tidy, echo=FALSE}
+```{r time_manip, echo=FALSE}
 format(Sys.time(), "%A, %B %d, %Y %X %Z")
 ```

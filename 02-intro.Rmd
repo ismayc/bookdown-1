@@ -59,6 +59,6 @@ knitr::kable(
 
 **Last updated:**
 
-```{r time_tidy, echo=FALSE}
+```{r time_intro, echo=FALSE}
 format(Sys.time(), "%A, %B %d, %Y %X %Z")
 ```
