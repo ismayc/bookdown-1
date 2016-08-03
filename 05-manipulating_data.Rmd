@@ -15,3 +15,11 @@
 - Make sure to refer back to plots in the viz chapter and how the
   material here relates to answering those questions
 - We'll also need to address how this leads into inference
+
+## What's to come?
+
+**Last updated:**
+
+```{r time_tidy, echo=FALSE}
+format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```

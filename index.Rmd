@@ -1,6 +1,6 @@
 --- 
 title: "A MODERN DIVE into the Language of Science"
-subtitle: "Modern Open-source Data-analysis Encouraging Reproducibility and iNtuitive Data-Inspired Visualization Efforts" #"The Language of Statistical & Data Sciences"
+subtitle: "Modern Open-source Data-analysis Encouraging Reproducibility and iNtuitive Data-Inspired Visualization Efforts" #"Modern Open-source Data-analysis Encouraging Reproducibility and iNtuitive Data-Inspired Visualization Efforts"
 author: "Chester Ismay and Albert Y. Kim"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site

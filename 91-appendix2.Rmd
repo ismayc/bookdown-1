@@ -49,3 +49,9 @@ The last addition here specifies the values of the horizontal `x` axis on a disc
 - Changing the theme for ggplots (`ggthemes` package too)
 - Adding `code_folding` and `code_download` to YAML
 - `kable` function from `knitr`
+
+**Last updated:**
+
+```{r time_tidy, echo=FALSE}
+format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```

@@ -52,3 +52,9 @@ knitr::kable(
   booktabs = TRUE
 )
 ```
+
+**Last updated:**
+
+```{r time_tidy, echo=FALSE}
+format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```

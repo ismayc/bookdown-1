@@ -13,3 +13,9 @@
     + Why do some arguments require quotations and others don't?
 - RMarkdown chunk options
 - Help -> Cheatsheets
+
+**Last updated:**
+
+```{r time_tidy, echo=FALSE}
+format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```

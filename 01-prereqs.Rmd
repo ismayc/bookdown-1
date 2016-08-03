@@ -44,3 +44,8 @@ The source of the book is available at <UPDATE THIS> and was built with versions
 devtools::session_info(needed_pkgs)
 ```
 
+**Last updated:**
+
+```{r time_tidy, echo=FALSE}
+format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```

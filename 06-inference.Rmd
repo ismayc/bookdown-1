@@ -32,3 +32,11 @@
 * Logistic Regression
 * CLT/Mathematical computation engine (but we need to ascertain the unintended consequences of dropping it)
     + Tell them the minimum they need to know
+    
+## What's to come?
+
+**Last updated:**
+
+```{r time_tidy, echo=FALSE}
+format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```
