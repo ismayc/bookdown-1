@@ -1,0 +1,5 @@
+# Appendix C: R Markdown {#appendix3}
+
+Walk through the components of an R Markdown file
+
+ - Resource for Markdown: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
