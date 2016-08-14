@@ -1,22 +1,9 @@
 # Appendix A: R and RStudio Basics {#appendix1}
 
-- What is R? What is RStudio?
-- Screenshots of RStudio frames?
-- Installing R and RStudio directions with screenshots
-- "File organization and naming are powerful weapons against chaos." - Jenny Bryan
-- Give an introduction into using R
-- Mean, median, standard deviation, five-number summary, distribution
-- Some content to cover:
-    + data structures (vectors, lists, data frames, matrices)
-    + indexing/subsetting
-    + functions (default arguments)
-    + Case matters in R!
-    + Why do some arguments require quotations and others don't?
-- RMarkdown chunk options
-- Help -> Cheatsheets
+Link to <http://ismayc.github.io/rbasics-book> or reproduce the documents here?
 
 **Last updated:**
 
-```{r time_app1, echo=FALSE}
-format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```{r echo=FALSE}
+paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
 ```

@@ -247,7 +247,7 @@ In Chapter \@ref(viz), we will further explore the distribution of a variable in
 
 **Last updated:**
 
-```{r time_tidy, echo=FALSE}
-format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```{r echo=FALSE}
+paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
 ```
 

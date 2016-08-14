@@ -11,3 +11,7 @@ More traditional in feel
     + Confounding variables
     + Shoes on vs waking up with headache
     + Think up data example to include in earlier chapters
+    
+```{r echo=FALSE}
+paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
+```

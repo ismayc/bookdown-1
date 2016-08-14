@@ -603,6 +603,6 @@ You have seen all of the major pieces behind "The Grammar of Graphics" which ser
 
 **Last updated:**
 
-```{r time_viz, echo=FALSE}
-format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```{r echo=FALSE}
+paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
 ```

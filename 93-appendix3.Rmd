@@ -1,5 +1,7 @@
 # Appendix C: R Markdown {#appendix3}
 
-Walk through the components of an R Markdown file
+Link to <http://ismayc.github.io/rbasics-book> or reproduce the documents here?
 
- - Resource for Markdown: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
+```{r echo=FALSE}
+paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
+```

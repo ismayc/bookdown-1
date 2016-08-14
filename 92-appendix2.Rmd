@@ -54,7 +54,6 @@ The last addition here specifies the values of the horizontal `x` axis on a disc
 
 **Last updated:**
 
-```{r time_app2, echo=FALSE}
-format(Sys.time(), "%A, %B %d, %Y %X %Z")
+```{r echo=FALSE}
+paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
 ```
-
