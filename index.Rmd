@@ -14,7 +14,7 @@ description: "Getting away from the traditional introductory statistical curricu
 
 ```{r set-options, include=FALSE}
 options(width = 72)
-knitr::opts_chunk$set(tidy = FALSE)
+knitr::opts_chunk$set(tidy = FALSE, fig.align = "center")
 if(file.exists("ismay_kim.Rmd")) file.remove("ismay_kim.Rmd")
 ```
 
@@ -60,7 +60,7 @@ knitr::write_bib(c(
 
 The source of the book is available at **UPDATE THIS** and was built with versions of R packages given here.  This may not be of importance for initial readers of this book, but you can reproduce a duplicate of this book by installing these versions of the packages.
 
-```{r colophon}
+```{r colophon, echo=FALSE}
 knitr::kable(devtools::session_info(needed_pkgs)$packages)
 ```
 

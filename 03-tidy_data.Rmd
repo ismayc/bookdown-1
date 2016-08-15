@@ -5,7 +5,7 @@
 
 **Need to give big picture question here and set up how this chapter ties in to chapters to come**.
 
-**Force dataframes into tibbles using `as_tibble`?  That way `head` isn't needed since printing will be nice by default. <http://r4ds.had.co.nz/tibbles.html>**
+**Force dataframes into tibbles using `as_tibble` or `tbl_df`?  That way `head` isn't needed since printing will be nice by default. <http://r4ds.had.co.nz/tibbles.html>**
 
 **Add RStudio graphics**
 
