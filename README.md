@@ -5,11 +5,12 @@
 - See if way to automate numbering of Learning check questions
     + Currently an issue with https://github.com/rstudio/bookdown/issues/152
     + Need to specify both CSS and LaTeX environment code for custom blocks
-- No paragraph indent and a new line between paragraphs in pdf_book to match with
-  gitbook
 - Remove hard-coding whenever possible
 - Add captions and labels to all plots
 - Look into appropriate license (LICENSE file)
+- Need to tweak tufte template for title
+    + No paragraph indent and a new line between paragraphs in pdf_book to match with
+  gitbook
 
 ## Notes
 
