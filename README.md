@@ -22,3 +22,4 @@
 
 - Parameterize the chapters so that other examples could be plugged in easily
    + Will need to set up `ifelse` conditions for the text to make sense in some spots
+- Add `tufte_book` download format
