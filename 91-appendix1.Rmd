@@ -1,9 +1,5 @@
+# (PART) Appendix {-} 
+
 # Appendix A: R and RStudio Basics {#appendix1}
 
 Link to <http://ismayc.github.io/rbasics-book> or reproduce the documents here?
-
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```

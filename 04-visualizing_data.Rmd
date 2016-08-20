@@ -11,11 +11,13 @@ Five named graphs
   - In particular histogram as a visual representation of distribution. i.e. it is an empirical distribution as an estimate of population distribution.
 -->
 
+<!--
 **Compare shapes of plots instead of summary statistics? (Berkeley)**
 
 **Most important thing with graphics is making it obvious for your audience to see the findings you want to get across**
 
 **To create insights into the data**
+-->
 
 ```{r setup_viz, include=FALSE}
 chap <- 4
@@ -601,8 +603,3 @@ You have seen all of the major pieces behind "The Grammar of Graphics" which ser
 
 ## What's to come?
 
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```

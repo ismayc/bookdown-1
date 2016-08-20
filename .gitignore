@@ -1,6 +1,6 @@
 .Rproj.user
 .Rhistory
-.RData
+.RData*
 _publish.R
 *.Rproj
 placeholder.html

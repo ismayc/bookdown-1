@@ -1,6 +1,5 @@
 # Introduction {#intro}
 
-
 ## Preamble
 
 - Coggle Diagrams
@@ -31,10 +30,3 @@ Students taking a traditional intro stats class in a small college environment u
 We assume no prerequisites: no calculus and no prior programming experience.  
 
 *To think about further*
-
-
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```

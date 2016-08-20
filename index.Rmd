@@ -1,5 +1,5 @@
 --- 
-title: "A MODERN DIVE into Data with R"
+title: '`r ifelse(knitr:::is_latex_output(), "\\Large{A MODERN DIVE into Data with R}", "A MODERN DIVE into Data with R")`'
 subtitle: "Modern Open-source Data-analysis Encouraging Reproducibility aNd Driven by Intuitive Visualization Efforts" #"Modern Open-source Data-analysis Encouraging Reproducibility and iNtuitive Data-Inspired Visualization Efforts"
 author: "Chester Ismay and Albert Y. Kim"
 date: "`r Sys.Date()`"
@@ -9,7 +9,7 @@ bibliography: [bib/books.bib, bib/packages.bib, bib/articles.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: #rstudio/bookdown-demo
-description: "Getting away from the traditional introductory statistical curriculum more focused on reproducible research and modern data analysis techniques and tools"
+description: "Getting away from the traditional introductory statistics curriculum, more focused on reproducible research and modern data analysis techniques and tools"
 ---
 
 ```{r set-options, include=FALSE}
@@ -26,9 +26,15 @@ We will keep a running list of R packages you will need to have installed to com
 
 You can run the `library` function on them to load them into your current analysis.  Prior to each analysis where a package is needed, you will see the corresponding `library` function in the text.
 
-```{r pkg_setup, message=FALSE, warning=FALSE}
+```{r include=FALSE, results='hide'}
+# Not sure why it is pulling from a GitHub installation w/o this?
+remove.packages("rmarkdown")
+```
+
+
+```{r pkg_setup, warning=FALSE, message=FALSE, results='hide'}
 needed_pkgs <- c("nycflights13", "dplyr", "ggplot2", "knitr", 
-  "devtools", "ggplot2", "webshot", "dygraphs", "tufte")
+  "devtools", "ggplot2", "webshot", "dygraphs", "tufte", "rmarkdown")
 new.pkgs <- needed_pkgs[!(needed_pkgs %in% installed.packages())]
 
 if (length(new.pkgs)) {
@@ -37,6 +43,12 @@ if (length(new.pkgs)) {
 # Check that phantomjs is installed
 if(is.null(webshot:::find_phantom()))
   webshot::install_phantomjs()
+```
+
+**Book was last updated:**
+
+```{r time, echo=FALSE}
+paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
 ```
 
 <!--
@@ -61,11 +73,7 @@ knitr::write_bib(c(
 The source of the book is available at **UPDATE THIS** and was built with versions of R packages given here.  This may not be of importance for initial readers of this book, but you can reproduce a duplicate of this book by installing these versions of the packages.
 
 ```{r colophon, echo=FALSE}
-knitr::kable(devtools::session_info(needed_pkgs)$packages)
-```
-
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
+knitr::kable(devtools::session_info(needed_pkgs)$packages, 
+             booktabs = TRUE,
+             longtable = TRUE)
 ```

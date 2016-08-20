@@ -1,6 +1,6 @@
 # Tidy data {#tidy}
 
-
+<!--
 **Include discussion on ethics of various datasets**.
 
 **Need to give big picture question here and set up how this chapter ties in to chapters to come**.
@@ -10,6 +10,7 @@
 **Add RStudio graphics**
 
 **http://chance.amstat.org/2015/04/setting-the-stage/**
+-->
 
 ```{r setup_tidy, include=FALSE}
 chap <- 3
@@ -244,10 +245,4 @@ kable(data_frame("role" = role, `Sociology?` = sociology,
 ## What's to come?
 
 In Chapter \@ref(viz), we will further explore the distribution of a variable in a related dataset to `flights`:  the `temp` variable in the `weather` dataset.  We'll be interested in understanding how this variable varies in relation to the values of other variables in the dataset.  We will see that visualization is often a powerful tool in helping us see what is going on in a dataset.  It will be a useful way to expand on the `str` function we have seen here for tidy data.
-
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```
 

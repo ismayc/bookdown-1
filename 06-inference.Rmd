@@ -56,9 +56,3 @@
 * Simpson's paradox
     
 ## What's to come?
-
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```
