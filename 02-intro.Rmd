@@ -1,6 +1,5 @@
 # Introduction {#intro}
 
-
 ## Preamble
 
 - Coggle Diagrams

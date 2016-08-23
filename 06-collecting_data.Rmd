@@ -6,7 +6,7 @@ More traditional in feel
     + Image of sampling: population, soup idea
     + Representativeness/bias: OkCupid to make statements. Population
 + Observational study vs randomized experiment (fit with correlation)
-    + OkCupid is an observational
+    + OkCupid is an observational study
 + Correlation is not causation
     + Confounding variables
     + Shoes on vs waking up with headache

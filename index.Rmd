@@ -35,6 +35,7 @@ You can run the `library` function on them to load them into your current analys
 ```{r pkg_setup, warning=FALSE, message=FALSE, results='hide'}
 needed_pkgs <- c("nycflights13", "dplyr", "ggplot2", "knitr", 
   "devtools", "ggplot2", "dygraphs", "rmarkdown")
+
 new.pkgs <- needed_pkgs[!(needed_pkgs %in% installed.packages())]
 
 if(length(new.pkgs)) {
