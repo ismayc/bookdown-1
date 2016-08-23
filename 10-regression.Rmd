@@ -1,0 +1,12 @@
+# Simple and Multiple Regression {#regress}
+    
++ Simple linear regression
++ Multiple regression
+    + Regression/correlation/multiple regression/confounding
+    + Categorical predictor and baseline 
+    + Implement `tidy`, `broom::augment`, and `glance` in `broom` package to get results
+    + Model selection is a can of worms 
+    + Cross-validation
+        + Take half of dataset for fit, use to predict other half.
+            + Show random sampling of half matters
+            + Is only once enough?

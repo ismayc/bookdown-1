@@ -245,9 +245,3 @@ kable(data_frame("role" = role, `Sociology?` = sociology,
 
 In Chapter \@ref(viz), we will further explore the distribution of a variable in a related dataset to `flights`:  the `temp` variable in the `weather` dataset.  We'll be interested in understanding how this variable varies in relation to the values of other variables in the dataset.  We will see that visualization is often a powerful tool in helping us see what is going on in a dataset.  It will be a useful way to expand on the `str` function we have seen here for tidy data.
 
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```
-

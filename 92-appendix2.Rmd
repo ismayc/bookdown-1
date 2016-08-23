@@ -51,9 +51,3 @@ The last addition here specifies the values of the horizontal `x` axis on a disc
 - `kable` function from `knitr`
 - Reading in data from files in different formats
 - Reshaping the data with `tidyr`
-
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```

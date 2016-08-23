@@ -1,0 +1,7 @@
+# Hypothesis Testing {#hypo}  
+    
++ Hypothesis testing
+    + The theory of hypothesis. Criminal justice. Question: what do you do with a problem like alpha?
+    + Example of non-rejection of H0: heights of men and women, flights from NYC to Boston vs flights from NYC to SF.
+    
+## What's to come?

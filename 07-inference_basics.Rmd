@@ -1,0 +1,24 @@
+# (PART) Inference {-} 
+
+# Inference Basics {#infer-basics}
+
++ Idea of histogram of sample being a visual approximation to population distribution.
+    + Shiny
+    + Take normal distribution using mean/SD of okcupid heights and plot count (not density) 
+    curve on top of histogram.
++ Sampling distribution:
+    + Permutation test:
+        * Flight delays for American vs United
+        * Do women smoke more than men in OkCupid? 
+        * Think up more dichotomies than male vs female.
+        * 
+
+
++ Standard errors and sampling distribution via randomization
+    + Developing traditional inference from randomization
+    + two-sample permutation test -> null distribution  
+    + Showing what happens when assumptions/conditions aren’t met
+    + Then show normal/t-test and show how it fits on top of sampling distribution
+    + Shiny Google Forms
+ 
+## What's to come? 

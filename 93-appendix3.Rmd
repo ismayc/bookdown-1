@@ -1,7 +1,3 @@
 # Appendix C: R Markdown {#appendix3}
 
 Link to <http://ismayc.github.io/rbasics-book> or reproduce the documents here?
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```

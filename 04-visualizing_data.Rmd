@@ -601,8 +601,3 @@ You have seen all of the major pieces behind "The Grammar of Graphics" which ser
 
 ## What's to come?
 
-**Last updated:**
-
-```{r echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```
