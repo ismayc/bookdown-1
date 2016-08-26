@@ -1,7 +1,8 @@
 # (PART) Conclusion {-} 
 
-# Concluding remarks {#conclusion}
+# Concluding Remarks {#conclusion}
 
+<!--
 ## Topics to be Dropped
 
 * Design of experiments
@@ -13,3 +14,4 @@
 * CLT/Mathematical computation engine (but we need to ascertain the unintended consequences of dropping it)
     + Tell them the minimum they need to know
 * Simpson's paradox
+-->

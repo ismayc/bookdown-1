@@ -1,5 +1,14 @@
 # Simple and Multiple Regression {#regress}
     
+```{r setup_reg, include=FALSE}
+chap <- 10
+lc <- 0
+rq <- 0
+# **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**
+# **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`**
+```
+    
+    
 + Simple linear regression
 + Multiple regression
     + Regression/correlation/multiple regression/confounding
@@ -10,3 +19,14 @@
         + Take half of dataset for fit, use to predict other half.
             + Show random sampling of half matters
             + Is only once enough?
+            
+***
+```{block lc10-1, type='learncheck'}
+**_Learning check_**
+```
+
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**
+
+***        
+    
+## What's to come?             

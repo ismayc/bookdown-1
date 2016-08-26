@@ -1,16 +1,15 @@
+# (PART) Data Exploration {-} 
+
 # Tidy data {#tidy}
 
-<!--
-**Include discussion on ethics of various datasets**.
+In this chapter, we'll discuss the importance of tidy data.  You may think
+that this means just having your data in a spreadsheet, but you'll see that
+it is actually more specific than that.  Data actually comes to us in a variety
+of formats from pictures to text and to just numbers.  We'll focus on datasets
+that can be stored in a spreadsheet throughout this book as that is the most
+common way data is collected in the sciences.
 
-**Need to give big picture question here and set up how this chapter ties in to chapters to come**.
-
-**Force dataframes into tibbles using `as_tibble` or `tbl_df`?  That way `head` isn't needed since printing will be nice by default. <http://r4ds.had.co.nz/tibbles.html>**
-
-**Add RStudio graphics**
-
-**http://chance.amstat.org/2015/04/setting-the-stage/**
--->
+Having tidy data will allow us to more easily create data visualizations as we will see in Chapter \@ref(viz).  It will also help us with manipulating data in Chapter \@ref(manip) and in all subsequent chapters when we discuss statistical inference.  You may not necessarily understand the importance for **tidy data** but it will become more and more apparent as we proceed through the book.
 
 ```{r setup_tidy, include=FALSE}
 chap <- 3
@@ -20,6 +19,8 @@ rq <- 0
 # **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`**
 ```
 
+## What is tidy data?
+
 You have surely heard the word "tidy" in your life:
 
 - "Tidy up your room!"
@@ -28,8 +29,6 @@ You have surely heard the word "tidy" in your life:
 - "I am not by any stretch of the imagination a tidy person, and the piles of unread books on the coffee table and by my bed have a plaintive, pleading quality to me - 'Read me, please!'" - Linda Grant
 
 So what does it mean for your data to be **tidy**?  Put simply:  it means that your data is organized.  But it's more than just that.  It means that your data follows the same standard format making it easy for others to find elements of your data, to manipulate and transform your data, and for our purposes continuing with the common theme:  it makes it easier to visualize your data and the relationships between different variables in your data.
-
-## What is tidy data?
 
 We will follow Hadley Wickham's definition of **tidy data** here [@tidy]:
 
@@ -46,6 +45,10 @@ variables and types. In **tidy data**:
 > 1. Each variable forms a column.
 > 2. Each observation forms a row.
 > 3. Each type of observational unit forms a table.
+
+```{r tidyfig, echo=FALSE, fig.align='center', fig.cap="Tidy data graphic from http://r4ds.had.co.nz/tidy-data.html"}
+knitr::include_graphics("images/tidy-1.png")
+```
 
 Reading over this definition, you can begin to think about datasets that won't follow this nice format.
 
@@ -136,7 +139,7 @@ Another way to view the properties of a dataset is to use the `str` function ("s
 
 Another nice feature of R is the help system.  You can get help in R by simply entering a question mark before the name of a function or an object and you will be presented with a page showing the documentation.  Note that this output help file is omitted here but can be accessed [here](https://cran.r-project.org/web/packages/nycflights13/nycflights13.pdf) on page 3 of the PDF document.
 
-```{r}
+```{r eval=FALSE}
 ?flights
 ```
 
@@ -190,7 +193,7 @@ joined_flights <- inner_join(x = flights, y = airlines, by = "carrier")
 View(joined_flights)
 ```
 
-If we `View` this dataset, we see a new variable has been created called (We will see in Chapter \@ref(manip) ways to change `name` to a more descriptive variable name.)
+If we `View` this dataset, we see a new variable has been created called (We will see in Subsection \@ref(select) ways to change `name` to a more descriptive variable name.)
 
 More discussion about joining dataframes together will be given in Chapter \@ref(manip).  We will see there that the names of the columns to be linked need not match as they did here with `"carrier"`.
 

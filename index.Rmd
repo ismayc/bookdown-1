@@ -20,7 +20,7 @@ if(file.exists("ismay_kim.Rmd")) file.remove("ismay_kim.Rmd")
 
 # Prerequisites {#prereqs}
 
-This book was written using the **bookdown** R package from Yihui Xie.  In order to follow along and run the code in this book on your own, you'll need to have access to R and RStudio.  You can find more information on both of these with a simple Google search for "R" and for "RStudio" and in Appendix A - Chapter \@ref(appendix1).
+This book was written using the **bookdown** R package from Yihui Xie.  In order to follow along and run the code in this book on your own, you'll need to have access to R and RStudio.  You can find more information on both of these with a simple Google search for "R" and for "RStudio".  An introduction to using R, RStudio, and R Markdown is also available in a free book [here](http://ismayc.github.io/rbasics-book) [@usedtor2016].  It is recommended that you refer back to this book frequently as it has GIF screen recordings that you can follow along with as you learn.
 
 We will keep a running list of R packages you will need to have installed to complete the analysis as well here in the `needed_pkgs` character vector.  You can check if you have all of the needed packages installed by running all of the lines below.  The last lines including the `if` will install them as needed (i.e., download their needed files from the internet to your hard drive).
 
@@ -28,13 +28,13 @@ You can run the `library` function on them to load them into your current analys
 
 ```{r include=FALSE, results='hide'}
 # Not sure why it is pulling from a GitHub installation w/o this?
-#remove.packages("rmarkdown")
+remove.packages("rmarkdown")
 ```
 
 
 ```{r pkg_setup, warning=FALSE, message=FALSE, results='hide'}
 needed_pkgs <- c("nycflights13", "dplyr", "ggplot2", "knitr", 
-  "devtools", "ggplot2", "dygraphs", "rmarkdown")
+  "devtools", "ggplot2movies", "dygraphs", "rmarkdown")
 
 new.pkgs <- needed_pkgs[!(needed_pkgs %in% installed.packages())]
 
@@ -68,13 +68,13 @@ paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"
 knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 
   'nycflights13', 'devtools', 'ggplot2', 'webshot', 
-  'dygraphs', 'tufte'
+  'dygraphs', 'tufte', 'ggplot2movies'
 ), 'bib/packages.bib')
 ```
 
 ## Colophon
 
-The source of the book is available at **UPDATE THIS** and was built with versions of R packages given here.  This may not be of importance for initial readers of this book, but you can reproduce a duplicate of this book by installing these versions of the packages.
+The source of the book is available [here](https://github.com/ModernStats/bookdown) and was built with versions of R packages given here.  This may not be of importance for initial readers of this book, but you can reproduce a duplicate of this book by installing these versions of the packages.
 
 ```{r colophon, echo=FALSE}
 knitr::kable(devtools::session_info(needed_pkgs)$packages, 

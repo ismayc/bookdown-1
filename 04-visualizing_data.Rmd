@@ -1,23 +1,5 @@
 # Visualizing Data {#viz}
 
-<!--
-Cover grammar of graphics?  Yes, we definitely should.
-
-Theoretical discussion of the grammar of graphics
-  - Menard example
-  
-Five named graphs
-  - Breakdown of their components with geoms
-  - In particular histogram as a visual representation of distribution. i.e. it is an empirical distribution as an estimate of population distribution.
--->
-
-<!--
-**Compare shapes of plots instead of summary statistics? (Berkeley)**
-
-**Most important thing with graphics is making it obvious for your audience to see the findings you want to get across**
-
-**To create insights into the data**
--->
 
 ```{r setup_viz, include=FALSE}
 chap <- 4
@@ -28,27 +10,11 @@ rq <- 0
 ```
 
 
-In Chapter \@ref(tidy), we discussed the importance of datasets being **tidy**.  You will see in examples here why having a tidy dataset helps us immensely with plotting our data.  We will focus on using Hadley's `ggplot2` package in doing so, which was developed to work specifically on datasets that are **tidy**.  It provides an easy way to customize your plots and is based on data visualization theory given in _The Grammar of Graphics_ [@wilkinson2005].
+In Chapter \@ref(tidy), we discussed the importance of datasets being **tidy**.  You will see in examples here why having a tidy dataset helps us immensely with plotting our data.  In plotting our data, we will be able to gain valuable insights from our data that we couldn't initially see from just looking at the raw tidy data.  We will focus on using Hadley's `ggplot2` package in doing so, which was developed to work specifically on datasets that are **tidy**.  It provides an easy way to customize your plots and is based on data visualization theory given in _The Grammar of Graphics_ [@wilkinson2005].
 
-Graphics provide a nice way for us to get a sense for how quantitative variables compare in terms of their center and their spread.  It also helps us to identify patterns and outliers in our data.  We will see that a common extension of these ideas is to compare the distribution (i.e., what the spread of a variable looks like) as we go across the levels of a different categorical variable.
+Graphics provide a nice way for us to get a sense for how quantitative variables compare in terms of their center and their spread.  The most important thing to know about graphics is that they should be created to make it obvious for your audience to see the findings you want to get across.  This requires a balance on not including too much in your plots, but also including enough so that relationships and interesting findings can be easily seen.  As we will see, plots/graphics also help us to identify patterns and outliers in our data.  We will see that a common extension of these ideas is to compare the distribution (i.e., what the spread of a variable looks like) as we go across the levels of a different categorical variable.
 
 ## Five Named Graphs - The FNG
-
-<!--
-* Focussing on `dep_delay` here and how it relates with other variables
-* May need to introduce some data manipulation here with `dplyr`
-* Restrict types of plots:
-    + histogram: as long as we avoid density plots
-    + boxplot: have to set x=1 aes. categorical variables when univariate
-        - Hadley suggests that a univariate boxplot shouldn't be used and prefers a histogram <https://groups.google.com/forum/#!topic/ggplot2/N4qRSmqMZxI>
-        - Boxplots do make sense when comparing distributions across levels of another variable though
-    + barplot: issue with categorical variables 
-        - May want to also discuss dot plots for many levels of categorical variable
-    + scatterplot: jitter/alpha/color
-    + linegraph: useful for time series / not useful if no ordering to x-values
-    + faceting: show why better than stacked bargraphs in via patterns across levels
-    + mosaicplot [I actually prefer side-by-side bar graphs/facetted bargraphs to stacked/mosaic so this might be moot?]
--->
 
 For our purposes here, we will be working with five different types of graphs.  (Note that we will use a lot of different words here in regards to plotting -  "graphs", "plots", and "charts" are all ways to discuss a resulting graphic.  You can think of them as all being synonyms.)  These five plots are:
 
@@ -97,14 +63,16 @@ ggplot(data = weather, mapping = aes(x = temp))
 
 The plot given above is not a histogram, but the output does show us a bit of what is going on with `ggplot(data = weather, mapping = aes(x = temp))`.  It is producing a backdrop onto which we will "paint" elements.  
 
-We next proceed by adding a layer---hence, the use of the `+` symbol---to the plot to produce a histogram.  (Note also here that we don't have to specify the `data = ` and `mapping = ` text in our function calls.  This is covered in more detail in Appendix A - Chapter \@ref(appendix1).)
+We next proceed by adding a layer---hence, the use of the `+` symbol---to the plot to produce a histogram.  (Note also here that we don't have to specify the `data = ` and `mapping = ` text in our function calls.  This is covered in more detail in Chapter 5 of the "Getting Used to R, RStudio, and R Markdown" book [@usedtor2016]).
 
 ```{r fig.cap=hist_title}
 ggplot(data = weather, mapping = aes(x = temp)) +
   geom_histogram()
 ```
 
-We have the power to specify how many bins we would like to put the data into as an argument in the `geom_histogram` function.  By default, this is chosen to be 30 somewhat arbitrarily and we have received a warning above our plot that this was done.  We also notice here that another warning about 1 missing value is given.  This value is omitted from the plot. This warning is ignored for future customizations of the plot. (**Discuss missing values here?**)
+We have the power to specify how many bins we would like to put the data into as an argument in the `geom_histogram` function.  By default, this is chosen to be 30 somewhat arbitrarily and we have received a warning above our plot that this was done.  We also notice here that another warning about 1 missing value is given.  This value is omitted from the plot. This warning is ignored for future customizations of the plot. 
+
+Missing values are a common problem when working with data and there are entire fields of study on how to work with missing data.  Frequently what is done is to remove instances from the data set that are missing.  This is certainly the easy way to deal with them, but not necessarily the correct decision in all cases.  For our purposes, we will usually ignore potential warnings about missing data since R can usually handle them by ignoring them.
 
 
 ```{r fig.cap=paste(hist_title, "- 60 Bins"), warning=FALSE}
@@ -137,7 +105,7 @@ ggplot(data = weather, mapping = aes(x = temp)) +
 ***
 
 
-### Continuous data summaries
+### Continuous data summaries {#contsum}
 
 The `temp` variable is a **continuous** quantitative variable (frequently just called a **continuous variable**).  "A variable is **continuous** if you can arrange its values in order and an infinite number of unique values can exist between any two values of the variable"[@r4ds2016].  Some common examples of continuous variables are time and height.  Between any two times there are an infinitely many number of time units that fall between them.  
 
@@ -145,19 +113,39 @@ It is often easier to think about quantitative variables that are not continuous
 
 We can examine some summary information about this `temp` variable.  To do so, we introduce the `summary` function.  (We will see in Chapter \@ref(manip) how to use the `summarize` function in the `dplyr` package to produce similar results.)
 
-The syntax here is a little different than what we have seen before.  (A further discussion about R syntax is available in Appendix A - Chapter \@ref(appendix1)). Here, `summary` is the function and it is expecting an object to be summarized as its argument.  The object here is the `temp` variable in the `weather` dataframe.  To focus on just this one variable `temp` in `weather`, we separate them by the dollar sign symbol `$`.  Order matters here:  the dataframe comes before the `$` and the variable/column name comes after.
+The syntax here is a little different than what we have seen before.  (A further discussion about R syntax is available in Chapter 5 of the "R basics" book [@usedtor2016]). Here, `summary` is the function and it is expecting an object to be summarized as its argument.  The object here is the `temp` variable in the `weather` dataframe.  To focus on just this one variable `temp` in `weather`, we separate them by the dollar sign symbol `$`.  Order matters here:  the dataframe comes before the `$` and the variable/column name comes after.
 
 ```{r}
 summary(weather$temp)
 ```
 
-This tells us what is known as the **five-number summary** for our variable as well as the **mean** value of the variable.  More information on both of these concepts is given in Appendix A - Chapter \@ref(appendix1).
+This tells us what is known as the **five-number summary** for our variable as well as the **mean** value of the variable.  More information on both of these concepts is given in Appendix B - Chapter \@ref(appendix2).
 
 This `summary` gives us some numerical summaries of our temperature variable.  The minimum recorded temperature is `r min(weather$temp, na.rm=TRUE)` degrees Fahrenheit and the maximum is `r max(weather$temp, na.rm=TRUE)` degrees Fahrenheit.  We have one missing value denoted as an `NA` in the observations of this variable.  The median Fahrenheit temperature of `r median(weather$temp, na.rm = TRUE)` and mean of `r mean(weather$temp, na.rm = TRUE)` are quite close.  This is a property of symmetric distributions.  
 
 The last two entries given by `summary` correspond to the 25^th^ percentile and the 75^th^ percentile.  If we sorted all of the temperatures in increasing order, we would see that 25% of them would fall below `r (q1 <- quantile(weather$temp, 0.25, na.rm = TRUE))` and that 75% of them would fall below `r (q3 <- quantile(weather$temp, 0.75, na.rm = TRUE))`.  This implies that the middle 50% of data values lie between `r q1` and `r q3` degrees Fahrenheit.
 
-**Introduce standard deviation here?**
+Another common measure to determine the variability of a data set is the **standard deviation**.  You can read further about the mathematical details of standard deviation in Appendix B - Chapter \@ref(appendix2), but you can think of it as being a measure of how far the data is, on average, from the mean.  Let's investigate this further by calculating the standard deviation of our temperature variable:
+
+```{r}
+sd(weather$temp)
+```
+
+Remember that there were some missing values in our temperature data when we plotted it earlier.  By default, the `sd` function that computes standard deviation of a variable will give the value of `NA` if any of the data is missing.  To further understand this, you can look at the help of the `sd` function in the R Console:
+
+```{r eval=FALSE}
+?sd
+```
+
+Under **Usage** you can see that `na.rm` is set to `FALSE` by default.  We'd like for missing values to be removed from our analysis so we set that value to `TRUE`:
+
+```{r}
+sd(weather$temp, na.rm = TRUE)
+```
+
+Standard deviation is always in the same units as our original data set.  So in this case the standard deviation is in degrees Fahrenheit.  Thus, we can interpret this value saying:
+
+For a randomly selected element in our temperature column, we can expect it to be about `r sd(weather$temp, na.rm = TRUE)` degrees Fahrenheit from our mean value of ``r mean(weather$temp, na.rm = TRUE)`.  By combining this knowledge with the plots above, we can have a good idea for whether this data is very spread out from its center or if it is tightly bunched. 
 
 ### Summary
 
@@ -167,7 +155,7 @@ Histograms provide a useful way of looking at how ONE continuous variable varies
 - Are most values close to the center?  If so, the spread of the variable is small.  If not, the spread is large.
 - How spread out are the values?  One measure of this spread is **standard deviation** discussed above.
 
-The histogram show how many entries fall in different groupings of this variable.  Another common property of distributions is symmetry and as we saw it is quite easily identified by looking over the histogram produced from the variable's values.
+The histogram shows how many entries fall in different groupings of this variable.  Another common property of distributions is symmetry and as we saw it is quite easily identified by looking over the histogram produced from the variable's values.
 
 ## Boxplots
 
@@ -204,6 +192,8 @@ different type of plot here.)
 **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** For which types of datasets would these types of faceted plots not work well in comparing relationships between variables?
 Draw or give an example.
 
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Does the `temp` variable in the `weather` data set have a lot of variability?  Why do you say that?
+
 ***
 
 Histograms can provide a way to compare distributions across groups as we see above when we looked at temperature over months.  Frequently,
@@ -223,7 +213,7 @@ ggplot(data = weather, mapping = aes(x = factor(month), y = temp)) +
 ```
 
 
-We have introduced a new function called `factor()` here.  One of the things this function does is to convert a numeric value like `month` (1, 2, ..., 12) into a categorical variable.  The "box" part of this plot represents the 25^th^ percentile, the median (50^th^ percentile), and the 75^th^ percentile.  The dots correspond to **outliers**.  (The specific formulation for these outliers is discussed in Appendix A - Chapter \@ref(appendix1).)  The lines show how the data varies that is not in the center 50% defined by the first and third quantiles.  Longer lines correspond to more variability and shorter lines correspond to less variability.
+We have introduced a new function called `factor()` here.  One of the things this function does is to convert a numeric value like `month` (1, 2, ..., 12) into a categorical variable.  The "box" part of this plot represents the 25^th^ percentile, the median (50^th^ percentile), and the 75^th^ percentile.  The dots correspond to **outliers**.  (The specific formulation for these outliers is discussed in Appendix B - Chapter \@ref(appendix2).)  The lines show how the data varies that is not in the center 50% defined by the first and third quantiles.  Longer lines correspond to more variability and shorter lines correspond to less variability.
 
 ***
 
@@ -263,14 +253,13 @@ data(airlines)
 airlines
 ```
 
-We see that United Air Lines, JetBlue Airways, and ExpressJet Airlines had the most flights depart New York City in 2013.  To get the actual number of flights by each airline we can use the `table` function on the `carrier` variable in `flights`:
+We see that United Air Lines, JetBlue Airways, and ExpressJet Airlines had the most flights depart New York City in 2013.  To get the actual number of flights by each airline we can use the `count` function in the `dplyr` package on the `carrier` variable in `flights`:
 
 ```{r}
-flights_table <- table(flights$carrier)
+library(dplyr)
+flights_table <- count(x = flights, vars = carrier)
 flights_table
 ```
-
-More information on the use of this `$` syntax is available in Chapter \@ref(tidy) and in Appendix A - Chapter \@ref(appendix1).
 
 ***
 
@@ -546,12 +535,9 @@ flights_summarized <- select(flights_summarized, -date)
 dyRangeSelector(dygraph(flights_summarized))
 ```
 
+<br>
 
 The syntax here is a little different than what we have covered so far.  The `dygraph` function is expecting for the dates to be given as the `rownames` of the object.  We then remove the `date` variable from the `flights_summarized` dataframe since it is accounted for in the `rownames`.  Lastly, we run the `dygraph` function on the new dataframe that only contains the median arrival delay as a column and then provide the ability to have a selector to zoom in on the interactive plot via `dyRangeSelector`.  (Note that this plot will only be interactive in the HTML version of this book.)
-
-**Include this interactive dygraphs stuff here or in Appendix B?**
-
-**Include bad example of when a line-graph would be invalid?**
 
 ***
 
@@ -578,10 +564,37 @@ Line-graphs provide a useful tool for viewing a continuous variable that is plot
 
 ## Brief Review of The Grammar of Graphics
 
-You have seen all of the major pieces behind "The Grammar of Graphics" which serves as the basis for the `ggplot2` package.  Here is a summary of each part:
+The FNG discussion above has introduced you to all of the major pieces behind "The Grammar of Graphics", which serves as the basis for the `ggplot2` package.  This theoretical framework given by Leland Wilkinson [@wilkinson2005] helps us identify what the pieces are that make up a statistical graphic:
 
-**May need some tweaking**:  <http://www.ling.upenn.edu/~joseff/avml2012/>
+> In brief, the grammar tells us that a statistical graphic is a mapping from data to aesthetic attributes (color, shape, size) of geometric objects (points, lines, bars). 
 
+Specially, we can break a graphic into the following components:
+
+- `aes`: mappings of data to _aesthetics_ we can perceive on a graphic.  These include x/y position, color, size, and shape. Each aesthetic can be mapped to a variable in our data set.  If not assigned, they are set to defaults.
+
+- `geom`: (geometric objects) This refers to our type of plot: points, lines, bars, etc.
+
+- `stat`: (statistical transformations to summarize data) This includes smoothing, binning values into a histogram, or just itself `"identity"`.  You'll see this when we get to regression later in Chapter \@ref(regress).
+
+- `facet`: how to break up data into subsets and display broken down plots as small multiples
+
+- `scales` both
+
+    + convert **data units** to **physical units** the computer can display
+    + draw a legend and/or axes, which provide an inverse mapping to make it possible to read the original data values from the graph.
+    
+- `coord`: coordinate system for x/y values: typically cartesian.
+
+- `position` adjustments
+
+
+There are other extra attributes that can be tweaked as well including titles for the plot and each of the axes and also over-arching themes for the plot.  In general, the Grammar of Graphics allows for customizability but also keeping with a consistent framework that allows the user to easily tweak their creations as they wish or need to in order to convey a message about their data.
+
+We'll see (and have seen) that you don't necessarily need to include all of these in your code to produce a plot but each of the components are set by default and do exist with each plot produced using `ggplot2`.
+
+An excellent resource as you begin to create plots using the `ggplot2` package is a cheatsheet that RStudio has put together entitled "Data Visualization with ggplot2" available [here](https://www.rstudio.com/wp-content/uploads/2015/12/ggplot2-cheatsheet-2.0.pdf).  This covers more than what we've discussed in this chapter but provides nice visual descriptions of what each function produces.
+
+<!--
 ***
 ***
 
@@ -600,6 +613,8 @@ You have seen all of the major pieces behind "The Grammar of Graphics" which ser
 
 ***
 ***
+-->
 
 ## What's to come?
 
+In Chapter \@ref(manip), we'll further explore data by grouping our data, creating summaries based on those groupings, filtering our data to match conditions, selecting specific columns of our data, and other manipulations with our data including defining new columns/variables.  These data manipulation procedures will go hand-in-hand with the data visualizations you've produced here.
