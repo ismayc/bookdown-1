@@ -24,7 +24,7 @@ This book was written using the **bookdown** R package from Yihui Xie.  In order
 
 We will keep a running list of R packages you will need to have installed to complete the analysis as well here in the `needed_pkgs` character vector.  You can check if you have all of the needed packages installed by running all of the lines below.  The last lines including the `if` will install them as needed (i.e., download their needed files from the internet to your hard drive).
 
-You can run the `library` function on them to load them into your current analysis.  Prior to each analysis where a package is needed, you will see the corresponding `library` function in the text.
+You can run the `library` function on them to load them into your current analysis.  Prior to each analysis where a package is needed, you will see the corresponding `library` function in the text.  Make sure to check the top of the chapter to see if a package was loaded there.
 
 ```{r include=FALSE, results='hide'}
 # Not sure why it is pulling from a GitHub installation w/o this?
