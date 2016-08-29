@@ -22,7 +22,7 @@ We could use bootstrapping in a way similar to that done in the Chapter \@ref(in
 
 Recall what the randomization/null distribution looked like for our simulated shuffled sample means:
 
-```{r}
+```{r fig.cap="Simulated shuffled sample means histogram"}
 library(ggplot2)
 library(dplyr)
 rand_distn %>% ggplot(aes(x = diffmean)) +

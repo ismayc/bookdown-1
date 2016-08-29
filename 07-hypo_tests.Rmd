@@ -163,7 +163,7 @@ We are left with `r nrow(movies_trimmed)` movies in our _population_ data set th
 
 Let's now visualize the distributions of `rating` across both levels of `genre`.  Think about what type(s) of plot is/are appropriate here before you proceed:
 
-```{r}
+```{r fig.cap="Rating vs genre in the population"}
 library(ggplot2)
 movies_trimmed %>% ggplot(aes(x = genre, y = rating)) +
   geom_boxplot()
@@ -171,7 +171,7 @@ movies_trimmed %>% ggplot(aes(x = genre, y = rating)) +
 
 We can see that the middle 50% of ratings for `"Action"` movies is more spread out than that of `"Romance"` movies in the population.  `Romance` has outliers at both the top and bottoms of the scale though.  We are initially interested in comparing the mean `rating` across these two groups so a faceted histogram may also be useful:
 
-```{r warning=FALSE}
+```{r warning=FALSE, fig.cap="Faceted histogram of genre vs rating"}
 movies_trimmed %>% ggplot(mapping = aes(x = rating)) +
   geom_histogram(binwidth = 1, color = "white", fill = "dodgerblue") +
   facet_wrap(~genre)
@@ -207,12 +207,12 @@ movies_genre_sample <- movies_trimmed %>%
 We can now observe the distributions of our two sample ratings for both groups.  Remember that these plots should
 be rough approximations of our population distributions.
 
-```{r}
+```{r fig.cap="Genre vs rating for our sample"}
 movies_genre_sample %>% ggplot(aes(x = genre, y = rating)) +
   geom_boxplot()
 ```
 
-```{r warning=FALSE}
+```{r warning=FALSE, fig.cap="Genre vs rating for our sample as faceted histogram"}
 movies_genre_sample %>% ggplot(mapping = aes(x = rating)) +
   geom_histogram(binwidth = 1, color = "white", fill = "dodgerblue") +
   facet_wrap(~genre)
@@ -316,21 +316,21 @@ rand_distn <- many_shuffles %>%
 
 We can now plot the distribution of these simulated differences in means:
 
-```{r}
+```{r fig.cap="Simulated differences in means histogram"}
 rand_distn %>% ggplot(aes(x = diffmean)) +
   geom_histogram(color = "white", bins = 20)
 ```
 
 Remember that we are interested in seeing where our observed sample mean difference of `r diff(mean_ratings$mean)` falls on this null distribution.  We are interested in simply a difference here so "more extreme" corresponds to values in both tails on the distribution.  Let's shade our null distribution to show a visual representation of our $p$-value:
 
-```{r}
+```{r fig.cap="Shaded histogram to show p-value"}
 rand_distn %>% ggplot(aes(x = diffmean, fill = (abs(diffmean) >= obs_diff))) +
   geom_histogram(color = "white", bins = 20)
 ```
 
 You may initially think there is an error here, but remember that the observed difference in means was `r obs_diff`.  It falls far outside the range of simulated differences.  We can add a vertical line to represent both it and its negative (since this is a two-tailed test) instead:
 
-```{r}
+```{r fig.cap="Histogram with vertical lines corresponding to observed statistic"}
 rand_distn %>% ggplot(aes(x = diffmean)) +
   geom_histogram(color = "white", bins = 100) +
   geom_vline(xintercept = obs_diff, color = "red") +

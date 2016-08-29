@@ -38,7 +38,7 @@ You may think of statistics as just being a bunch of numbers.  We commonly hear 
 
 This can be summarized in a graphic that is commonly used by Hadley Wickham:
 
-```{r echo=FALSE, fig.align='center'}
+```{r echo=FALSE, fig.align='center', fig.cap="Hadley's workflow graphic"}
 knitr::include_graphics("images/tidy1.png")
 ```
 
@@ -65,4 +65,3 @@ Reproducibility means a lot of things in terms of different scientific fields.  
 This book is targetted at students taking a traditional intro stats class in a small college environment using RStudio and preferably RStudio Server. We assume no prerequisites: no calculus and no prior programming experience.  This is intended to be a gentle and nice introduction to the practice of statistics in terms of how data scientists, statisticians, and other scientists analyze data and write stories about data.  We have intentionally avoided the use of throwing formulas at you and instead have focused on developing statistical concepts via data visualization and statistical computing.  We hope this is a more intuitive experience than the way statistics has traditionally been taught in the past (and how it is commonly perceived from the outside).  We additionally hope that you see the value of reproducible research via R as you continue in your studies.  We understand that there will initially be growing pains in learning to program but we are here to help you and you should know that there is a huge community of R users that are always happy to help newbies along.
 
 Now let's get into learning about how to create good stories about and with data!
--->

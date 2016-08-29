@@ -265,7 +265,7 @@ In addition, we can plot the distribution of these simulated `heads` using the i
 
 We already have an idea as to an appropriate plot by the data summarization that we did in the chunk above.  We'd like to see how many heads occurred in the 10,000 sets of 10 flips.  In other words, we'd like to see how frequently 9 or more heads occurred in the 10 flips:
 
-```{r}
+```{r fig.cap="Barplot of number of heads in simulation - needs tweaking"}
 library(ggplot2)
 simGuesses %>% ggplot(aes(x = heads)) +
   geom_bar()
@@ -273,7 +273,7 @@ simGuesses %>% ggplot(aes(x = heads)) +
 
 This horizontal axis labels are a little confusing here.  What does 2.5 or 7.5 heads mean?  In `simGuesses`, `heads` is a `numerical` variable.  Thus, `ggplot` is expecting the values to be on a continuous scale.  We can switch the scale to be discrete by invoking the `factor` function:
 
-```{r}
+```{r fig.cap="Barplot of number of heads in simulation"}
 library(ggplot2)
 simGuesses %>% ggplot(aes(x = factor(heads))) +
   geom_bar()
@@ -320,7 +320,7 @@ Let's walk through each step of this calculation:
 
 We can see that the observed statistic of 9 correct guesses is not a likely outcome assuming the null hypothesis is true.  Only around 1% of the outcomes in our 10,000 simulations fall at or above 9 successes.  We have evidence supporting the conclusion that the person is actually better than just guessing at random at determining whether milk has been added first or not.  To better visualize this we can also make use of pink shading on the histogram corresponding to the $p$-value:
 
-```{r}
+```{r fig.cap="Barplot of heads with p-value highlighted"}
 library(ggplot2)
 simGuesses %>% 
   ggplot(aes(x = factor(heads), fill = (heads >= 9))) +
@@ -374,11 +374,11 @@ View(movies)
 
 We will explore many other features of this data set in the chapters to come, but here we will be focusing on the `rating` variable corresponding to the average IMDB user rating.
 
-You may notice that this data set is quite large:  `r format(nrow(movies), big.mark = ",")` movies have data collected about them here.  This will correspond to our population of ALL movies.  Remember from Chapter \@ref(collect) that our population is rarely known.  We use this data set as our population here to show you the power of bootstrapping in estimating population parameters.  We'll see how **confidence intervals** built using the bootstrap distribution do at including our population parameter of interest.  Here we can actually calculate these values since our population is known, but remember that in general this isn't the case.
+You may notice that this data set is quite large:  `r format(nrow(movies), big.mark = ",")` movies have data collected about them here.  This will correspond to our population of ALL movies.  Remember from Chapter \@ref(infer-basics) that our population is rarely known.  We use this data set as our population here to show you the power of bootstrapping in estimating population parameters.  We'll see how **confidence intervals** built using the bootstrap distribution do at including our population parameter of interest.  Here we can actually calculate these values since our population is known, but remember that in general this isn't the case.
 
 Let's take a look at what the distribution of our population `ratings` looks like.  We'll see that we will use the distribution of our sample(s) as an estimate of this population histogram.
 
-```{r}
+```{r fig.cap="Population ratings histogram"}
 movies %>% ggplot(aes(x = rating)) +
   geom_histogram(color = "white", bins = 20)
 ```
@@ -407,7 +407,7 @@ The `sample_n` function has filtered the data frame `movies` "at random" to choo
 
 Let's now explore what the `rating` variable looks like for these 50 movies:
 
-```{r}
+```{r fig.cap="Sample ratings histogram"}
 movies_sample %>% ggplot(aes(x = rating)) +
   geom_histogram(color = "white", bins = 20)
 ```
@@ -476,7 +476,7 @@ You should see some variability begin to tease its way out here.  Many of the si
 
 So what's the next step now?  Just as we repeated the repetitions thousands of times with the "Lady Tasting Tea" example, we can do a similar thing here.
 
-```{r cache=TRUE}
+```{r cache=TRUE, fig.cap="Bootstrapped means histogram"}
 trials <- do(10000) * summarize(resample(movies_sample), 
                                 mean = mean(rating))
 trials %>% ggplot(aes(x = mean)) +
@@ -543,194 +543,6 @@ Visually, we can represent this process in the following diagram.
 ```{r bootstrapimg, echo=FALSE, fig.cap="Bootstrapping diagram from Lock5 textbook"}
 knitr::include_graphics("images/bootstrap.png")
 ```
-
-
-<!--
-
-\section{Exercises}\label{sec:ch3exs}
-Your solutions to these problems should be done in \RS using an {\tt RMarkdown} document and choosing the \textbf{Knit HTML} or \textbf{Knit PDF} option.  Create a document that clearly labels each of the problems with their exercise number.  Your document should include your {\tt R} commands as well as the plots that were created by these commands.  Make sure to also carefully answer the questions by discussing the output of the plots or the code wherever necessary.
-
-\vspace*{0.2in}
-
-\begin{exercise}
-Enter the following tiny data set into an Excel file or Google Spreadsheet, save the file in CSV format to your computer, and import it into {\tt RStudio} Server. 
-
-\begin{tabular}{ c | c}
-number & letter \\ \hline
-42     & A      \\ \hline
-654    & D      \\ \hline
-7      & A      \\ \hline
-52     & A      \\ \hline
-4      & D      \\ \hline
-88     & B      \\ \hline
-223    & B      \\ \hline
-6      & A      \\ \hline
-92     & D      \\ \hline
-\end{tabular}
-
-\begin{itemize}
-  \item Store the data to a variable in {\tt R} and output the data.
-  \item After importing calculate the mean of the {\tt number} variable.
-  \item Create a bar graph of the {\tt letter} variable.
-\end{itemize}
-\end{exercise}
-
-%The following exercises were taken from the Tintle et al. introductory statistics textbook.
-\begin{exercise}
-A recent study (Ackerman, Griskevicius, and Li, 2011) examined expressions of commitment between
-two partners in a committed romantic relationship. One aspect of the study involved 47 heterosexual
-couples who are part of an online pool of people willing to participate in surveys. These 47 couples were
-asked about which person was the first to say ``I love you." For 7 of those couples, the two people
-disagreed about the answer to this question. But both people agreed for the other 40 couples, so those 40
-responses were included in the analysis. Previous studies have suggested that males tend to say ``I love
-you" first.
-\begin{enumerate}[label=\alph*)]
-  \item Identify the observational units in this study.
-  \item Identify the variable of interest in this study.  \textbf{Also classify the variable as categorical or quantitative.}
-  \item State the parameter of interest in words.
-  \item State the appropriate null and alternative hypotheses (in words) for testing whether males are
-more likely to say ``I love you" first.
-  \item State the appropriate null and alternative hypotheses (in symbols) for testing whether males are
-more likely to say ``I love you" first.
-  \item It turned out that for 28 of the 40 couples in the sample (after the 7 couples who could not agree were
-excluded), the man said ``I love you" before the woman did.
-Determine the sample proportion (written as a decimal) of couples for whom the man was the
-first to say ``I love you." What symbol do we use to denote this proportion?
-  \item Describe how you could use a coin-flipping model to find the $p$-value for these data.  (Explain this using actual coins not the simulated coins in {\tt R}.)
-  \item Conduct a simulation analysis using {\tt R} similar to that done in this chapter.  Provide relevant histograms with appropriate shading.
-  \item What is the value of the $p$-value for this problem?
-  \item Interpret the $p$-value for this problem using the definition of the $p$-value.  (Note that this DOES NOT mean to state the conclusion of the test.  You'll do that in the next part.)
-  \item Summarize your conclusion from this $p$-value in terms of the support for the alternative hypothesis.
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}
-A recent article (Hauser, Glynn, and Wood, 2007) described a study that investigated whether rhesus
-monkeys have some ability to understand gestures made by humans. In one part of the study, the
-experimenter approached individual rhesus monkeys and placed 2 boxes an equal distance from the
-monkey. The experimenter then placed food in one of the boxes, making sure that the monkey could tell
-that one of the boxes received food without revealing which one. Finally, the researcher made eye contact
-with the monkey and then gestured toward the box with the food by jerking his head toward that box.
-This process was repeated for a total of 40 rhesus monkeys. It turned out that 30 of the monkeys
-approached the box that the human had gestured toward, and 10 approached the other box. The purpose is
-to investigate whether rhesus monkeys can interpret the head jerk better than random chance.
-
-\begin{enumerate}[label=\alph*)]
-  \item Identify the observational units and variable in this study. Also classify the variable as categorical
-or quantitative.
-  \item Describe in words the parameter of interest for this study, and assign a symbol to it.
-  \item Determine the sample proportion of monkeys who picked the box towards which the human had
-gestured. Is this value a parameter or a statistic? What is the symbol you should use to denote this
-proportion?
-  \item State the appropriate null and alternative hypotheses in the context of this study, first in words,
-and then in symbols.
-  \item Describe how you could use a coin to conduct a simulation analysis of this study and its result.
-Give sufficient detail that someone else could implement this simulation analysis based on your
-description. Be sure to indicate how you would decide whether the observed data provide convincing evidence that rhesus monkeys can interpret human gestures better than random
-chance.
-  \item Use {\tt R} to conduct a simulation analysis with at least 10,000 repetitions.
-  \item Based on the null
-distribution produced in {\tt R}, explain how you are deciding whether the observed data
-provide convincing evidence that rhesus monkeys can read human gestures better than random
-chance.
-  \item Summarize the conclusion that you would draw about the research question of whether
-rhesus monkeys have some ability to understand gestures made by humans.
-\end{enumerate}
-\end{exercise}
-
-\begin{exercise}State whether the quantity described is a parameter or a statistic and give the correct notation.
-  \begin{itemize}
-		\item Average household income for all houses in the US, using data from the US Census.
-		\item Average number of television sets per household in North Carolina, using data from a sample of 1000 households.
-	\end{itemize}
-\end{exercise}
-
-\begin{exercise} Give the correct notation for the quantity described and give its value.
-	\begin{itemize}
-		\item Average of enrollment in charter schools in Illinois.  In 2010, there were 95 charter schools in the state of Illinois and the total number of students attending the charter schools was 30,795.
-		\item Spread of the number of cell phone calls made or received per day by cell phone users.  In a survey of 1917 cell phone users, the standard deviation was 13.10 phone calls a day.
-	\end{itemize}
-\end{exercise}
-
-\begin{exercise}  Fish can be trained quite easily.  With just seven days of training, golden shiner fish learn to pick a color (yellow or blue) to receive a treat, and the fish will swim to that color immediately.  On the first day of training, however, it takes them more time.  In a study described in \textit{Science News}, the mean time for the fish in the study to reach the yellow mark is $\bar{x} = 51$ seconds with a standard error for this statistic of 2.4.  
-	\begin{itemize}
-		\item Find and interpret an approximate 95\% confidence interval for the mean time it takes a golden shiner fish to reach the yellow mark.  (You don't need to use any functions in {\tt R} here.  You can (and SHOULD) use {\tt R} as a calculator though for this problem.)
-		\item Is it plausible that the average time it takes fish to find the mark is 60 seconds?  Explain.
-		\item Is it plausible that it is 55 seconds?  Explain.
-	\end{itemize}
-\end{exercise}
-
-\begin{exercise}An original sample of $n = 6$ values are 17, 10, 15, 21, 13, and 18.
-	Do the values given constitute a possible bootstrap sample from the original sample?  Explain why or why not.
-	\begin{itemize}
-		\item 10, 12, 17, 18, 20, 21
-		\item 10, 15, 17
-		\item 10, 13, 15, 17, 18, 21
-		\item 18, 13, 21, 17, 15, 13, 10
-		\item 13, 10, 21, 10, 18, 17
-	\end{itemize}
-\end{exercise}
-
-\begin{exercise} How many ants will climb on a piece of a peanut butter sandwich left on the ground near an ant hill?  To study this, a student in Australia left a piece of a sandwich for several minutes, then covered it with a jar and counted the number of ants.  He did this eight times.
-	
-	\begin{itemize}
-    \item Enter the following dataset into a CSV file in Excel in one column: $43, 59, 22, 25, 36, 47, 19, 21$.  Make sure to add a header called {\tt numAnts} in the first row.  Then read this dataset into {\tt R} using the \textbf{Upload} option.
-		\item Find the mean and the standard deviation of the sample.
-		\item Describe how we could use eight slips of paper to create one bootstrap statistic.  Be specific.
-		\item What is the population parameter of interest in the context of this problem?  
-		\item Find and interpret an approximate 95\% bootstrap confidence interval (in TWO ways!) for the parameter defined in the previous part.
-	\end{itemize}
-\end{exercise}
-
-
-\begin{exercise} To create a confidence interval from a bootstrap distribution using percentiles, we keep the middle values and chop off some number of the lowest values and the highest values.  If our bootstrap distribution contains values for 1000 bootstrap samples, indicate how many we chop off at each end for each confidence level given.
-	
-	\hspace*{0.5in} (a) 95\% \hspace{0.5in} (b) 90\% \hspace{0.5in} (c) 99\% \hspace{0.5in} (d) 80\%
-
-\end{exercise}
-
-%\begin{exercise}
-%Use the dataset contained in {\tt smileLen2.txt} in my Public folder in \RS to test whether there is a \textbf{difference} in the mean leniency score of those that are smiling versus those with a miserable face.  
-%\begin{itemize}
-%  \item Also create and interpret a 95\% confidence interval for difference in population mean leniency scores.
-%  \item Is 0 in your confidence interval?  Discuss why checking that value is important.
-%  \end{itemize}
-%\end{exercise}
-
-\begin{exercise}
-Anchoring is ``the common human tendency to rely too heavily," or `anchor,' on one trait or piece of information when making decisions." (Source: \textit{Wikipedia}.) A group of students taking an introductory statistics course at a four-year university in California were asked to guess the population of Milwaukee, Wisconsin. Some of the students were randomly chosen to be told that the nearby city of Chicago, Illinois has a population of about 3 million people, while the rest of the students were told that the nearby city of Green Bay, Wisconsin has a population of about 100 thousand. Previous studies have shown that these numbers serve as a psychological anchor, so people told about Chicago tend to guess a higher population for Milwaukee than people told about Green Bay. (For more about this phenomenon, see the book \textit{Nudge: Improving Decisions about Health, Wealth, and Happiness}.) The purpose in analyzing the data is to see if we find strong evidence of this phenomenon among students like the ones in this study.  Use the dataset in my Public folder called {\tt Milwaukee.csv} for this problem.
-
-\begin{enumerate}[label=\alph*)]
-  \item Identify the observational units.
-		
-	\item Identify the explanatory variable and the response variable in this study. Also classify each as categorical or quantitative.
-	
-	\item Express the null and alternative hypotheses for testing whether the class data give strong evidence in support of the anchoring phenomenon described above. Use words only.
-		
-	
-	\item Express the null and alternative hypotheses for testing whether the class data give strong evidence in support of the anchoring phenomenon described above. Use symbols, and be sure to define completely any symbols used.
-
-	\item Give detailed, step-by-step instructions on how one could conduct a tactile (by hand) simulation to generate a $p$-value for testing the hypotheses stated. Be sure to include details on the following:
-	\begin{itemize}
-		\item Would the simulation involve coins, or dice, or index cards?
-		\item How many tosses, or rolls, or cards would be used?
-		\item How many sets of tosses, or rolls, or shuffles would you observe?
-	\end{itemize}
-
-	\item Create appropriate plot(s) and calculate summary information to get a sense of what to expect before conducting the inferential analysis.
-	
-	\item Conduct a simulation analysis and determine an approximate $p$-value.
-		
-	\item Interpret the $p$-value in the context of the study. That is, the $p$-value is a probability of \textit{what} assuming \textit{what}?
-		
-
-	\item State your conclusion of your hypothesis test in the context of the study.
-	
-	\item Also conduct and interpret an appropriate confidence interval for this problem.
-	\end{enumerate}	
-\end{exercise}
-
--->
 
 ## What's to come?
 

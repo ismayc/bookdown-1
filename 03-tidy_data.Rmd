@@ -194,7 +194,7 @@ joined_flights <- inner_join(x = flights, y = airlines, by = "carrier")
 View(joined_flights)
 ```
 
-If we `View` this dataset, we see a new variable has been created called (We will see in Subsection \@ref(select) ways to change `name` to a more descriptive variable name.)
+If we `View` this dataset, we see a new variable has been created called (We will see in Subsection 5.1.1 ways to change `name` to a more descriptive variable name.)
 
 More discussion about joining dataframes together will be given in Chapter \@ref(manip).  We will see there that the names of the columns to be linked need not match as they did here with `"carrier"`.
 

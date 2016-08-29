@@ -37,7 +37,7 @@ It's most important for you to focus on the five most commonly used functions th
 
 Just as we had the FNG (The Five Named Graphs in Chapter \@ref(viz) using `ggplot2`), we have the FMV here (The Five Main Verbs in `dplyr`):
 
-### Select variables using `select` {#select}
+### Select variables using `select`
 
 ```{r selectfig, echo=FALSE, fig.cap="Select diagram from Data Wrangling with dplyr and tidyr cheatsheet"}
 knitr::include_graphics("images/select.png")
@@ -156,7 +156,7 @@ portland_flights <- filter(flights, dest = "PDX")
 Error: filter() takes unnamed arguments. Do you need `==`?
 ```
 
-We see that there were 1354 flights from New York City to Portland in 2013.  Let's combine this with what we saw in Subsection \@ref(select) to ensure that Portland flights were selected:
+We see that there were 1354 flights from New York City to Portland in 2013.  Let's combine this with what we saw in Subsection 5.1.1 to ensure that Portland flights were selected:
 
 ```{r}
 reordered_flights <- select(flights, dest, everything())
@@ -329,7 +329,7 @@ gain_summary
 
 We've recreated the `summary` function we say in Chapter \@ref(viz) here using the `summarize` function in `dplyr`.
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, fig.cap="Histogram of gain variable"}
 library(ggplot2)
 ggplot(flights_plus, aes(x = gain)) +
   geom_histogram(color = "white", bins = 20)
@@ -435,7 +435,7 @@ freq_dest %>%
   arrange(desc(num_flights))
 ```
 
-Recall from Chapter @\ref(viz) that we read the pipe operator as "and then".  So here we take the `freq_dest` data frame **AND THEN** we determine the top 10 values of `num_flights` **AND THEN** we arrange these top 10 flights according to a descending numbers of flights (from highest to lowest).  
+Recall from Chapter \@ref(viz) that we read the pipe operator as "and then".  So here we take the `freq_dest` data frame **AND THEN** we determine the top 10 values of `num_flights` **AND THEN** we arrange these top 10 flights according to a descending numbers of flights (from highest to lowest).  
 
 We can go one stop further and tie together the `group_by` and `summarize` functions we used to find the most frequent flights:
 
@@ -452,7 +452,7 @@ ten_freq_dests <- flights %>%
 **_Learning check_**
 ```
 
-**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Recreate each of the chunks of code above Subsection \@ref(arrange) in this chapter using the `%>%` operator.  Note that sometimes you can combine multiple subsequent chunks of code together.  Do so whenever possible.
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Recreate each of the chunks of code above Subsection 5.1.5 in this chapter using the `%>%` operator.  Note that sometimes you can combine multiple subsequent chunks of code together.  Do so whenever possible.
 
 **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**  What benefits can you see to using the pipe instead of the other way of doing things as you saw throughout this chapter?  Give specific examples.
 

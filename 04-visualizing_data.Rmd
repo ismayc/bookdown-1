@@ -58,7 +58,7 @@ To produce a histogram, we introduce the Hadley's `ggplot2` package [@R-ggplot2]
 
 The names of the variables will be entered into the `aes` function as arguments where `aes` stands for "aesthetics".
 
-```{r}
+```{r fig.cap="ggplot backdrop"}
 ggplot(data = weather, mapping = aes(x = temp))
 ```
 
@@ -160,7 +160,6 @@ The histogram shows how many entries fall in different groupings of this variabl
 
 ## Boxplots
 
-
 Histograms can also be produced to compare the distribution of a variable over another variable.  Suppose we were
 interested in looking at how the temperature recordings we saw in the last section varied by month.  This is what is meant by "the distribution of a variable over another variable": `temp` is one variable and `month` is the other variable.
 
@@ -168,7 +167,7 @@ interested in looking at how the temperature recordings we saw in the last secti
 
 In order to look at histograms of `temp` for each month, we introduce a new concept called **facetting**.  Faceting is used when we'd like to create small multiples of the same plot over a different categorical variable.  By default, all of the small multiples will have the same vertical axis.  An example will help here.  We will discuss the concept of faceting in further detail in Section \@ref(barplots).
 
-```{r warning=FALSE}
+```{r facethistogram, warning=FALSE, fig.cap="Faceted histogram"}
 ggplot(data = weather, mapping = aes(x = temp)) +
   geom_histogram(binwidth = 5, color = "white", fill = "firebrick") +
   facet_wrap(~month)
@@ -200,7 +199,7 @@ Draw or give an example.
 Histograms can provide a way to compare distributions across groups as we see above when we looked at temperature over months.  Frequently,
 a plot called a **boxplot** (also called a **side-by-side boxplot**) is done instead.  The **boxplot** uses the information provided in the **five-number summary** referred to in the previous section when we used the `summary` function.  It gives a way to compare this summary information across the different levels of a group.  Let's create a boxplot to compare the monthly temperatures as we did above with the faceted histograms.
 
-```{r}
+```{r badbox, fig.cap="Invalid boxplot specification"}
 ggplot(data = weather, mapping = aes(x = month, y = temp)) +
   geom_boxplot()
 ```
@@ -208,7 +207,7 @@ ggplot(data = weather, mapping = aes(x = month, y = temp)) +
 Note the first warning that is given here.  (The second one corresponds to missing values in the dataframe and it is turned off on subsequent plots.) This plot does not look like what we were expecting.  We were expecting to see the distribution of
 temperatures for each month (so 12 different boxplots).  This gives us the overall boxplot without any other groupings.  We can get around this by introducing a new function for our `x` variable.
 
-```{r warning=FALSE}
+```{r monthtempbox, fig.cap="Month by temp boxplot", warning=FALSE}
 ggplot(data = weather, mapping = aes(x = factor(month), y = temp)) +
   geom_boxplot()
 ```
@@ -242,7 +241,7 @@ Both histograms and boxplots represent ways to visualize the variability of cont
 
 Frequently, the best way to visualize these different counts (also known as **frequencies**) is via a barplot.  Consider the distribution of airlines that flew out of New York City in 2013.  This can be plotted by invoking the `geom_bar` function in `ggplot2`:
 
-```{r, fig.cap="Number of flights departing NYC in 2013 by airline"}
+```{r flightsbar, fig.cap="Number of flights departing NYC in 2013 by airline"}
 ggplot(data = flights, mapping = aes(x = carrier)) +
   geom_bar()
 ```
@@ -289,7 +288,7 @@ Let's examine our previous barplot example on the number of flights departing NY
 - how many carriers have fewer flights than United Airlines (`UA`)?
 
 
-```{r echo=FALSE}
+```{r carrierpie, echo=FALSE, fig.cap="The dreaded pie chart"}
 ggplot(flights, aes(x = factor(1), fill = carrier)) +
   geom_bar(width = 1) +
   coord_polar(theta = "y") +
@@ -306,7 +305,7 @@ While it is quite easy to look back at the barplot to get the answer to these qu
 
 [fd]: https://flowingdata.com/2008/09/19/pie-i-have-eaten-and-pie-i-have-not-eaten/  "Pie I Have Eaten and Pie I Have Not Eaten"
 
-```{r echo=FALSE, fig.align='center'}
+```{r echo=FALSE, fig.align='center', fig.cap="The only good pie chart"}
 knitr::include_graphics("images/Pie-I-have-Eaten.jpg")
 ```
 
@@ -440,7 +439,7 @@ The large mass of points near (0, 0) can cause some confusion.  This is the resu
 
 One way of relieving this issue of **over-plotting** is to **jitter** the points a bit.  In other words, we are going to add just a bit of random noise to the points to better see them and remove some of the over-plotting.  You can think of "jittering" as shaking the points a bit on the plot. Instead of using `geom_point`, we use `geom_jitter` to perform this shaking and specify around how much jitter to add with the `width` and `height` arguments.  This corresponds to how hard you'd like to shake the plot in units corresponding to those for both the horizontal and vertical variables (minutes here).
 
-```{r warning=FALSE}
+```{r warning=FALSE, fig.cap="Jittered delay scatterplot"}
 ggplot(alaska_flights, aes(x = dep_delay, y = arr_delay)) + 
   geom_jitter(width = 30, height = 30)
 ```
@@ -479,7 +478,9 @@ ggplot(alaska_flights, aes(x = dep_delay, y = arr_delay)) +
 
 ***
 
+<!--
 **Maybe include a shading of the points by another variable example here for multivariate thinking?**
+-->
 
 ### Summary
 
@@ -493,7 +494,7 @@ The last of the FNG is a line-graph.  They are most frequently used when the hor
 
 We are interested in exploring the arrival delays by day throughout the year of 2013 from outgoing flights from New York City.  If we plotted all of these values, we obtain the following scatter-plot:
 
-```{r warning=FALSE}
+```{r warning=FALSE, fig.cap="Hard to read scatterplot"}
 ggplot(flights, aes(x = time_hour, y = arr_delay)) + 
   geom_point()
 ```
@@ -537,7 +538,7 @@ ggplot(data = flights_summarized, aes(x = date, y = median_arr_delay)) +
 
 **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Why did we use the `flights_summarized` dataframe to produce the line-graph in Figure \@ref(fig:lineflights) instead of `flights` or `flights_day`?
 
-**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Are the largest median arrival delays where you expected them to occur on the line-graph above in Figure \@ref(lineflights)? Why or why not?
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Are the largest median arrival delays where you expected them to occur on the line-graph above in Figure \@ref(fig:lineflights)? Why or why not?
 
 ***
 
