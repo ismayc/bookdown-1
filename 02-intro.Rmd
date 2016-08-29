@@ -4,11 +4,11 @@
 
 This book is inspired by three books:
 
-- "Mathematical Statistics with Resampling and R" [@hester2011], 
-- "Intro Stat with Randomization and Simulation" [@isrs2014], and
-- "R for Data Science" [@r4ds2016].
+- "Mathematical Statistics with Resampling and R" [@hester2011],
+- "Intro Stat with Randomization and Simulation" [@isrs2014], and 
+- "R for Data Science" [@rds2016].
 
-These books provide excellent resources on how to use resampling to build statistical concepts like normal distributions using computers instead of focusing on memorization of formulas.  The last two books also provide a path towards free alternatives to the traditionally expensive introductory statistics textbook.  When looking over the vast number of introductory statistics textbooks we found that there wasn't one that incorporated many of the new R packages directly into the text.  Additionally, there wasn't an open-source, free textbook available that showed new learners all of the following
+The first book, while designed for upper-level undergraduates and graduate students, provides an excellent resource on how to use resampling to build statistical concepts like normal distributions using computers instead of focusing on memorization of formulas.  The last two books also provide a path towards free alternatives to the traditionally expensive introductory statistics textbook.  When looking over the vast number of introductory statistics textbooks we found that there wasn't one that incorporated many of the new R packages directly into the text.  Additionally, there wasn't an open-source, free textbook available that showed new learners all of the following
 
 1. how to use R to explore and visualize data
 2. how to use randomization and simulation to build inferential ideas
@@ -65,3 +65,4 @@ Reproducibility means a lot of things in terms of different scientific fields.  
 This book is targetted at students taking a traditional intro stats class in a small college environment using RStudio and preferably RStudio Server. We assume no prerequisites: no calculus and no prior programming experience.  This is intended to be a gentle and nice introduction to the practice of statistics in terms of how data scientists, statisticians, and other scientists analyze data and write stories about data.  We have intentionally avoided the use of throwing formulas at you and instead have focused on developing statistical concepts via data visualization and statistical computing.  We hope this is a more intuitive experience than the way statistics has traditionally been taught in the past (and how it is commonly perceived from the outside).  We additionally hope that you see the value of reproducible research via R as you continue in your studies.  We understand that there will initially be growing pains in learning to program but we are here to help you and you should know that there is a huge community of R users that are always happy to help newbies along.
 
 Now let's get into learning about how to create good stories about and with data!
+-->

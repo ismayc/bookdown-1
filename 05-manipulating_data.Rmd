@@ -11,6 +11,7 @@ lc <- 0
 rq <- 0
 # **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**
 # **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`**
+knitr::opts_chunk$set(tidy = FALSE, fig.align = "center", out.width='\\textwidth')
 ```
 
 
@@ -335,7 +336,7 @@ ggplot(flights_plus, aes(x = gain)) +
 ```
 
 
-We can also create multiple columns at once and even refer to columns that were just created in a new column.  Hadley produces one such example in Chapter 5 of "R for Data Science" [@r4ds2016]:
+We can also create multiple columns at once and even refer to columns that were just created in a new column.  Hadley produces one such example in Chapter 5 of "R for Data Science" [@rds2016]:
 
 ```{r}
 flights_plus2 <- mutate(flights,
@@ -458,7 +459,7 @@ ten_freq_dests <- flights %>%
 **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**  Write out exactly how the `ten_freq_dests` data set was created using the "and then" verbiage.
 
 ***
-The piping syntax will be our major focus throughout the rest of this book and you'll find that you'll quickly be addicted to the chaining with some practice. If you'd like to see more examples on using `dplyr`, the FMV (in addition to some other `dplyr` verbs), and `%>%` with the `nycflights13` data set, you can check out Chapter 5 of Hadley and Garrett's book [@r4ds2016].
+The piping syntax will be our major focus throughout the rest of this book and you'll find that you'll quickly be addicted to the chaining with some practice. If you'd like to see more examples on using `dplyr`, the FMV (in addition to some other `dplyr` verbs), and `%>%` with the `nycflights13` data set, you can check out Chapter 5 of Hadley and Garrett's book [@rds2016].
 
 ## Joining/merging data frames
 
@@ -476,7 +477,7 @@ To do so, we'll need to tell R how to match one data frame to another data frame
 View(airports)
 ```
 
-The first column `faa` corresponds to the airport codes that we saw in `dest` in our `flights` and subsequent `ten_freq_dests` data sets.  Hadley and Garrett [@r4ds2016] created the following diagram to help us understand how the different data sets are linked:
+The first column `faa` corresponds to the airport codes that we saw in `dest` in our `flights` and subsequent `ten_freq_dests` data sets.  Hadley and Garrett [@rds2016] created the following diagram to help us understand how the different data sets are linked:
 
 ```{r reldiagram, echo=FALSE, fig.cap="Data relationships in nycflights13 from R for Data Science"}
 knitr::include_graphics("images/relational-nycflights.png")
@@ -500,7 +501,7 @@ named_freq_dests
 
 In case you didn't know, `"ORD"` is the airport code of Chicago O'Hare airport and `"FLL"` is the main airport in Fort Lauderdale, Florida.
 
-A visual representation of the `inner_join` is given [@r4ds2016]:
+A visual representation of the `inner_join` is given [@rds2016]:
 
 ```{r ijdiagram, echo=FALSE, fig.cap="Diagram of inner join from R for Data Science"}
 knitr::include_graphics("images/join-inner.png")
@@ -525,4 +526,4 @@ There are more complex joins available, but the `inner_join` will solve nearly a
 
 This concludes the **Data Exploration** unit of this book.  You should be pretty proficient in both plotting variables (or multiple variables together) in various data sets and manipulating data as we've done in this chapter.  You are encouraged to step back through the code in earlier chapters and make changes as you see fit based on your updated knowledge.  
 
-In Chapter \@ref(collect), we'll begin to build the pieces needed to understand how this unit of **Data Exploration** can tie into statistical inference in the **Inference** part of the book.  Remember that the focus throughout is on data visualization and we'll see that next when we discuss sampling.
+In Chapter \@ref(infer-basics), we'll begin to build the pieces needed to understand how this unit of **Data Exploration** can tie into statistical inference in the **Inference** part of the book.  Remember that the focus throughout is on data visualization and we'll see that next when we discuss sampling, resampling, and bootstrapping.  These ideas will lead us into hypothesis testing and confidence intervals.

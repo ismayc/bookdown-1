@@ -17,6 +17,7 @@ lc <- 0
 rq <- 0
 # **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**
 # **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`**
+knitr::opts_chunk$set(tidy = FALSE, fig.align = "center", out.width='\\textwidth')
 ```
 
 ## What is tidy data?
@@ -46,7 +47,7 @@ variables and types. In **tidy data**:
 > 2. Each observation forms a row.
 > 3. Each type of observational unit forms a table.
 
-```{r tidyfig, echo=FALSE, fig.align='center', fig.cap="Tidy data graphic from http://r4ds.had.co.nz/tidy-data.html"}
+```{r tidyfig, echo=FALSE, fig.cap="Tidy data graphic from http://r4ds.had.co.nz/tidy-data.html"}
 knitr::include_graphics("images/tidy-1.png")
 ```
 
@@ -158,7 +159,7 @@ But what about the third property?
 
 > 3. Each type of observational unit forms a table.
 
-We identified earlier that the observational unit in the `flights` dataset is an individual flight.  And we have shown that this dataset consists of `r nrow(flights)` flights with `r ncol(flights)` variables.  In other words, some rows of this dataset don't refer to a measurement on an airline or on an airport.  They specifically refer to characteristics/measurements on a given **flight** from New York City in 2013.  
+We identified earlier that the observational unit in the `flights` dataset is an individual flight.  And we have shown that this dataset consists of `r format(nrow(flights), big.mark = ",", scientific = FALSE, trim = TRUE)` flights with `r ncol(flights)` variables.  In other words, some rows of this dataset don't refer to a measurement on an airline or on an airport.  They specifically refer to characteristics/measurements on a given **flight** from New York City in 2013.  
 
 By contrast, also included in the `nycflights13` package are datasets with different observational units [@R-nycflights13]:
 

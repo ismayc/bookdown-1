@@ -2,10 +2,15 @@
 
 ## Basic statistical terms
 
-- Mean
-- Median
-- Standard deviation
-- Five-number summary
-- Distribution
-- Outliers
+### Mean
+
+### Median
+
+### Standard deviation
+
+### Five-number summary
+
+### Distribution
+
+### Outliers
 

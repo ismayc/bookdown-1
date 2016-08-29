@@ -7,6 +7,7 @@ lc <- 0
 rq <- 0
 # **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`**
 # **`r paste0("(RQ", chap, ".", (rq <- rq + 1), ")")`**
+knitr::opts_chunk$set(tidy = FALSE, fig.align = "center", out.width='\\textwidth')
 ```
 
 
@@ -107,7 +108,7 @@ ggplot(data = weather, mapping = aes(x = temp)) +
 
 ### Continuous data summaries {#contsum}
 
-The `temp` variable is a **continuous** quantitative variable (frequently just called a **continuous variable**).  "A variable is **continuous** if you can arrange its values in order and an infinite number of unique values can exist between any two values of the variable"[@r4ds2016].  Some common examples of continuous variables are time and height.  Between any two times there are an infinitely many number of time units that fall between them.  
+The `temp` variable is a **continuous** quantitative variable (frequently just called a **continuous variable**).  "A variable is **continuous** if you can arrange its values in order and an infinite number of unique values can exist between any two values of the variable"[@rds2016].  Some common examples of continuous variables are time and height.  Between any two times there are an infinitely many number of time units that fall between them.  
 
 It is often easier to think about quantitative variables that are not continuous to help us better understand continuity.  The best example is counts.  If we are looking to count the number of flights that depart on a given day from New York City, this variable would not be continuous.  It falls on a **discrete** scale.
 
@@ -378,7 +379,7 @@ ggplot(data = flights_namedports, mapping = aes(x = carrier, fill = name)) +
   facet_grid(name ~ .)
 ```
 
-Note how the `facet_grid` function arguments are written here.  We are wanting the names of the airports vertically and the `carrier` listed horizontally.  As you may have guessed, this argument and other _formulas_ of this sort in R are in `y ~ x` order.  We will see more examples of this in Chapter \@ref(infer).
+Note how the `facet_grid` function arguments are written here.  We are wanting the names of the airports vertically and the `carrier` listed horizontally.  As you may have guessed, this argument and other _formulas_ of this sort in R are in `y ~ x` order.  We will see more examples of this in Chapter \@ref(regress).
 
 ***
 
@@ -524,21 +525,6 @@ ggplot(data = flights_summarized, aes(x = date, y = median_arr_delay)) +
   geom_line()
 ```
 
-### Interactive line-graphs
-
-Another useful tool for viewing line-graphs such as this is the `dygraph` function in the `dygraphs` package in combination with the `dyRangeSelector` function.  This allows us to zoom in on a selected range and get an interactive plot for us to work with:
-
-```{r warning=FALSE}
-library(dygraphs)
-rownames(flights_summarized) <- flights_summarized$date
-flights_summarized <- select(flights_summarized, -date)
-dyRangeSelector(dygraph(flights_summarized))
-```
-
-<br>
-
-The syntax here is a little different than what we have covered so far.  The `dygraph` function is expecting for the dates to be given as the `rownames` of the object.  We then remove the `date` variable from the `flights_summarized` dataframe since it is accounted for in the `rownames`.  Lastly, we run the `dygraph` function on the new dataframe that only contains the median arrival delay as a column and then provide the ability to have a selector to zoom in on the interactive plot via `dyRangeSelector`.  (Note that this plot will only be interactive in the HTML version of this book.)
-
 ***
 
 ```{block lc4-5, type='learncheck'}
@@ -551,10 +537,7 @@ The syntax here is a little different than what we have covered so far.  The `dy
 
 **`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Why did we use the `flights_summarized` dataframe to produce the line-graph in Figure \@ref(fig:lineflights) instead of `flights` or `flights_day`?
 
-**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Are the largest median arrival delays where you expected them to occur on the line-graph above in Figure \@ref(lineflights)?
-
-**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Use the interactive line-graph to determine the highest median arrival delay for flights from NYC in 2013.  What date was it and what do you think contributed to it?
-
+**`r paste0("(LC", chap, ".", (lc <- lc + 1), ")")`** Are the largest median arrival delays where you expected them to occur on the line-graph above in Figure \@ref(lineflights)? Why or why not?
 
 ***
 
