@@ -15,7 +15,6 @@ description: "Getting away from the traditional introductory statistics curricul
 ```{r set-options, include=FALSE}
 options(width = 72)
 knitr::opts_chunk$set(tidy = FALSE, fig.align = "center")
-if(file.exists("ismay.Rmd")) file.remove("ismay.Rmd")
 ```
 
 # Prerequisites {#prereqs}
@@ -28,7 +27,7 @@ You can run the `library` function on them to load them into your current analys
 
 ```{r include=FALSE, results='hide'}
 # Not sure why it is pulling from a GitHub installation w/o this?
-remove.packages("rmarkdown")
+# remove.packages("rmarkdown")
 ```
 
 
@@ -77,7 +76,7 @@ knitr::write_bib(c(
 
 ## Colophon
 
-The source of the book is available [here](https://github.com/ismayc/moderndiver-source) and was built with versions of R packages given below.  This may not be of importance for initial readers of this book, but the hope is you can reproduce a duplicate of this book by installing these versions of the packages.
+The source of the book is available [here](https://github.com/ismayc/moderndiver-source) and was built with versions of R packages (and their dependent packages) given below.  This may not be of importance for initial readers of this book, but the hope is you can reproduce a duplicate of this book by installing these versions of the packages.
 
 ```{r colophon, echo=FALSE}
 knitr::kable(devtools::session_info(needed_pkgs)$packages, 
