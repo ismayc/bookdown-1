@@ -1,21 +1,21 @@
 --- 
 title: '`r ifelse(knitr:::is_latex_output(), "\\Large{A MODERN DIVE into Data with R}", "A MODERN DIVE into Data with R")`'
 subtitle: "Modern Open-source Data-analysis Encouraging Reproducibility aNd Driven by Intuitive Visualization Efforts" #"Modern Open-source Data-analysis Encouraging Reproducibility and iNtuitive Data-Inspired Visualization Efforts"
-author: "Chester Ismay and Albert Y. Kim"
+author: "Chester Ismay"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [bib/books.bib, bib/packages.bib, bib/articles.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: #rstudio/bookdown-demo
+github-repo: ismayc/moderndiver-source
 description: "Getting away from the traditional introductory statistics curriculum, more focused on reproducible research and modern data analysis techniques and tools"
 ---
 
 ```{r set-options, include=FALSE}
 options(width = 72)
 knitr::opts_chunk$set(tidy = FALSE, fig.align = "center")
-if(file.exists("ismay_kim.Rmd")) file.remove("ismay_kim.Rmd")
+if(file.exists("ismay.Rmd")) file.remove("ismay.Rmd")
 ```
 
 # Prerequisites {#prereqs}
@@ -77,7 +77,7 @@ knitr::write_bib(c(
 
 ## Colophon
 
-The source of the book is available [here](https://github.com/ModernStats/bookdown) and was built with versions of R packages given below.  This may not be of importance for initial readers of this book, but the hope is you can reproduce a duplicate of this book by installing these versions of the packages.
+The source of the book is available [here](https://github.com/ismayc/moderndiver-source) and was built with versions of R packages given below.  This may not be of importance for initial readers of this book, but the hope is you can reproduce a duplicate of this book by installing these versions of the packages.
 
 ```{r colophon, echo=FALSE}
 knitr::kable(devtools::session_info(needed_pkgs)$packages, 
