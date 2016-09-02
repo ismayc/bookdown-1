@@ -10,7 +10,7 @@ bookdown::gitbook:
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     edit:
-      link: https://github.com/ismayc/moderndive/edit/master/%s #TO UPDATE!
+      link: https://github.com/ismayc/moderndiver-source/edit/master/%s
 bookdown::pdf_book:
   base_format: tufte::tufte_book
   includes:
