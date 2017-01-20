@@ -58,11 +58,7 @@ if(is.null(webshot:::find_phantom()))
 knitr::opts_chunk$set(tidy = FALSE, fig.align = "center", out.width='\\textwidth')
 ```
 
-**Book was last updated:**
-
-```{r time, echo=FALSE}
-paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))
-```
+**Book was last updated** `r paste("By", Sys.info()[["user"]], "on", format(Sys.time(), "%A, %B %d, %Y %X %Z"))`
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
